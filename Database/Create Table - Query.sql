@@ -1,0 +1,8 @@
+CREATE DATABASE CourseAndResultManagement
+
+CREATE TABLE Department
+(
+	DepartmentId INT IDENTITY(1,1) PRIMARY KEY,
+	Code VARCHAR(8) NOT NULL UNIQUE,
+	[Name] VARCHAR(50) NOT NULL UNIQUE
+)
