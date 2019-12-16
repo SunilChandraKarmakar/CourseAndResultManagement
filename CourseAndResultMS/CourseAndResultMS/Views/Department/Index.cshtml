@@ -1,22 +1,51 @@
 ﻿@using CourseAndResultMS.Models;
-
 @{
     List<Department> departments = ViewBag.DepartmentList;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Department Index</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
 </head>
-
 <body>
     <div class="row">
         <div class="col-md-12">
-
+            <h2>Department Details</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../Department/Create" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp; Create Department</a>
+        </div>
+    </div>
+    <div class="row" id="showdepartment">
+        <div class="col-md-6">
+            <table id="myTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Department item in departments)
+                    {
+                        <tr>
+                            <td>@item.Code</td>
+                            <td>@item.Name</td>
+                            <td>
+                                <a href="../Department/Edit/@item.DepartmentId" class="btn btn-info"><i class="fa fa-edit">&nbsp;</i>Edit</a>
+                                <a href="../Department/Delete/@item.DepartmentId" class="btn btn-danger"><i class="fa fa-eye-dropper">&nbsp;</i>Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
-
 </html>

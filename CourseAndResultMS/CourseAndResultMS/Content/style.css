@@ -1,0 +1,13 @@
+﻿#navbarcolor {
+    background-color: antiquewhite;
+}
+
+.col-md-12 h2 {
+    font-family: 'Exo 2', sans-serif;
+    text-align: center;
+}
+
+#showdepartment {
+    margin-top: 50px;
+    margin-left: 100px;
+}
