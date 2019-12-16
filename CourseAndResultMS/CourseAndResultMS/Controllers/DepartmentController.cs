@@ -22,5 +22,18 @@ namespace CourseAndResultMS.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Create(Department aDepartment)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Departments.Add(aDepartment);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(aDepartment);
+        }
     }
 }
