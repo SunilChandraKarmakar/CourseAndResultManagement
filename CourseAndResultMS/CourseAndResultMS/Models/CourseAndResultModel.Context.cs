@@ -26,5 +26,7 @@ namespace CourseAndResultMS.Models
         }
     
         public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Course> Courses { get; set; }
+        public virtual DbSet<Semester> Semesters { get; set; }
     }
 }

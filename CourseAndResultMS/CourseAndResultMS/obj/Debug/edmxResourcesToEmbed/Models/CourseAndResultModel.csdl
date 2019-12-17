@@ -7,8 +7,65 @@
     <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Code" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Courses" Relationship="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D" FromRole="Department" ToRole="Course" />
   </EntityType>
   <EntityContainer Name="CourseAndResultManagementEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Courses" EntityType="CourseAndResultManagementModel.Course" />
+    <EntitySet Name="Semesters" EntityType="CourseAndResultManagementModel.Semester" />
+    <AssociationSet Name="FK__Course__Departme__403A8C7D" Association="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__Semester__412EB0B6" Association="CourseAndResultManagementModel.FK__Course__Semester__412EB0B6">
+      <End Role="Semester" EntitySet="Semesters" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseId" />
+    </Key>
+    <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Cradit" Type="Decimal" Nullable="false" Precision="2" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="SemesterId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D" FromRole="Course" ToRole="Department" />
+    <NavigationProperty Name="Semester" Relationship="CourseAndResultManagementModel.FK__Course__Semester__412EB0B6" FromRole="Course" ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="Semester">
+    <Key>
+      <PropertyRef Name="SemesterId" />
+    </Key>
+    <Property Name="SemesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Courses" Relationship="CourseAndResultManagementModel.FK__Course__Semester__412EB0B6" FromRole="Semester" ToRole="Course" />
+  </EntityType>
+  <Association Name="FK__Course__Departme__403A8C7D">
+    <End Type="CourseAndResultManagementModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.Course" Role="Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__Semester__412EB0B6">
+    <End Type="CourseAndResultManagementModel.Semester" Role="Semester" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.Course" Role="Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="SemesterId" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

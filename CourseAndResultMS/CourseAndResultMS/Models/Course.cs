@@ -12,19 +12,17 @@ namespace CourseAndResultMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Department
+    public partial class Course
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Department()
-        {
-            this.Courses = new HashSet<Course>();
-        }
-    
-        public int DepartmentId { get; set; }
+        public int CourseId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public decimal Cradit { get; set; }
+        public string Description { get; set; }
+        public int DepartmentId { get; set; }
+        public int SemesterId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual Semester Semester { get; set; }
     }
 }

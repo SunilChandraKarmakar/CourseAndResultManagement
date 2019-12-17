@@ -6,6 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="0f2d4836c23c4264bdf77fdb964a838a" Name="Diagram1">
         <EntityTypeShape EntityType="CourseAndResultManagementModel.Department" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.Course" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.Semester" Width="1.5" PointX="0.75" PointY="4.375" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__Course__Semester__412EB0B6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
