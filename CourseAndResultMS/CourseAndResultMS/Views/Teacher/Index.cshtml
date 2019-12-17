@@ -1,0 +1,61 @@
+﻿@using CourseAndResultMS.Models;
+@{
+    List<Teacher> teachers = ViewBag.TeacherList;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Index</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Teacher Details</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../Teacher/Create" class="btn btn-success"><i class="fa fa-plus">&nbsp;</i> Create Teacher</a>
+        </div>
+    </div>
+    <div class="row" id="tblTeacher">
+        <div class="col-md-10">
+            <table id="myTable" class="display table table-bordered table-striped">
+                <thead>
+                    <tr style="background-color: darkkhaki">
+                        <th>Basic Info</th>
+                        <th>Teacher Profile</th>
+                        <th>Address</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Teacher item in teachers)
+                    {
+                        <tr>
+                            <td>
+                                Name : @item.Name <br />
+                                Contact : @item.ContactNo <br />
+                                Email : @item.Email <br />
+                            </td>
+                            <td>
+                                Description : @item.Designation.Description <br />
+                                Department : @item.Department.Name <br />
+                                Taken Cradit : @item.CraditToBeTaken <br />
+                            </td>
+                            <td>@item.Address</td>
+                            <td>
+                                <a href="../Teacher/Edit/@item.TeacherId"><i class="fa fa-edit">&nbsp;</i> Edit</a>
+                                <a href="../Teacher/Delete/@item.TeacherId"><i class="fa fa-eye-dropper">&nbsp;</i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
