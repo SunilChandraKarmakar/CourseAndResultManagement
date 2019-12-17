@@ -18,6 +18,14 @@
 
 
 
+
+
+
+
+
+
+
+
         label.error {
             color: red;
             font-style: italic;
@@ -38,15 +46,15 @@
                     <div class="form-group">
                         <label for="Code" class="col-md-2 control-label">Code</label>
                         <div class="col-md-10">
-                            <input type="text" id="Code" name="Code" class="form-control" onchange="IsExist()" />
-                            <span class="text-danger" id="matchCode"></span>
+                            <input type="text" id="Code" name="Code" class="form-control" onchange="UserCheck()" />
+                            <span class="text-danger" id="checkCode"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Name" class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input type="text" id="Name" name="Name" class="form-control" onchange="IsExist()" />
-                            <span class="text-danger" id="matchName"></span>
+                            <input type="text" id="Name" name="Name" class="form-control" onchange="UserCheck()" />
+                            <span class="text-danger" id="checkName"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -97,41 +105,39 @@
     </div>
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script>
+        function UserCheck() {
+            $("#checkCode").empty();
+            $("#checkName").empty();
 
-        function IsExist() {
+            var code = $("#Code").val();
+            var name = $("#Name").val();
 
-            $("#errorCode").empty();
-            $("#errorName").empty();
-
-            var code = $("#code").val();
-            var name = $("#name").val();
             var jsonForCode = { code: code };
             var jsonForName = { name: name };
 
             $.ajax({
                 type: "POST",
                 url: '/Course/CodeIsExist',
-                contentType: "application/json; charset:uft-8",
+                contentType: "application/json; charset=uft-8",
                 data: JSON.stringify(jsonForCode),
                 success: function (data) {
                     if (data == 1)
-                        $("#errorCode").append('<span class="text-dangeer">Code is exist.</span>');
+                        $("#checkCode").append('<span class="text-danger">Code is exist.</span>')
                 }
             });
 
             $.ajax({
                 type: "POST",
                 url: '/Course/NameIsExist',
-                contentType: "application/json; charset:uft-8",
+                contentType: "application/json; charset=uft-8",
                 data: JSON.stringify(jsonForName),
                 success: function (data) {
                     if (data == 1)
-                        $("#errorName").append('<span class="text-dangeer">Name is exist.</span>');
+                        $("#checkName").append('<span class="text-danger">Name is exist.</span>')
                 }
             });
-        };
+        }
 
         $(document).ready(function () {
             $("#create").validate({

@@ -7,7 +7,7 @@
     <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="Cradit" Type="decimal" Precision="2" Scale="2" Nullable="false" />
+    <Property Name="Cradit" Type="decimal" Precision="12" Scale="2" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="50" />
     <Property Name="DepartmentId" Type="int" Nullable="false" />
     <Property Name="SemesterId" Type="int" Nullable="false" />
