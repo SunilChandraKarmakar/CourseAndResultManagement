@@ -23,11 +23,21 @@ namespace CourseAndResultMS.Controllers
             return View();
         }
 
-        public JsonResult isExistCode(string code)
+        public JsonResult IsExistCode(string code)
         {
             Department checkCode = db.Departments.FirstOrDefault(c => c.Code == code);
 
             if (checkCode != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
+        public JsonResult IsExistName(string name)
+        {
+            Department checkName = db.Departments.FirstOrDefault(n => n.Name == name);
+
+            if (checkName != null)
                 return Json(1);
             else
                 return Json(0);

@@ -1,7 +1,4 @@
-﻿@{
-    string errorMessage = ViewBag.ErrorMessage;
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -9,27 +6,6 @@
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         label.error {
             color: red;
@@ -51,14 +27,15 @@
                     <div class="form-group">
                         <label for="Code" class="control-label col-md-2">Code</label>
                         <div class="col-md-10">
-                            <input type="text" id="Code" name="Code" class="form-control" />
+                            <input type="text" id="Code" name="Code" class="form-control" onchange="UserCheck()" />
                             <span class="text-danger" id="checkCode"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Name" class="control-label col-md-2">Name</label>
                         <div class="col-md-10">
-                            <input type="text" id="Name" name="Name" class="form-control" />
+                            <input type="text" id="Name" name="Name" class="form-control" onchange="UserCheck()" />
+                            <span class="text-danger" id="checkName"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -74,28 +51,39 @@
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script>
-        $(document).ready(function () {
 
-            $("#submit").click(function () {
+        function UserCheck() {
+            $("#checkCode").empty();
+            $("#checkName").empty();
+            var code = $("#Code").val();
+            var name = $("#Name").val();
+            var jsonForCode = { code: code };
+            var jsonForName = { name: name };
 
-                $("#checkCode").empty();
-                var code = $("#Code").val();
-                var json = { code: code };
-
-                $.ajax({
-                    type: "POST",
-                    url: '/Department/isExistCode',
-                    contentType: "application/json; charset=uft-8",
-                    data: JSON.stringify(json),
-                    success: function (data) {
-                        if (data == 1)
-                            $("#checkCode").append('<span class="text-danger" style="font:bold">Code is exist.</span>')
-
-                    }
-
-                });
+            $.ajax({
+                type: "POST",
+                url: '/Department/IsExistCode',
+                contentType: "application/json; charset=uft-8",
+                data: JSON.stringify(jsonForCode),
+                success: function (data) {
+                    if (data == 1)
+                        $("#checkCode").append('<span class="text-danger">Code is exist.</span>')
+                }
             });
 
+            $.ajax({
+                type: "POST",
+                url: '/Department/IsExistName',
+                contentType: "application/json; charset=uft-8",
+                data: JSON.stringify(jsonForName),
+                success: function (data) {
+                    if (data == 1)
+                        $("#checkName").append('<span class="text-danger">Name is exist.</span>')
+                }
+            });
+        }
+
+        $(document).ready(function () {
             $("#create").validate({
                 rules: {
                     Code: {
