@@ -17,6 +17,26 @@ namespace CourseAndResultMS.Controllers
             return View();
         }
 
+        public JsonResult CodeIsExist(string code)
+        {
+            Course course = db.Courses.FirstOrDefault(c => c.Code == code);
+
+            if (code != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
+        public JsonResult NameIsExist(string name)
+        {
+            Course course = db.Courses.FirstOrDefault(c => c.Name == name);
+
+            if (name != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {

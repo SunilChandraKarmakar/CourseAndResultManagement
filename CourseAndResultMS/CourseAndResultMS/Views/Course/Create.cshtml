@@ -9,6 +9,20 @@
     <meta charset="UTF-8">
     <title>Course Create</title>
     <link href="~/Content/style.css" rel="stylesheet" />
+    <style>
+
+
+
+
+
+
+
+
+        label.error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <div class="row">
@@ -24,13 +38,15 @@
                     <div class="form-group">
                         <label for="Code" class="col-md-2 control-label">Code</label>
                         <div class="col-md-10">
-                            <input type="text" id="Code" name="Code" class="form-control" />
+                            <input type="text" id="Code" name="Code" class="form-control" onchange="IsExist()" />
+                            <span class="text-danger" id="matchCode"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Name" class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input type="text" id="Name" name="Name" class="form-control" />
+                            <input type="text" id="Name" name="Name" class="form-control" onchange="IsExist()" />
+                            <span class="text-danger" id="matchName"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -42,7 +58,7 @@
                     <div class="form-group">
                         <label for="DepartmentId" class="col-md-2 control-label">Department</label>
                         <div class="col-md-10">
-                            <select id="DepartmentId" class="form-control">
+                            <select id="DepartmentId" name="DepartmentId" class="form-control">
                                 <option value="">-- Select --</option>
                                 @foreach (Department item in departments)
                                 {
@@ -54,7 +70,7 @@
                     <div class="form-group">
                         <label for="SemesterId" class="col-md-2 control-label">Semester</label>
                         <div class="col-md-10">
-                            <select id="SemesterId" class="form-control">
+                            <select id="SemesterId" name="SemesterId" class="form-control">
                                 <option value="">-- Select --</option>
                                 @foreach (Semester item in semesters)
                                 {
@@ -66,7 +82,7 @@
                     <div class="form-group">
                         <label for="Description" class="col-md-2 control-label">Description</label>
                         <div class="col-md-10">
-                            <textarea id="Description" class="form-control"></textarea>
+                            <textarea id="Description" name="Description" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -79,5 +95,78 @@
             </form>
         </div>
     </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script>
+
+        function IsExist() {
+
+            $("#errorCode").empty();
+            $("#errorName").empty();
+
+            var code = $("#code").val();
+            var name = $("#name").val();
+            var jsonForCode = { code: code };
+            var jsonForName = { name: name };
+
+            $.ajax({
+                type: "POST",
+                url: '/Course/CodeIsExist',
+                contentType: "application/json; charset:uft-8",
+                data: JSON.stringify(jsonForCode),
+                success: function (data) {
+                    if (data == 1)
+                        $("#errorCode").append('<span class="text-dangeer">Code is exist.</span>');
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: '/Course/NameIsExist',
+                contentType: "application/json; charset:uft-8",
+                data: JSON.stringify(jsonForName),
+                success: function (data) {
+                    if (data == 1)
+                        $("#errorName").append('<span class="text-dangeer">Name is exist.</span>');
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            $("#create").validate({
+                rules: {
+                    Code: {
+                        required: true,
+                        minlength: 5
+                    },
+                    Name: "required",
+                    Cradit: {
+                        required: true,
+                        minlength: 0.5,
+                        maxlength: 5.0
+                    },
+                    DepartmentId: "required",
+                    SemesterId: "required",
+                    Description: "required"
+                },
+                messages: {
+                    Code: {
+                        required: "Please input code",
+                        minlength: "At last 5 character"
+                    },
+                    Name: "Please input name",
+                    Cradit: {
+                        required: "Please give cradit",
+                        minlength: "At last 0.5 cradit",
+                        maxlength: "Upto 5.0 cradit"
+                    },
+                    DepartmentId: "Please select Department",
+                    SemesterId: "Please select Semester",
+                    Description: "Please write something"
+                }
+            });
+        });
+    </script>
 </body>
 </html>
