@@ -26,3 +26,25 @@ CREATE TABLE Course
 	FOREIGN KEY(DepartmentId) REFERENCES Department(DepartmentId),
 	FOREIGN KEY(SemesterId) REFERENCES Semester(SemesterId) 
 )
+
+CREATE TABLE Designation 
+(
+	DesignationId INT IDENTITY(1,1) PRIMARY KEY,
+	DesignationCode VARCHAR(10) UNIQUE NOT NULL,
+	[Description] VARCHAR(30) NOT NULL 
+)
+
+CREATE TABLE Teacher 
+(
+	TeacherId INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] VARCHAR(30) NOT NULL,
+	Email VARCHAR(50) UNIQUE NOT NULL,
+	ContactNo VARCHAR(14) UNIQUE NOT NULL,
+	DesignationId INT NOT NULL,
+	DepartmentId INT NOT NULL,
+	CraditToBeTaken DECIMAL(18,2) NOT NULL,
+	[Address] VARCHAR(50),
+	
+	 FOREIGN KEY(DesignationId) REFERENCES Designation(DesignationId),
+	 FOREIGN KEY(DepartmentId) REFERENCES Department(DepartmentId)
+)
