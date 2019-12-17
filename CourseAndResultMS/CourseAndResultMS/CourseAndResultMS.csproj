@@ -199,9 +199,15 @@
     <Compile Include="Models\Department.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Designation.cs">
+      <DependentUpon>CourseAndResultModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Semester.cs">
+      <DependentUpon>CourseAndResultModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Teacher.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

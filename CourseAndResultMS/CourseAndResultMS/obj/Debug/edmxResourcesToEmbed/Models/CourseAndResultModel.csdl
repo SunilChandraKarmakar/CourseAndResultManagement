@@ -8,6 +8,7 @@
     <Property Name="Code" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Courses" Relationship="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D" FromRole="Department" ToRole="Course" />
+    <NavigationProperty Name="Teachers" Relationship="CourseAndResultManagementModel.FK__Teacher__Departm__4F7CD00D" FromRole="Department" ToRole="Teacher" />
   </EntityType>
   <EntityContainer Name="CourseAndResultManagementEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Departments" EntityType="Self.Department" />
@@ -20,6 +21,16 @@
     <AssociationSet Name="FK__Course__Semester__412EB0B6" Association="CourseAndResultManagementModel.FK__Course__Semester__412EB0B6">
       <End Role="Semester" EntitySet="Semesters" />
       <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+    <EntitySet Name="Designations" EntityType="CourseAndResultManagementModel.Designation" />
+    <EntitySet Name="Teachers" EntityType="CourseAndResultManagementModel.Teacher" />
+    <AssociationSet Name="FK__Teacher__Departm__4F7CD00D" Association="CourseAndResultManagementModel.FK__Teacher__Departm__4F7CD00D">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teacher__Designa__4E88ABD4" Association="CourseAndResultManagementModel.FK__Teacher__Designa__4E88ABD4">
+      <End Role="Designation" EntitySet="Designations" />
+      <End Role="Teacher" EntitySet="Teachers" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Course">
@@ -65,6 +76,54 @@
       </Principal>
       <Dependent Role="Course">
         <PropertyRef Name="SemesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Designation">
+    <Key>
+      <PropertyRef Name="DesignationId" />
+    </Key>
+    <Property Name="DesignationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DesignationCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Teachers" Relationship="CourseAndResultManagementModel.FK__Teacher__Designa__4E88ABD4" FromRole="Designation" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Name="DesignationId" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="CraditToBeTaken" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__Teacher__Departm__4F7CD00D" FromRole="Teacher" ToRole="Department" />
+    <NavigationProperty Name="Designation" Relationship="CourseAndResultManagementModel.FK__Teacher__Designa__4E88ABD4" FromRole="Teacher" ToRole="Designation" />
+  </EntityType>
+  <Association Name="FK__Teacher__Departm__4F7CD00D">
+    <End Type="CourseAndResultManagementModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.Teacher" Role="Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teacher__Designa__4E88ABD4">
+    <End Type="CourseAndResultManagementModel.Designation" Role="Designation" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.Teacher" Role="Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Designation">
+        <PropertyRef Name="DesignationId" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="DesignationId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
