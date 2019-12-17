@@ -26,6 +26,12 @@
 
 
 
+
+
+
+
+
+
         label.error {
             color: red;
             font-style: italic;
@@ -149,8 +155,7 @@
                     Name: "required",
                     Cradit: {
                         required: true,
-                        minlength: 0.5,
-                        maxlength: 5.0
+                        range: [0.5, 5.0]
                     },
                     DepartmentId: "required",
                     SemesterId: "required",
@@ -164,8 +169,7 @@
                     Name: "Please input name",
                     Cradit: {
                         required: "Please give cradit",
-                        minlength: "At last 0.5 cradit",
-                        maxlength: "Upto 5.0 cradit"
+                        range: "At last 0.5, upto 5.0 cradit",
                     },
                     DepartmentId: "Please select Department",
                     SemesterId: "Please select Semester",
