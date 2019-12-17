@@ -7,17 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace CourseAndResultMS.Models
 {
-    using System.ComponentModel.DataAnnotations;
-
     public partial class Department
     {
         public int DepartmentId { get; set; }
-
-        [Required]
         public string Code { get; set; }
-        [Required]
         public string Name { get; set; }
     }
 }
