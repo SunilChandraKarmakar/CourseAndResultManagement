@@ -23,6 +23,16 @@ namespace CourseAndResultMS.Controllers
             return View();
         }
 
+        public JsonResult isExistCode(string code)
+        {
+            Department checkCode = db.Departments.FirstOrDefault(c => c.Code == code);
+
+            if (checkCode != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
         [HttpPost]
         public ActionResult Create(Department aDepartment)
         {
