@@ -6,3 +6,23 @@ CREATE TABLE Department
 	Code VARCHAR(8) NOT NULL UNIQUE,
 	[Name] VARCHAR(50) NOT NULL UNIQUE
 )
+
+CREATE TABLE Semester
+(
+	SemesterId INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] VARCHAR(20) NOT NULL UNIQUE
+)
+
+CREATE TABLE Course
+(
+	CourseId INT IDENTITY(1,1) PRIMARY KEY,
+	Code VARCHAR(15) NOT NULL UNIQUE,
+	[Name] VARCHAR(30) NOT NULL UNIQUE,
+	Cradit DECIMAL(2,2) NOT NULL,
+	[Description] VARCHAR(50),
+	DepartmentId INT NOT NULL,
+	SemesterId INT NOT NULL,
+
+	FOREIGN KEY(DepartmentId) REFERENCES Department(DepartmentId),
+	FOREIGN KEY(SemesterId) REFERENCES Semester(SemesterId) 
+)
