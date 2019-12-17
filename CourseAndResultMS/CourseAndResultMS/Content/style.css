@@ -7,7 +7,12 @@
     text-align: center;
 }
 
-#showdepartment {
+#tablemargin {
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+#departmenttbl {
     margin-top: 50px;
     margin-left: 100px;
 }

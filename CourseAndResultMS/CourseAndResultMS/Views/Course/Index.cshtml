@@ -1,0 +1,60 @@
+﻿@using CourseAndResultMS.Models;
+@{
+    List<Course> courses = ViewBag.CourseList;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Course Index</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Course Details</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../Course/Create" class="btn btn-success"><i class="fa fa-plus">&nbsp; </i> Create Course</a>
+        </div>
+    </div>
+    <div class="row" id="tablemargin">
+        <div class="col-md-8">
+            <table id="myTable" class="display table table-striped table-bordered">
+                <thead>
+                    <tr style="background-color: darkkhaki">
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Cradit</th>
+                        <th>Department and Semester</th>
+                        <th>Discription</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Course item in courses)
+                    {
+                        <tr>
+                            <td>@item.Code</td>
+                            <td>@item.Name</td>
+                            <td>@item.Cradit</td>
+                            <td>
+                                Department : @item.Department.Name
+                                Semester : @item.Semester.Name
+                            </td>
+                            <td>@item.Description</td>
+                            <td>
+                                <a href="../Course/Edit/@item.CourseId" class="btn btn-info"><i class="fa fa-edit">&nbsp;</i> Edit</a>
+                                <a href="../Course/Delete/@item.CourseId" class="btn btn-danger"><i class="fa fa-eye-dropper">&nbsp;</i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
