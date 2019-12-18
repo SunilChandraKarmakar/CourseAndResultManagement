@@ -16,5 +16,16 @@ namespace CourseAndResultMS.Controllers
             ViewBag.TeacherList = teachers;
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            List<Designation> designations = db.Designations.ToList();
+            List<Department> departments = db.Departments.ToList();
+            ViewBag.DesignationList = designations;
+            ViewBag.DepartmentList = departments;
+
+            return View();
+        }
     }
 }

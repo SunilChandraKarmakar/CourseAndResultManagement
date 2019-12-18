@@ -1,0 +1,90 @@
+﻿@using CourseAndResultMS.Models;
+@{
+    List<Designation> designations = ViewBag.DesignationList;
+    List<Department> departments = ViewBag.DepartmentList;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Create Teacher</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Create Teacher</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="create" method="post" action="@Url.Action("Create", "Teacher")">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="Name" class="col-md-2 control-label">Name</label>
+                        <div class="col-md-10">
+                            <input type="text" id="Name" name="Name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="col-md-2 control-label">Email</label>
+                        <div class="col-md-10">
+                            <input type="email" id="Email" name="Email" class="form-control" onchange="UserCheck()" />
+                            <span id="matchEmail" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Contact" class="col-md-2 control-label">Contact</label>
+                        <div class="col-md-10">
+                            <input type="number" id="Contact" name="Contact" class="form-control" onchange="UserCheck()" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="DesignationId" class="col-md-2 control-label">Designation</label>
+                        <div class="col-md-10">
+                            <select id="DesignationId" name="DesignationId" class="form-control">
+                                <option value="">-- Select --</option>
+                                @foreach (Designation item in designations)
+                                {
+                                    <option value="@item.DesignationId">@item.Description</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="DepartmentId" class="col-md-2 control-label">Department</label>
+                        <div class="col-md-10">
+                            <select id="DepartmentId" name="DepartmentId" class="form-control">
+                                <option value="">-- Select --</option>
+                                @foreach (Department item in departments)
+                                {
+                                    <option value="@item.DepartmentId">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="CraditToBeTaken" class="col-md-2 control-label">Cradit Taken</label>
+                        <div class="col-md-10">
+                            <input type="number" id="CraditToBeTaken" name="CraditToBeTaken" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Address" class="col-md-2 control-label">Address</label>
+                        <div class="col-md-10">
+                            <textarea id="Address" name="Address" class="form-control" placeholder="Type your address"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" id="submit" value="Submit" class="btn btn-primary" />
+                            <a href="../Teacher/Index" class="btn btn-info">Back To List</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
