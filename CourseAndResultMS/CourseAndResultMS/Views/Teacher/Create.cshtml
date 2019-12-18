@@ -86,5 +86,54 @@
             </form>
         </div>
     </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#create").validate({
+                rules: {
+                    Name: "required",
+                    Email: {
+                        required: true,
+                        email: true,
+                        maxlength: 50
+                    },
+                    Contact: {
+                        required: true,
+                        minlength: 11,
+                        maxlength: 14
+                    },
+                    DesignationId: "required",
+                    DepartmentId: "required",
+                    CraditToBeTaken: {
+                        required: true,
+                        range: [0, 200]
+                    },
+                    Address: "required"
+                },
+                messages: {
+                    Name: "Please give Teacher Name.",
+                    Email: {
+                        required: "Please give email.",
+                        email: "Please give valid email.",
+                        maxlength: "Upto 50 character."
+                    },
+                    Contact: {
+                        required: "Please give contact number.",
+                        minlength: "At last 11 digite are give.",
+                        maxlength: "Upto 14 digite are given"
+                    },
+                    DesignationId: "Select Designation",
+                    DepartmentId: "Select Department",
+                    CraditToBeTaken: {
+                        required: "Please give Cradit to be taken",
+                        range: "You given 0 - 200 Cradit"
+                    },
+                    Address: "Please give address"
+                }
+            });
+        });
+    </script>
 </body>
 </html>
