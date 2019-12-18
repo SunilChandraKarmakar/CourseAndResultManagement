@@ -38,6 +38,7 @@
                         <label for="Contact" class="col-md-2 control-label">Contact</label>
                         <div class="col-md-10">
                             <input type="number" id="Contact" name="Contact" class="form-control" onchange="UserCheck()" />
+                            <span id="matchContact" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,6 +91,37 @@
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script>
+
+        function UserCheck() {
+            var email = $("#Email").val();
+            var contact = $("#Contact").val();
+
+            var jsonObjFroEmail = { checkEmail: email };
+            var jsonObjFroContact = { checkContact: contact };
+
+            $.ajax({
+                type: "POST",
+                url: '/Teacher/EmailIsExist',
+                contentType: "application/json; charset=uft-8",
+                data: JSON.stringify(jsonObjFroEmail),
+                success: function (data) {
+                    if (data == 1)
+                        $("#matchEmail").append('<span type="text-danger">Email has been allready taken!</span>');
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: '/Teacher/ContactIsExist',
+                contentType: "application/json; charset=uft-8",
+                data: JSON.stringify(jsonObjFroContact),
+                success: function (data) {
+                    if (data == 1)
+                        $("#matchContact").append('<span type="text-danger">Contact number has been allready taken!</span>');
+                }
+            });
+        }
+
         $(document).ready(function () {
             $("#create").validate({
                 rules: {

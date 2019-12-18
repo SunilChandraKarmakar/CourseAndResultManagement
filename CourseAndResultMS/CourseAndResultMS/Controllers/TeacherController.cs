@@ -27,5 +27,25 @@ namespace CourseAndResultMS.Controllers
 
             return View();
         }
+
+        public JsonResult EmailIsExist(string checkEmail)
+        {
+            Teacher aTeacherEmail = db.Teachers.FirstOrDefault(e => e.Email == checkEmail);
+
+            if (aTeacherEmail != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
+
+        public JsonResult ContactIsExist(string checkContact)
+        {
+            Teacher aTeacherContact = db.Teachers.FirstOrDefault(c => c.ContactNo == checkContact);
+
+            if (aTeacherContact != null)
+                return Json(1);
+            else
+                return Json(0);
+        }
     }
 }
