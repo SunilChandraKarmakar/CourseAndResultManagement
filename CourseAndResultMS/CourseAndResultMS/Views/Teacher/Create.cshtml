@@ -35,9 +35,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Contact" class="col-md-2 control-label">Contact</label>
+                        <label for="ContactNo" class="col-md-2 control-label">Contact</label>
                         <div class="col-md-10">
-                            <input type="number" id="Contact" name="Contact" class="form-control" onchange="UserCheck()" />
+                            <input type="number" id="ContactNo" name="ContactNo" class="form-control" onchange="UserCheck()" />
                             <span id="matchContact" class="text-danger"></span>
                         </div>
                     </div>
@@ -93,8 +93,12 @@
     <script>
 
         function UserCheck() {
+
+            $("#matchEmail").empty();
+            $("#matchContact").empty();
+
             var email = $("#Email").val();
-            var contact = $("#Contact").val();
+            var contact = $("#ContactNo").val();
 
             var jsonObjFroEmail = { checkEmail: email };
             var jsonObjFroContact = { checkContact: contact };
@@ -131,7 +135,7 @@
                         email: true,
                         maxlength: 50
                     },
-                    Contact: {
+                    ContactNo: {
                         required: true,
                         minlength: 11,
                         maxlength: 14
@@ -151,7 +155,7 @@
                         email: "Please give valid email.",
                         maxlength: "Upto 50 character."
                     },
-                    Contact: {
+                    ContactNo: {
                         required: "Please give contact number.",
                         minlength: "At last 11 digite are give.",
                         maxlength: "Upto 14 digite are given"

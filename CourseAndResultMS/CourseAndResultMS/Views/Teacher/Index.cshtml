@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="row" id="tblTeacher">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <table id="myTable" class="display table table-bordered table-striped">
                 <thead>
                     <tr style="background-color: darkkhaki">
@@ -48,8 +48,8 @@
                             </td>
                             <td>@item.Address</td>
                             <td>
-                                <a href="../Teacher/Edit/@item.TeacherId"><i class="fa fa-edit">&nbsp;</i> Edit</a>
-                                <a href="../Teacher/Delete/@item.TeacherId"><i class="fa fa-eye-dropper">&nbsp;</i> Delete</a>
+                                <a href="../Teacher/Edit/@item.TeacherId" class="btn btn-info"><i class="fa fa-edit">&nbsp;</i> Edit</a>
+                                <a href="../Teacher/Delete/@item.TeacherId" class="btn btn-danger"><i class="fa fa-eye-dropper">&nbsp;</i> Delete</a>
                             </td>
                         </tr>
                     }
