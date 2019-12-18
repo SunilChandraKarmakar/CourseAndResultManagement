@@ -14,6 +14,12 @@ namespace CourseAndResultMS.Models
     
     public partial class Teacher
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Teacher()
+        {
+            this.CourseAssignToTeachers = new HashSet<CourseAssignToTeacher>();
+        }
+    
         public int TeacherId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -25,5 +31,7 @@ namespace CourseAndResultMS.Models
     
         public virtual Department Department { get; set; }
         public virtual Designation Designation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CourseAssignToTeacher> CourseAssignToTeachers { get; set; }
     }
 }

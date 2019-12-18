@@ -12,6 +12,16 @@
     <Property Name="DepartmentId" Type="int" Nullable="false" />
     <Property Name="SemesterId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="CourseAssignToTeacher">
+    <Key>
+      <PropertyRef Name="CourseAssignToTeacherId" />
+    </Key>
+    <Property Name="CourseAssignToTeacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="RemainingCradit" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
   <EntityType Name="Department">
     <Key>
       <PropertyRef Name="DepartmentId" />
@@ -72,6 +82,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__CourseAss__Cours__5535A963">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CourseAssignToTeacher" Type="Self.CourseAssignToTeacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="CourseAssignToTeacher">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CourseAss__Depar__534D60F1">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="CourseAssignToTeacher" Type="Self.CourseAssignToTeacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="CourseAssignToTeacher">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CourseAss__Teach__5441852A">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="CourseAssignToTeacher" Type="Self.CourseAssignToTeacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherId" />
+      </Principal>
+      <Dependent Role="CourseAssignToTeacher">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Teacher__Departm__4F7CD00D">
     <End Role="Department" Type="Self.Department" Multiplicity="1" />
     <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
@@ -98,6 +144,7 @@
   </Association>
   <EntityContainer Name="CourseAndResultManagementModelStoreContainer">
     <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseAssignToTeacher" EntityType="Self.CourseAssignToTeacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
@@ -109,6 +156,18 @@
     <AssociationSet Name="FK__Course__Semester__412EB0B6" Association="Self.FK__Course__Semester__412EB0B6">
       <End Role="Semester" EntitySet="Semester" />
       <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CourseAss__Cours__5535A963" Association="Self.FK__CourseAss__Cours__5535A963">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CourseAss__Depar__534D60F1" Association="Self.FK__CourseAss__Depar__534D60F1">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CourseAss__Teach__5441852A" Association="Self.FK__CourseAss__Teach__5441852A">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeacher" />
     </AssociationSet>
     <AssociationSet Name="FK__Teacher__Departm__4F7CD00D" Association="Self.FK__Teacher__Departm__4F7CD00D">
       <End Role="Department" EntitySet="Department" />

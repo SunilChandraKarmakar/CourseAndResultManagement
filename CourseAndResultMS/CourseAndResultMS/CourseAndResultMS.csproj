@@ -197,6 +197,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CourseAndResultModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CourseAssignToTeacher.cs">
+      <DependentUpon>CourseAndResultModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Department.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>

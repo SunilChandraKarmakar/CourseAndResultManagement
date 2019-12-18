@@ -17,6 +17,16 @@
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="SemesterId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CourseAssignToTeacher">
+          <Key>
+            <PropertyRef Name="CourseAssignToTeacherId" />
+          </Key>
+          <Property Name="CourseAssignToTeacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="TeacherId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="RemainingCradit" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="DepartmentId" />
@@ -77,6 +87,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CourseAss__Cours__5535A963">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CourseAssignToTeacher" Type="Self.CourseAssignToTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="CourseAssignToTeacher">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseAss__Depar__534D60F1">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="CourseAssignToTeacher" Type="Self.CourseAssignToTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="CourseAssignToTeacher">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseAss__Teach__5441852A">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="CourseAssignToTeacher" Type="Self.CourseAssignToTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="CourseAssignToTeacher">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Teacher__Departm__4F7CD00D">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
@@ -103,6 +149,7 @@
         </Association>
         <EntityContainer Name="CourseAndResultManagementModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseAssignToTeacher" EntityType="Self.CourseAssignToTeacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
@@ -114,6 +161,18 @@
           <AssociationSet Name="FK__Course__Semester__412EB0B6" Association="Self.FK__Course__Semester__412EB0B6">
             <End Role="Semester" EntitySet="Semester" />
             <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseAss__Cours__5535A963" Association="Self.FK__CourseAss__Cours__5535A963">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseAss__Depar__534D60F1" Association="Self.FK__CourseAss__Depar__534D60F1">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseAss__Teach__5441852A" Association="Self.FK__CourseAss__Teach__5441852A">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeacher" />
           </AssociationSet>
           <AssociationSet Name="FK__Teacher__Departm__4F7CD00D" Association="Self.FK__Teacher__Departm__4F7CD00D">
             <End Role="Department" EntitySet="Department" />
@@ -137,6 +196,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Courses" Relationship="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D" FromRole="Department" ToRole="Course" />
           <NavigationProperty Name="Teachers" Relationship="CourseAndResultManagementModel.FK__Teacher__Departm__4F7CD00D" FromRole="Department" ToRole="Teacher" />
+          <NavigationProperty Name="CourseAssignToTeachers" Relationship="CourseAndResultManagementModel.FK__CourseAss__Depar__534D60F1" FromRole="Department" ToRole="CourseAssignToTeacher" />
         </EntityType>
         <EntityContainer Name="CourseAndResultManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Departments" EntityType="Self.Department" />
@@ -160,6 +220,19 @@
             <End Role="Designation" EntitySet="Designations" />
             <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
+          <EntitySet Name="CourseAssignToTeachers" EntityType="CourseAndResultManagementModel.CourseAssignToTeacher" />
+          <AssociationSet Name="FK__CourseAss__Cours__5535A963" Association="CourseAndResultManagementModel.FK__CourseAss__Cours__5535A963">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseAss__Depar__534D60F1" Association="CourseAndResultManagementModel.FK__CourseAss__Depar__534D60F1">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseAss__Teach__5441852A" Association="CourseAndResultManagementModel.FK__CourseAss__Teach__5441852A">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeachers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Course">
           <Key>
@@ -174,6 +247,7 @@
           <Property Name="SemesterId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D" FromRole="Course" ToRole="Department" />
           <NavigationProperty Name="Semester" Relationship="CourseAndResultManagementModel.FK__Course__Semester__412EB0B6" FromRole="Course" ToRole="Semester" />
+          <NavigationProperty Name="CourseAssignToTeachers" Relationship="CourseAndResultManagementModel.FK__CourseAss__Cours__5535A963" FromRole="Course" ToRole="CourseAssignToTeacher" />
         </EntityType>
         <EntityType Name="Semester">
           <Key>
@@ -230,6 +304,7 @@
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__Teacher__Departm__4F7CD00D" FromRole="Teacher" ToRole="Department" />
           <NavigationProperty Name="Designation" Relationship="CourseAndResultManagementModel.FK__Teacher__Designa__4E88ABD4" FromRole="Teacher" ToRole="Designation" />
+          <NavigationProperty Name="CourseAssignToTeachers" Relationship="CourseAndResultManagementModel.FK__CourseAss__Teach__5441852A" FromRole="Teacher" ToRole="CourseAssignToTeacher" />
         </EntityType>
         <Association Name="FK__Teacher__Departm__4F7CD00D">
           <End Type="CourseAndResultManagementModel.Department" Role="Department" Multiplicity="1" />
@@ -252,6 +327,55 @@
             </Principal>
             <Dependent Role="Teacher">
               <PropertyRef Name="DesignationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CourseAssignToTeacher">
+          <Key>
+            <PropertyRef Name="CourseAssignToTeacherId" />
+          </Key>
+          <Property Name="CourseAssignToTeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="TeacherId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="RemainingCradit" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Course" Relationship="CourseAndResultManagementModel.FK__CourseAss__Cours__5535A963" FromRole="CourseAssignToTeacher" ToRole="Course" />
+          <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__CourseAss__Depar__534D60F1" FromRole="CourseAssignToTeacher" ToRole="Department" />
+          <NavigationProperty Name="Teacher" Relationship="CourseAndResultManagementModel.FK__CourseAss__Teach__5441852A" FromRole="CourseAssignToTeacher" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK__CourseAss__Cours__5535A963">
+          <End Type="CourseAndResultManagementModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="CourseAndResultManagementModel.CourseAssignToTeacher" Role="CourseAssignToTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="CourseAssignToTeacher">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseAss__Depar__534D60F1">
+          <End Type="CourseAndResultManagementModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="CourseAndResultManagementModel.CourseAssignToTeacher" Role="CourseAssignToTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="CourseAssignToTeacher">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseAss__Teach__5441852A">
+          <End Type="CourseAndResultManagementModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="CourseAndResultManagementModel.CourseAssignToTeacher" Role="CourseAssignToTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="CourseAssignToTeacher">
+              <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -311,6 +435,17 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseAssignToTeachers">
+            <EntityTypeMapping TypeName="CourseAndResultManagementModel.CourseAssignToTeacher">
+              <MappingFragment StoreEntitySet="CourseAssignToTeacher">
+                <ScalarProperty Name="RemainingCradit" ColumnName="RemainingCradit" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="CourseAssignToTeacherId" ColumnName="CourseAssignToTeacherId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

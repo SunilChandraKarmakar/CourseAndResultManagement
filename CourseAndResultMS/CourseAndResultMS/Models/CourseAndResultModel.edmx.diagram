@@ -14,6 +14,10 @@
         <EntityTypeShape EntityType="CourseAndResultManagementModel.Teacher" Width="1.5" PointX="6" PointY="0.75" />
         <AssociationConnector Association="CourseAndResultManagementModel.FK__Teacher__Departm__4F7CD00D" />
         <AssociationConnector Association="CourseAndResultManagementModel.FK__Teacher__Designa__4E88ABD4" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.CourseAssignToTeacher" Width="1.5" PointX="8.25" PointY="1" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__CourseAss__Cours__5535A963" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__CourseAss__Depar__534D60F1" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__CourseAss__Teach__5441852A" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -54,5 +54,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CourseAssignToTeachers">
+      <EntityTypeMapping TypeName="CourseAndResultManagementModel.CourseAssignToTeacher">
+        <MappingFragment StoreEntitySet="CourseAssignToTeacher">
+          <ScalarProperty Name="RemainingCradit" ColumnName="RemainingCradit" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="CourseAssignToTeacherId" ColumnName="CourseAssignToTeacherId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
