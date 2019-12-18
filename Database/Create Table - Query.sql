@@ -48,3 +48,16 @@ CREATE TABLE Teacher
 	 FOREIGN KEY(DesignationId) REFERENCES Designation(DesignationId),
 	 FOREIGN KEY(DepartmentId) REFERENCES Department(DepartmentId)
 )
+
+CREATE TABLE CourseAssignToTeacher
+(
+	CourseAssignToTeacherId INT IDENTITY(1,1) PRIMARY KEY,
+	DepartmentId INT NOT NULL,
+	TeacherId INT NOT NULL,
+	CourseId INT NOT NULL UNIQUE,
+	RemainingCradit DECIMAL(18,2),
+	
+	FOREIGN KEY(DepartmentId) REFERENCES Department(DepartmentId),
+	FOREIGN KEY(TeacherId) REFERENCES Teacher(TeacherId),
+	FOREIGN KEY(CourseId) REFERENCES Course(CourseId)	
+)
