@@ -16,5 +16,20 @@ namespace CourseAndResultMS.Controllers
             ViewBag.CourseAssignToTeachers = courseAssignToTeachers;
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            List<Department> departments = db.Departments.ToList();
+            ViewBag.DepartmentList = departments;
+            return View();
+        }
+
+        public JsonResult GetTeacherByDepartmentId(int departmentId)
+        {
+            List<Teacher> teachers = db.Teachers.ToList();
+            Teacher getAllTeacherByDepartmentId = teachers.Find(t => t.DepartmentId == departmentId);
+            return Json(getAllTeacherByDepartmentId);
+        }
     }
 }
