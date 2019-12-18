@@ -1,0 +1,25 @@
+﻿@using CourseAndResultMS.Models;
+@{
+    List<CourseAssignToTeacher> courseAssignToTeachers = ViewBag.CourseAssignToTeachers;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Course Assign Index</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Course Assign Details</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../CourseAssignToTeacher/Create" class="btn btn-success"><i class="fa fa-plus">&nbsp;</i> Create Course Assign</a>
+        </div>
+    </div>
+</body>
+</html>
