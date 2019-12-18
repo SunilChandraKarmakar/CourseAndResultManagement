@@ -47,5 +47,23 @@ namespace CourseAndResultMS.Controllers
             else
                 return Json(0);
         }
+
+        [HttpPost]
+        public ActionResult Create(Teacher aTeacher)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Teachers.Add(aTeacher);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            List<Designation> designations = db.Designations.ToList();
+            List<Department> departments = db.Departments.ToList();
+            ViewBag.DesignationList = designations;
+            ViewBag.DepartmentList = departments;
+
+            return View(aTeacher);
+        }
     }
 }
