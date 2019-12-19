@@ -27,9 +27,11 @@ namespace CourseAndResultMS.Controllers
 
         public JsonResult GetTeacherByDepartmentId(int departmentId)
         {
+            db.Configuration.ProxyCreationEnabled = false;
+
             List<Teacher> teachers = db.Teachers.ToList();
-            Teacher getAllTeacherByDepartmentId = teachers.Find(t => t.DepartmentId == departmentId);
-            return Json(getAllTeacherByDepartmentId);
+            List<Teacher> getTeacherListByDepartmentId = teachers.FindAll(t => t.DepartmentId == departmentId);
+            return Json(getTeacherListByDepartmentId, JsonRequestBehavior.AllowGet);
         }
     }
 }

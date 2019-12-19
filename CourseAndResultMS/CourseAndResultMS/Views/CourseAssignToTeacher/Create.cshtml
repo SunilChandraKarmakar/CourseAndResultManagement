@@ -39,30 +39,39 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="CraditToBeTaken" class="col-md-2 control-label">Cradit To Be Taken</label>
+                        <div class="col-md-10">
+                            <input type="text" id="CraditToBeTaken" class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
     <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
-        $("#DepartmentId").change(function () {
-            $("#TeacherId").empty();
+        $(document).ready(function () {
+            $("#DepartmentId").change(function () {
 
-            var depId = $("#DepartmentId").val();
-            var jsonObjForTeacher = { departmentId: depId };
-            alert(jsonObjForTeacher);
+                $("#TeacherId").empty();
+                $("#TeacherId").append('<option value="">-- Select Teacher --</option>')
 
-            $.ajax({
-                type: "POST",
-                url: '/CourseAssignToTeacher/GetTeacherByDepartmentId',
-                contentType: "application/json; charset=uft-8",
-                data: JSON.stringify(jsonObjForTeacher),
-                success: function (data) {
+                var depId = $("#DepartmentId").val();
+                var teacherListByDepId = { departmentId: depId };
 
-                    //$.each(data, function (key, value) {
-                    //    $("#TeacherId").append('<option value=' + value.TeacherId + '>' + value.Name + '</option>');
-                    //});
-                },
+                $.ajax({
+                    type: "POST",
+                    url: '/CourseAssignToTeacher/GetTeacherByDepartmentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(teacherListByDepId),
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $("#TeacherId").append('<option value=' + value.TeacherId + '>' + value.Name + '</option>');
+                        });
+                    }
+                });
             });
         });
     </script>
