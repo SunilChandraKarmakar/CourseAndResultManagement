@@ -9,17 +9,15 @@
 
 namespace CourseAndResultMS.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class CourseAssignToTeacher
     {
         public int CourseAssignToTeacherId { get; set; }
         public int DepartmentId { get; set; }
         public int TeacherId { get; set; }
         public int CourseId { get; set; }
-        public Nullable<decimal> RemainingCradit { get; set; }
-    
+        public decimal RemainingCradit { get; set; }
+
         public virtual Course Course { get; set; }
         public virtual Department Department { get; set; }
         public virtual Teacher Teacher { get; set; }

@@ -25,7 +25,7 @@
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="TeacherId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
-          <Property Name="RemainingCradit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RemainingCradit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -338,7 +338,7 @@
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <Property Name="TeacherId" Type="Int32" Nullable="false" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="RemainingCradit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RemainingCradit" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="Course" Relationship="CourseAndResultManagementModel.FK__CourseAss__Cours__5535A963" FromRole="CourseAssignToTeacher" ToRole="Course" />
           <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__CourseAss__Depar__534D60F1" FromRole="CourseAssignToTeacher" ToRole="Department" />
           <NavigationProperty Name="Teacher" Relationship="CourseAndResultManagementModel.FK__CourseAss__Teach__5441852A" FromRole="CourseAssignToTeacher" ToRole="Teacher" />

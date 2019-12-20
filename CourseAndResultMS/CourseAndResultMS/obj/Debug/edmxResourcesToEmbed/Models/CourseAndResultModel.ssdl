@@ -20,7 +20,7 @@
     <Property Name="DepartmentId" Type="int" Nullable="false" />
     <Property Name="TeacherId" Type="int" Nullable="false" />
     <Property Name="CourseId" Type="int" Nullable="false" />
-    <Property Name="RemainingCradit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RemainingCradit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
   </EntityType>
   <EntityType Name="Department">
     <Key>

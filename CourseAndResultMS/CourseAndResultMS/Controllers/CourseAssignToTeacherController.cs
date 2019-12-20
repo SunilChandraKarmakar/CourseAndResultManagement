@@ -33,5 +33,31 @@ namespace CourseAndResultMS.Controllers
             List<Teacher> getTeacherListByDepartmentId = teachers.FindAll(t => t.DepartmentId == departmentId);
             return Json(getTeacherListByDepartmentId, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetTeacherCradit(int teacherId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<Teacher> teachers = db.Teachers.ToList();
+            Teacher aTeacher = teachers.Find(t => t.TeacherId == teacherId);
+            return Json(aTeacher, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult RemainingCraditForTeacher(int teacherId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<Teacher> teacherList = db.Teachers.ToList();
+            Teacher aTeacher = teacherList.Find(t => t.TeacherId == teacherId);
+
+            List<CourseAssignToTeacher> courseAssignToTeacherList = db.CourseAssignToTeachers.ToList();
+            CourseAssignToTeacher aCourseAssignToTeacher = (CourseAssignToTeacher)courseAssignToTeacherList.Where(c => c.TeacherId == teacherId);
+
+            decimal teacherCradit = aTeacher.CraditToBeTaken;
+            decimal assiginTeacherCradit = aCourseAssignToTeacher.RemainingCradit;
+            decimal remainingCradit = teacherCradit - assiginTeacherCradit;
+
+            return Json(remainingCradit, JsonRequestBehavior.AllowGet);
+        }
     }
 }

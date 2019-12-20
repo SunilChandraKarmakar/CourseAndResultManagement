@@ -42,7 +42,39 @@
                     <div class="form-group">
                         <label for="CraditToBeTaken" class="col-md-2 control-label">Cradit To Be Taken</label>
                         <div class="col-md-10">
-                            <input type="text" id="CraditToBeTaken" class="form-control" disabled="disabled" />
+                            <input type="number" id="CraditToBeTaken" class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="RemainingCradit" class="col-md-2 control-label">Remaining Cradit</label>
+                        <div class="col-md-10">
+                            <input type="number" id="RemainingCradit" name="RemainingCradit" class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="CourseId" class="col-md-2 control-label">Course Code</label>
+                        <div class="col-md-10">
+                            <select id="CourseId" class="form-control">
+                                <option value="">-- Select Code --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Name" class="col-md-2 control-label">Name</label>
+                        <div class="col-md-10">
+                            <input type="text" id="Name" class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Cradit" class="col-md-2 control-label">Cradit</label>
+                        <div class="col-md-10">
+                            <input type="text" id="Cradit" class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />
+                            <a href="../CourseAssignToTeacher/Index" class="btn btn-info">Back To List</a>
                         </div>
                     </div>
                 </div>
@@ -56,6 +88,7 @@
             $("#DepartmentId").change(function () {
 
                 $("#TeacherId").empty();
+                $("#CraditToBeTaken").val('');
                 $("#TeacherId").append('<option value="">-- Select Teacher --</option>')
 
                 var depId = $("#DepartmentId").val();
@@ -70,6 +103,37 @@
                         $.each(data, function (key, value) {
                             $("#TeacherId").append('<option value=' + value.TeacherId + '>' + value.Name + '</option>');
                         });
+                    }
+                });
+            });
+
+            $("#TeacherId").change(function () {
+
+                $("#CraditToBeTaken").val('');
+                $("#RemainingCradit").val('');
+
+                var teacherId = $("#TeacherId").val();
+                var getTeacherCraditToBeTaken = { teacherId: teacherId };
+                var getRemainingCraditForTeacher = { teacherId: teacherId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '/CourseAssignToTeacher/GetTeacherCradit',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getTeacherCraditToBeTaken),
+                    success: function (data) {
+                        $("#CraditToBeTaken").val(data.CraditToBeTaken);
+                        $("#RemainingCradit").val(data.CraditToBeTaken);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '/CourseAssignToTeacher/RemainingCraditForTeacher',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getRemainingCraditForTeacher),
+                    success: function (data) {
+                        $("#RemainingCradit").val(data);
                     }
                 });
             });
