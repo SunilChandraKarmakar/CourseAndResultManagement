@@ -21,7 +21,9 @@ namespace CourseAndResultMS.Controllers
         public ActionResult Create()
         {
             List<Department> departments = db.Departments.ToList();
+            List<Course> courses = db.Courses.ToList();
             ViewBag.DepartmentList = departments;
+            ViewBag.CourseList = courses;
             return View();
         }
 
@@ -43,21 +45,22 @@ namespace CourseAndResultMS.Controllers
             return Json(aTeacher, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult RemainingCraditForTeacher(int teacherId)
+        public JsonResult GetCourseByDepartmentId(int departmentId)
         {
             db.Configuration.ProxyCreationEnabled = false;
 
-            List<Teacher> teacherList = db.Teachers.ToList();
-            Teacher aTeacher = teacherList.Find(t => t.TeacherId == teacherId);
+            List<Course> courses = db.Courses.ToList();
+            List<Course> getCourseByDepartmentId = courses.FindAll(c => c.DepartmentId == departmentId);
+            return Json(getCourseByDepartmentId, JsonRequestBehavior.AllowGet);
+        }
 
-            List<CourseAssignToTeacher> courseAssignToTeacherList = db.CourseAssignToTeachers.ToList();
-            CourseAssignToTeacher aCourseAssignToTeacher = (CourseAssignToTeacher)courseAssignToTeacherList.Where(c => c.TeacherId == teacherId);
+        public JsonResult GetCourseNameAndCraditByCourseId(int courseId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
 
-            decimal teacherCradit = aTeacher.CraditToBeTaken;
-            decimal assiginTeacherCradit = aCourseAssignToTeacher.RemainingCradit;
-            decimal remainingCradit = teacherCradit - assiginTeacherCradit;
-
-            return Json(remainingCradit, JsonRequestBehavior.AllowGet);
+            List<Course> courses = db.Courses.ToList();
+            Course aCourse = courses.Find(c => c.CourseId == courseId);
+            return Json(aCourse, JsonRequestBehavior.AllowGet);
         }
     }
 }
