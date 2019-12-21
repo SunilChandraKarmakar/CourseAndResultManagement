@@ -109,5 +109,22 @@ namespace CourseAndResultMS.Controllers
 
             return Json(teacherRemainingCradit, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Create(CourseAssignToTeacher aCourseAssignToTeacher)
+        {
+            if (ModelState.IsValid)
+            {
+                db.CourseAssignToTeachers.Add(aCourseAssignToTeacher);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            List<Department> departments = db.Departments.ToList();
+            List<Course> courses = db.Courses.ToList();
+            ViewBag.DepartmentList = departments;
+            ViewBag.CourseList = courses;
+            return View(aCourseAssignToTeacher);
+        }
     }
 }
