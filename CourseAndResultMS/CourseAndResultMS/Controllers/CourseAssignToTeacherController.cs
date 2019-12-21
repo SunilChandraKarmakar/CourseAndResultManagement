@@ -53,7 +53,7 @@ namespace CourseAndResultMS.Controllers
             Teacher aTeacher = teachers.Find(t => t.TeacherId == teacherId);
 
             List<CourseAssignToTeacher> courseAssignToTeachers = db.CourseAssignToTeachers.ToList();
-            CourseAssignToTeacher courseAssignToTeacher = courseAssignToTeachers.Find(c => c.TeacherId == teacherId);
+            CourseAssignToTeacher courseAssignToTeacher = courseAssignToTeachers.FindLast(c => c.TeacherId == teacherId);
 
             if (courseAssignToTeacher == null)
                 return Json(aTeacher.CraditToBeTaken, JsonRequestBehavior.AllowGet);
@@ -85,7 +85,7 @@ namespace CourseAndResultMS.Controllers
             decimal teacherRemainingCradit = 0;
 
             List<CourseAssignToTeacher> courseAssignToTeachers = db.CourseAssignToTeachers.ToList();
-            CourseAssignToTeacher aCourseAssignToTeacher = courseAssignToTeachers.Find(t => t.TeacherId == teacherId);
+            CourseAssignToTeacher aCourseAssignToTeacher = courseAssignToTeachers.FindLast(t => t.TeacherId == teacherId);
 
             List<Course> courses = db.Courses.ToList();
             Course aCourse = courses.Find(c => c.CourseId == courseId);
