@@ -8,6 +8,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Course Assign</title>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <style>
+
+        label.error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <div class="row">
@@ -18,7 +27,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form id="create" method="post" action="@Url.Action("Create","CourseAssignToTeacher")">
+            <form id="create" method="post" action="@Url.Action("Create", "CourseAssignToTeacher")">
                 <div class="form-horizontal">
                     <div class="form-group">
                         <label for="DepartmentId" class="col-md-2 control-label">Department</label>
@@ -58,12 +67,14 @@
                             <select id="CourseId" name="CourseId" class="form-control">
                                 <option value="">-- Select Code --</option>
                             </select>
+                            <span id="matchCode" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Name" class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input type="text" id="Name" class="form-control" disabled="disabled" />
+                            <input type="text" id="Name" name="Name" class="form-control" disabled="disabled" />
+                            <span id="matchName" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -86,6 +97,20 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            $("#create").validate({
+                rules: {
+                    DepartmentId: "required",
+                    TeacherId: "required",
+                    CourseId: "required",
+                },
+                messages: {
+                    DepartmentId: "Please select Department name.",
+                    TeacherId: "Please select Teacher name.",
+                    CourseId: "Please select Course code."
+                }
+            });
+
             $("#DepartmentId").change(function () {
                 $("#TeacherId").empty();
                 $("#CourseId").empty();
@@ -159,14 +184,18 @@
             });
 
             $("#CourseId").change(function () {
+
                 $("#Name").val('');
                 $("#Cradit").val('');
                 $("#RemainingCradit").val('');
 
                 var teacherId = $("#TeacherId").val();
                 var courseId = $("#CourseId").val();
+
                 var getCourseNameAndCraditByCourseId = { courseId: courseId };
                 var getRemainingCraditByCourseId = { teacherId: teacherId, courseId: courseId };
+                var getNameIsExist = { courseId: courseId };
+
 
                 $.ajax({
                     type: "POST",

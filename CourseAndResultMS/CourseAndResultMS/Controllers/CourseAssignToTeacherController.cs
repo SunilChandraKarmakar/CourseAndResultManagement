@@ -110,6 +110,19 @@ namespace CourseAndResultMS.Controllers
             return Json(teacherRemainingCradit, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult NameIsExist(int courseId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<CourseAssignToTeacher> courseAssignToTeachers = db.CourseAssignToTeachers.ToList();
+            CourseAssignToTeacher aCourseAssignToTeacher = courseAssignToTeachers.Find(c => c.CourseId == courseId);
+
+            if (aCourseAssignToTeacher != null)
+                return Json(1, JsonRequestBehavior.AllowGet);
+            else
+                return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Create(CourseAssignToTeacher aCourseAssignToTeacher)
         {
