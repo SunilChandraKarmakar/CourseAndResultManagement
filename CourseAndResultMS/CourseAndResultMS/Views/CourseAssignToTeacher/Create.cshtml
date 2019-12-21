@@ -144,13 +144,12 @@
                     data: JSON.stringify(getTeacherCraditToBeTaken),
                     success: function (data) {
                         $("#CraditToBeTaken").val(data.CraditToBeTaken);
-                        $("#RemainingCradit").val(data.CraditToBeTaken);
                     }
                 });
 
                 $.ajax({
                     type: "POST",
-                    url: '/CourseAssignToTeacher/RemainingCraditForTeacher',
+                    url: '/CourseAssignToTeacher/GetRemainingCraditForTeacher',
                     contentType: "application/json; charset=uft-8",
                     data: JSON.stringify(getRemainingCraditForTeacher),
                     success: function (data) {
@@ -162,9 +161,12 @@
             $("#CourseId").change(function () {
                 $("#Name").val('');
                 $("#Cradit").val('');
+                $("#RemainingCradit").val('');
 
+                var teacherId = $("#TeacherId").val();
                 var courseId = $("#CourseId").val();
                 var getCourseNameAndCraditByCourseId = { courseId: courseId };
+                var getRemainingCraditByCourseId = { teacherId: teacherId, courseId: courseId };
 
                 $.ajax({
                     type: "POST",
@@ -174,6 +176,16 @@
                     success: function (data) {
                         $("#Name").val(data.Name);
                         $("#Cradit").val(data.Cradit);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '/CourseAssignToTeacher/GetRemainingCraditByCourseId',
+                    contentType: 'application/json; charset=uft-8',
+                    data: JSON.stringify(getRemainingCraditByCourseId),
+                    success: function (data) {
+                        $("#RemainingCradit").val(data);
                     }
                 });
             });

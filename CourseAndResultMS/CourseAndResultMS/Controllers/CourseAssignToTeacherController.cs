@@ -45,6 +45,22 @@ namespace CourseAndResultMS.Controllers
             return Json(aTeacher, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetRemainingCraditForTeacher(int teacherId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<Teacher> teachers = db.Teachers.ToList();
+            Teacher aTeacher = teachers.Find(t => t.TeacherId == teacherId);
+
+            List<CourseAssignToTeacher> courseAssignToTeachers = db.CourseAssignToTeachers.ToList();
+            CourseAssignToTeacher courseAssignToTeacher = courseAssignToTeachers.Find(c => c.TeacherId == teacherId);
+
+            if (courseAssignToTeacher == null)
+                return Json(aTeacher.CraditToBeTaken, JsonRequestBehavior.AllowGet);
+            else
+                return Json(courseAssignToTeacher.RemainingCradit, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetCourseByDepartmentId(int departmentId)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -61,6 +77,37 @@ namespace CourseAndResultMS.Controllers
             List<Course> courses = db.Courses.ToList();
             Course aCourse = courses.Find(c => c.CourseId == courseId);
             return Json(aCourse, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetRemainingCraditByCourseId(int teacherId, int courseId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            decimal teacherRemainingCradit = 0;
+
+            List<CourseAssignToTeacher> courseAssignToTeachers = db.CourseAssignToTeachers.ToList();
+            CourseAssignToTeacher aCourseAssignToTeacher = courseAssignToTeachers.Find(t => t.TeacherId == teacherId);
+
+            List<Course> courses = db.Courses.ToList();
+            Course aCourse = courses.Find(c => c.CourseId == courseId);
+
+            List<Teacher> teachers = db.Teachers.ToList();
+            Teacher aTeacher = teachers.Find(t => t.TeacherId == teacherId);
+
+            if (aCourseAssignToTeacher == null)
+            {
+                decimal craditToBeTaken = aTeacher.CraditToBeTaken;
+                decimal courseCradit = aCourse.Cradit;
+                teacherRemainingCradit = craditToBeTaken - courseCradit;
+
+            }
+            else
+            {
+                decimal remainingCradit = aCourseAssignToTeacher.RemainingCradit;
+                decimal courseCradit = aCourse.Cradit;
+                teacherRemainingCradit = remainingCradit - courseCradit;
+            }
+
+            return Json(teacherRemainingCradit, JsonRequestBehavior.AllowGet);
         }
     }
 }
