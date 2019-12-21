@@ -110,7 +110,7 @@ namespace CourseAndResultMS.Controllers
             return Json(teacherRemainingCradit, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult NameIsExist(int courseId)
+        public JsonResult GetCodeNameCraditByCourseId(int courseId)
         {
             db.Configuration.ProxyCreationEnabled = false;
 

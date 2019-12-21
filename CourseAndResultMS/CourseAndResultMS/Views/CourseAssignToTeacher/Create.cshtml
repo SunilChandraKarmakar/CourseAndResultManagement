@@ -12,6 +12,13 @@
     <link href="~/Content/style.css" rel="stylesheet" />
     <style>
 
+
+
+
+
+
+
+
         label.error {
             color: red;
             font-style: italic;
@@ -188,13 +195,15 @@
                 $("#Name").val('');
                 $("#Cradit").val('');
                 $("#RemainingCradit").val('');
+                $("#matchCode").empty();
+                $("#matchName").empty();
 
                 var teacherId = $("#TeacherId").val();
                 var courseId = $("#CourseId").val();
 
                 var getCourseNameAndCraditByCourseId = { courseId: courseId };
                 var getRemainingCraditByCourseId = { teacherId: teacherId, courseId: courseId };
-                var getNameIsExist = { courseId: courseId };
+                var getCourseCodeNameCraditIsExist = { courseId: courseId };
 
 
                 $.ajax({
@@ -215,6 +224,20 @@
                     data: JSON.stringify(getRemainingCraditByCourseId),
                     success: function (data) {
                         $("#RemainingCradit").val(data);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '/CourseAssignToTeacher/GetCodeNameCraditByCourseId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getCourseCodeNameCraditIsExist),
+                    success: function (data) {
+                        if (data == 1) {
+                            $("#matchCode").html('<span class="text-danger">Code is exists!</span>');
+                            $("#matchName").html('<span class="text-danger">Name is exists!</span>')
+                        }
+
                     }
                 });
             });
