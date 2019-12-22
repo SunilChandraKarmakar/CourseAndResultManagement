@@ -38,6 +38,19 @@
     <Property Name="DesignationCode" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
+  <EntityType Name="RegisterStudent">
+    <Key>
+      <PropertyRef Name="RegisterStudentId" />
+    </Key>
+    <Property Name="RegisterStudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegistrationNumber" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="14" Nullable="false" />
+    <Property Name="RegistrationDate" Type="date" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="Semester">
     <Key>
       <PropertyRef Name="SemesterId" />
@@ -136,6 +149,18 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__RegisterS__Depar__6383C8BA">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="RegisterStudent">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Teacher__Departm__4F7CD00D">
     <End Role="Department" Type="Self.Department" Multiplicity="1" />
     <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
@@ -165,6 +190,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     <EntitySet Name="CourseAssignToTeacher" EntityType="Self.CourseAssignToTeacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegisterStudent" EntityType="Self.RegisterStudent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CourseInformation" EntityType="Self.CourseInformation" store:Type="Views" store:Schema="dbo">
@@ -198,6 +224,10 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     <AssociationSet Name="FK__CourseAss__Teach__5441852A" Association="Self.FK__CourseAss__Teach__5441852A">
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RegisterS__Depar__6383C8BA" Association="Self.FK__RegisterS__Depar__6383C8BA">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="RegisterStudent" EntitySet="RegisterStudent" />
     </AssociationSet>
     <AssociationSet Name="FK__Teacher__Departm__4F7CD00D" Association="Self.FK__Teacher__Departm__4F7CD00D">
       <End Role="Department" EntitySet="Department" />

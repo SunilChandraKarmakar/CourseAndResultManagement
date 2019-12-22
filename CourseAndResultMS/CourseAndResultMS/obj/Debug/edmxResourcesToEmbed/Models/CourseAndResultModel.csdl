@@ -10,6 +10,7 @@
     <NavigationProperty Name="Courses" Relationship="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D" FromRole="Department" ToRole="Course" />
     <NavigationProperty Name="Teachers" Relationship="CourseAndResultManagementModel.FK__Teacher__Departm__4F7CD00D" FromRole="Department" ToRole="Teacher" />
     <NavigationProperty Name="CourseAssignToTeachers" Relationship="CourseAndResultManagementModel.FK__CourseAss__Depar__534D60F1" FromRole="Department" ToRole="CourseAssignToTeacher" />
+    <NavigationProperty Name="RegisterStudents" Relationship="CourseAndResultManagementModel.FK__RegisterS__Depar__6383C8BA" FromRole="Department" ToRole="RegisterStudent" />
   </EntityType>
   <EntityContainer Name="CourseAndResultManagementEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Departments" EntityType="Self.Department" />
@@ -47,6 +48,11 @@
       <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeachers" />
     </AssociationSet>
     <EntitySet Name="CourseInformations" EntityType="CourseAndResultManagementModel.CourseInformation" />
+    <EntitySet Name="RegisterStudents" EntityType="CourseAndResultManagementModel.RegisterStudent" />
+    <AssociationSet Name="FK__RegisterS__Depar__6383C8BA" Association="CourseAndResultManagementModel.FK__RegisterS__Depar__6383C8BA">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Course">
     <Key>
@@ -209,4 +215,30 @@
     <Property Name="TeacherId" Type="Int32" />
     <Property Name="DepartmentId" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="RegisterStudent">
+    <Key>
+      <PropertyRef Name="RegisterStudentId" />
+    </Key>
+    <Property Name="RegisterStudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegistrationNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__RegisterS__Depar__6383C8BA" FromRole="RegisterStudent" ToRole="Department" />
+  </EntityType>
+  <Association Name="FK__RegisterS__Depar__6383C8BA">
+    <End Type="CourseAndResultManagementModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.RegisterStudent" Role="RegisterStudent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="RegisterStudent">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

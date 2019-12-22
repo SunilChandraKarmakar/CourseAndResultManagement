@@ -20,6 +20,7 @@ namespace CourseAndResultMS.Models
             this.Courses = new HashSet<Course>();
             this.Teachers = new HashSet<Teacher>();
             this.CourseAssignToTeachers = new HashSet<CourseAssignToTeacher>();
+            this.RegisterStudents = new HashSet<RegisterStudent>();
         }
     
         public int DepartmentId { get; set; }
@@ -32,5 +33,7 @@ namespace CourseAndResultMS.Models
         public virtual ICollection<Teacher> Teachers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseAssignToTeacher> CourseAssignToTeachers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegisterStudent> RegisterStudents { get; set; }
     }
 }
