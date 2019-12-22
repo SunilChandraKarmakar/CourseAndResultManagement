@@ -61,3 +61,17 @@ CREATE TABLE CourseAssignToTeacher
 	FOREIGN KEY(TeacherId) REFERENCES Teacher(TeacherId),
 	FOREIGN KEY(CourseId) REFERENCES Course(CourseId)	
 )
+
+CREATE TABLE RegisterStudent
+(
+	RegisterStudentId INT IDENTITY(1,1) PRIMARY KEY,
+	RegistrationNumber VARCHAR(30) NOT NULL UNIQUE,
+	[Name] VARCHAR(50) NOT NULL,
+	DepartmentId INT NOT NULL,
+	Email VARCHAR(30) NOT NULL UNIQUE,
+	ContactNo VARCHAR(14) NOT NULL UNIQUE,
+	RegistrationDate DATE,
+	[Address] VARCHAR(100),
+
+	FOREIGN KEY(DepartmentId) REFERENCES Department(DepartmentId)
+)
