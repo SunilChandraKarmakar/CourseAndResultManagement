@@ -21,5 +21,6 @@ namespace CourseAndResultMS.Models
         public int CourseId { get; set; }
         public Nullable<int> SemesterId { get; set; }
         public Nullable<int> TeacherId { get; set; }
+        public int DepartmentId { get; set; }
     }
 }

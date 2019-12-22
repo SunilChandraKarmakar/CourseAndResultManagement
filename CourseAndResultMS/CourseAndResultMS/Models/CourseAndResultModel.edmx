@@ -70,10 +70,12 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
             <PropertyRef Name="CourseId" />
             <PropertyRef Name="Code" />
             <PropertyRef Name="Title" />
+            <PropertyRef Name="DepartmentId" />
           </Key>
           <Property Name="CourseId" Type="int" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="SemesterId" Type="int" />
           <Property Name="Semester" Type="varchar" MaxLength="20" />
           <Property Name="TeacherId" Type="int" />
@@ -175,6 +177,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     [CourseInformation].[CourseId] AS [CourseId], 
     [CourseInformation].[Code] AS [Code], 
     [CourseInformation].[Title] AS [Title], 
+    [CourseInformation].[DepartmentId] AS [DepartmentId], 
     [CourseInformation].[SemesterId] AS [SemesterId], 
     [CourseInformation].[Semester] AS [Semester], 
     [CourseInformation].[TeacherId] AS [TeacherId], 
@@ -412,6 +415,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
             <PropertyRef Name="Code" />
             <PropertyRef Name="Title" />
             <PropertyRef Name="CourseId" />
+            <PropertyRef Name="DepartmentId" />
           </Key>
           <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
@@ -420,6 +424,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           <Property Name="CourseId" Type="Int32" Nullable="false" />
           <Property Name="SemesterId" Type="Int32" />
           <Property Name="TeacherId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -494,6 +499,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           <EntitySetMapping Name="CourseInformations">
             <EntityTypeMapping TypeName="CourseAndResultManagementModel.CourseInformation">
               <MappingFragment StoreEntitySet="CourseInformation">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />

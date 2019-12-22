@@ -68,6 +68,7 @@
     <EntitySetMapping Name="CourseInformations">
       <EntityTypeMapping TypeName="CourseAndResultManagementModel.CourseInformation">
         <MappingFragment StoreEntitySet="CourseInformation">
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
           <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
           <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
           <ScalarProperty Name="CourseId" ColumnName="CourseId" />

@@ -1,18 +1,19 @@
 ﻿@using CourseAndResultMS.Models;
 @{
-    List<CourseAssignToTeacher> courseAssignToTeachers = ViewBag.CourseAssignToTeachers;
+    List<Department> departments = ViewBag.DepartmentList;
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Course Assign Index</title>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <div class="row">
         <div class="col-md-12">
-            <h2>Course Assign Details</h2>
+            <h2>Course Static Details</h2>
             <hr />
         </div>
     </div>
@@ -20,6 +21,68 @@
         <div class="col-md-4">
             <a href="../CourseAssignToTeacher/Create" class="btn btn-success"><i class="fa fa-plus">&nbsp;</i> Create Course Assign</a>
         </div>
+        <div class="col-md-8">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="DepartmentId" class="control-label col-md-2">Department</label>
+                    <div class="col-md-10">
+                        <select id="DepartmentId" name="DepartmentId" class="form-control">
+                            <option value="">-- Select Department --</option>
+                            @foreach (Department item in departments)
+                            {
+                                <option value="@item.DepartmentId">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="row">
+        <div class="col-md-10" id="tblCourse">
+            <table id="myTable" class="display table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Title</th>
+                        <th>Semester</th>
+                        <th>Assigned To</th>
+                    </tr>
+                </thead>
+                <tbody id="viewCourseInfo">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#DepartmentId").change(function () {
+                var depId = $("#DepartmentId").val();
+                var getCourseInfoByDepartmentId = { departmentId: depId };
+                $("#viewCourseInfo").empty();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/CourseAssignToTeacher/GetCourseInfoByDepartmentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getCourseInfoByDepartmentId),
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $("#viewCourseInfo").append('<tr><td>' + value.Code + '</td><td>' + value.Title + '</td><td>' + value.Semester + '</td><td>' + value.Teacher + '</td></tr>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

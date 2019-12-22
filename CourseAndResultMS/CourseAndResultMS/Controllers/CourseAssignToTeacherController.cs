@@ -12,8 +12,8 @@ namespace CourseAndResultMS.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<CourseAssignToTeacher> courseAssignToTeachers = db.CourseAssignToTeachers.ToList();
-            ViewBag.CourseAssignToTeachers = courseAssignToTeachers;
+            List<Department> departments = db.Departments.ToList();
+            ViewBag.DepartmentList = departments;
             return View();
         }
 
@@ -138,6 +138,16 @@ namespace CourseAndResultMS.Controllers
             ViewBag.DepartmentList = departments;
             ViewBag.CourseList = courses;
             return View(aCourseAssignToTeacher);
+        }
+
+        public JsonResult GetCourseInfoByDepartmentId(int departmentId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<CourseInformation> courseInformation = db.CourseInformations.ToList();
+            List<CourseInformation> aCourseInfo = courseInformation.FindAll(c => c.DepartmentId == departmentId);
+
+            return Json(aCourseInfo, JsonRequestBehavior.AllowGet);
         }
     }
 }
