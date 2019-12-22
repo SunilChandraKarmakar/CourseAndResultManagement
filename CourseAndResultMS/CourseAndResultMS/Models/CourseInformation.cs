@@ -12,16 +12,14 @@ namespace CourseAndResultMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CourseAssignToTeacher
+    public partial class CourseInformation
     {
-        public int CourseAssignToTeacherId { get; set; }
-        public int DepartmentId { get; set; }
-        public int TeacherId { get; set; }
+        public string Code { get; set; }
+        public string Title { get; set; }
+        public string Semester { get; set; }
+        public string Teacher { get; set; }
         public int CourseId { get; set; }
-        public decimal RemainingCradit { get; set; }
-    
-        public virtual Course Course { get; set; }
-        public virtual Department Department { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public Nullable<int> SemesterId { get; set; }
+        public Nullable<int> TeacherId { get; set; }
     }
 }

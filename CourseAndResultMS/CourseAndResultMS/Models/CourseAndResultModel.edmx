@@ -63,6 +63,22 @@
           <Property Name="CraditToBeTaken" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CourseInformation">
+          <Key>
+            <PropertyRef Name="CourseId" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="SemesterId" Type="int" />
+          <Property Name="Semester" Type="varchar" MaxLength="20" />
+          <Property Name="TeacherId" Type="int" />
+          <Property Name="Teacher" Type="varchar" MaxLength="30" />
+        </EntityType>
         <Association Name="FK__Course__Departme__403A8C7D">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="Course" Type="Self.Course" Multiplicity="*" />
@@ -154,6 +170,17 @@
           <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseInformation" EntityType="Self.CourseInformation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CourseInformation].[CourseId] AS [CourseId], 
+    [CourseInformation].[Code] AS [Code], 
+    [CourseInformation].[Title] AS [Title], 
+    [CourseInformation].[SemesterId] AS [SemesterId], 
+    [CourseInformation].[Semester] AS [Semester], 
+    [CourseInformation].[TeacherId] AS [TeacherId], 
+    [CourseInformation].[Teacher] AS [Teacher]
+    FROM [dbo].[CourseInformation] AS [CourseInformation]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Course__Departme__403A8C7D" Association="Self.FK__Course__Departme__403A8C7D">
             <End Role="Department" EntitySet="Department" />
             <End Role="Course" EntitySet="Course" />
@@ -233,6 +260,7 @@
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="CourseAssignToTeacher" EntitySet="CourseAssignToTeachers" />
           </AssociationSet>
+          <EntitySet Name="CourseInformations" EntityType="CourseAndResultManagementModel.CourseInformation" />
         </EntityContainer>
         <EntityType Name="Course">
           <Key>
@@ -379,6 +407,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CourseInformation">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Semester" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Teacher" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="SemesterId" Type="Int32" />
+          <Property Name="TeacherId" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -446,6 +488,19 @@
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="CourseAssignToTeacherId" ColumnName="CourseAssignToTeacherId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseInformations">
+            <EntityTypeMapping TypeName="CourseAndResultManagementModel.CourseInformation">
+              <MappingFragment StoreEntitySet="CourseInformation">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

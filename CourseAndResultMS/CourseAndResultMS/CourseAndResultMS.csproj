@@ -201,6 +201,9 @@
     <Compile Include="Models\CourseAssignToTeacher.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CourseInformation.cs">
+      <DependentUpon>CourseAndResultModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Department.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
