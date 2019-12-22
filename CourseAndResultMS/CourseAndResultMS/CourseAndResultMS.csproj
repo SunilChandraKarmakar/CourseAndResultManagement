@@ -629,10 +629,10 @@
     <Content Include="Views\Teacher\Create.cshtml" />
     <Content Include="Views\CourseAssignToTeacher\Index.cshtml" />
     <Content Include="Views\CourseAssignToTeacher\Create.cshtml" />
+    <Content Include="Views\RegisterStudent\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\RegisterStudent\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

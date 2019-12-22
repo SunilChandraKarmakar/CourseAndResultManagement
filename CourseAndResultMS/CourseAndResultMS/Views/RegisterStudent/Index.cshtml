@@ -1,0 +1,62 @@
+﻿@using CourseAndResultMS.Models;
+@{
+    List<RegisterStudent> registerStudents = ViewBag.RegisterStudentList;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register Student</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Register Student Details</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../RegisterStudent/Create" class="btn btn-success"><i class="fa fa-plus">&nbsp;</i> Create Reister Student</a>
+        </div>
+    </div>
+    <div class="row" id="tblRegisterStudent">
+        <div class="col-md-8">
+            <table id="myTable" class="display table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <td>Basic Information</td>
+                        <td>Department Name</td>
+                        <td>Join date and Address</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (RegisterStudent item in registerStudents)
+                    {
+                        <tr>
+                            <td>
+                                Name : @item.Name <br />
+                                Email : @item.Email <br />
+                                Contact : @item.ContactNo <br />
+                            </td>
+                            <td>Department : item.Department.Name</td>
+                            <td>
+                                Join Date : @item.RegistrationDate <br />
+                                <address>
+                                    Address: @item.Address
+                                </address>
+                            </td>
+                            <td>
+                                <a href="../RegisterStudent/Edit/@item.RegisterStudentId" class="btn btn-info"><i class="fa fa-eye">&nbsp;</i> Edit</a>
+                                <a href="../RegisterStudent/Delete/@item.RegisterStudentId" class="btn btn-danger"><i class="fa fa-algolia">&nbsp;</i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
