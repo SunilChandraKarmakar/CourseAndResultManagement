@@ -75,3 +75,9 @@ CREATE TABLE RegisterStudent
 
 	FOREIGN KEY(DepartmentId) REFERENCES Department(DepartmentId)
 )
+
+CREATE TABLE [Week]
+(
+	WeekId INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] VARCHAR(30) UNIQUE NOT NULL
+)
