@@ -27,7 +27,7 @@
                 <thead>
                     <tr>
                         <td>Basic Information</td>
-                        <td>Department Name</td>
+                        <td>Registration And Department</td>
                         <td>Join date and Address</td>
                         <td></td>
                     </tr>
@@ -41,11 +41,14 @@
                                 Email : @item.Email <br />
                                 Contact : @item.ContactNo <br />
                             </td>
-                            <td>Department : @item.Department.Name</td>
+                            <td>
+                                Registration : @item.RegistrationNumber <br />
+                                Department : @item.Department.Name <br />
+                            </td>
                             <td>
                                 Join Date : @item.RegistrationDate <br />
                                 <address>
-                                    Address: @item.Address
+                                    Address: @item.Address <br />
                                 </address>
                             </td>
                             <td>

@@ -73,6 +73,15 @@ namespace CourseAndResultMS.Controllers
         [HttpPost]
         public ActionResult Create(RegisterStudent aRegisterStudent)
         {
+            if (ModelState.IsValid)
+            {
+                db.RegisterStudents.Add(aRegisterStudent);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            List<Department> departments = db.Departments.ToList();
+            ViewBag.DepartmentList = departments;
             return View(aRegisterStudent);
         }
     }
