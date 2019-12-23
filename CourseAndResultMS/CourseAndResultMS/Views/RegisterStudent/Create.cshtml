@@ -9,6 +9,12 @@
     <title>Create Register Student</title>
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <style>
+        label.error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <div class="row">
@@ -66,7 +72,7 @@
                     <div class="form-group">
                         <label for="Address" class="col-md-2 control-label">Address</label>
                         <div class="col-md-10">
-                            <textarea id="Address" class="form-control" placeholder="Type your address"></textarea>
+                            <textarea id="Address" name="Address" class="form-control" placeholder="Type your address"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,6 +94,39 @@
             changeMonth: true,
             changeYear: true,
             dateFormat: "d MM, y"
+        });
+
+        $(document).ready(function () {
+            $("#create").validate({
+                rules: {
+                    Name: "required",
+                    DepartmentId: "required",
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    ContactNo: {
+                        required: true,
+                        maxlength: 14
+                    },
+                    RegistrationDate: "required",
+                    Address: "required"
+                },
+                messages: {
+                    Name: "Please give Student Name.",
+                    DepartmentId: "Select Department Name.",
+                    Email: {
+                        required: "Please give Email",
+                        email: "Input valid email."
+                    },
+                    ContactNo: {
+                        required: "Please give Contact No.",
+                        maxlength: "Upto 14 digits"
+                    },
+                    RegistrationDate: "Select Date",
+                    Address: "Please give Address",
+                }
+            });
         });
     </script>
 </body>
