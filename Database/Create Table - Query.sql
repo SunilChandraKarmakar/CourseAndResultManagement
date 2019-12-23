@@ -87,3 +87,19 @@ CREATE TABLE ClassRoom
 	ClassRoomId INT IDENTITY(1,1) PRIMARY KEY,
 	[Name] VARCHAR(30) UNIQUE NOT NULL
 )
+
+CREATE TABLE AllocateClassRoom
+(
+	AllocateClassRoomId INT IDENTITY(1,1) PRIMARY KEY,
+	DepartmentId INT NOT NULL,
+	CourseId INT NOT NULL,
+	ClassRoomId INT NOT NULL,
+	WeekId INT NOT NULL,
+	ClassStartTime TIME,
+	ClassEndTime TIME,
+
+	FOREIGN KEY(DepartmentId) REFERENCES Department(DepartmentId),
+	FOREIGN KEY(CourseId) REFERENCES Course(CourseId),
+	FOREIGN KEY(ClassRoomId) REFERENCES ClassRoom(ClassRoomId),
+	FOREIGN KEY(WeekId) REFERENCES [Week](WeekId)
+)
