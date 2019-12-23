@@ -10,6 +10,9 @@
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     <style>
+
+
+
         label.error {
             color: red;
             font-style: italic;
@@ -54,7 +57,8 @@
                     <div class="form-group">
                         <label for="Email" class="col-md-2 control-label">Email</label>
                         <div class="col-md-10">
-                            <input type="email" id="Email" name="Email" class="form-control" />
+                            <input type="email" id="Email" name="Email" class="form-control" onchange="CheckEmail()" />
+                            <span id="checkEmail"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -128,6 +132,25 @@
                 }
             });
         });
+
+        function CheckEmail() {
+
+            $("#checkEmail").empty();
+
+            var email = $("Email").val();
+            var checkMatchEmail = { checkEmail: email };
+
+            $.ajax({
+                type: "POST",
+                url: 'RegisterStudent/GetEmailIsExist',
+                contentType: "application/json; charset=uft-8",
+                data: JSON.stringify(checkMatchEmail),
+                success: function (data) {
+                    if (data == 1)
+                        $("#checkEmail").append('<span class="text-danger">Email is exist!</span>')
+                }
+            });
+        }
     </script>
 </body>
 </html>

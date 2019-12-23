@@ -24,5 +24,18 @@ namespace CourseAndResultMS.Controllers
             ViewBag.DepartmentList = departments;
             return View();
         }
+
+        public JsonResult GetEmailIsExist(string checkEmail)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<RegisterStudent> registerStudents = db.RegisterStudents.ToList();
+            RegisterStudent aRegisterStudent = registerStudents.Find(r => r.Email == checkEmail);
+
+            if (aRegisterStudent != null)
+                return Json(1, JsonRequestBehavior.AllowGet);
+            else
+                return Json(0, JsonRequestBehavior.AllowGet);
+        }
     }
 }
