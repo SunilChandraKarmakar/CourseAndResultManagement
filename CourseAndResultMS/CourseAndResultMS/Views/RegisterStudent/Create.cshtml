@@ -12,7 +12,6 @@
     <style>
 
 
-
         label.error {
             color: red;
             font-style: italic;
@@ -131,6 +130,22 @@
                     Address: "Please give Address",
                 }
             });
+
+            $("#DepartmentId").change(function () {
+                var depId = $("#DepartmentId").val();
+                var getDepCodeById = { departmentId: depId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '/RegisterStudent/GetDepCodeById',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getDepCodeById),
+                    success: function (data) {
+                        $("#RegistrationNumber").val(data);
+                    }
+                });
+            });
+
         });
 
         function CheckEmail() {
@@ -142,7 +157,7 @@
 
             $.ajax({
                 type: "POST",
-                url: 'RegisterStudent/GetEmailIsExist',
+                url: '/RegisterStudent/GetEmailIsExist',
                 contentType: "application/json; charset=uft-8",
                 data: JSON.stringify(checkMatchEmail),
                 success: function (data) {

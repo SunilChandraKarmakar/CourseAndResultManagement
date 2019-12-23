@@ -1,4 +1,5 @@
 ﻿using CourseAndResultMS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -36,6 +37,43 @@ namespace CourseAndResultMS.Controllers
                 return Json(1, JsonRequestBehavior.AllowGet);
             else
                 return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDepCodeById(int departmentId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<Department> departments = db.Departments.ToList();
+            Department aDepartment = departments.Find(d => d.DepartmentId == departmentId);
+
+            string currentYear = DateTime.Now.Year.ToString();
+            string departmentCodeWithCurrentYear = aDepartment.Code + "-" + currentYear;
+
+            List<RegisterStudent> registerStudents = db.RegisterStudents.ToList();
+            RegisterStudent registerStudentByDepartment = registerStudents.FindLast(r => r.DepartmentId == departmentId);
+
+            string registrationNumber = "";
+
+            if (registerStudentByDepartment == null)
+            {
+                int coutnStudent = 101;
+                registrationNumber = departmentCodeWithCurrentYear + "-" + coutnStudent.ToString();
+            }
+            else
+            {
+                string storeRegistrationNumber = registerStudentByDepartment.RegistrationNumber;
+                string findSerial = storeRegistrationNumber.Substring(9);
+                int storeSerialInInt = Convert.ToInt32(findSerial);
+                registrationNumber = departmentCodeWithCurrentYear + "-" + (storeSerialInInt + 1).ToString();
+            }
+
+            return Json(registrationNumber, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Create(RegisterStudent aRegisterStudent)
+        {
+            return View(aRegisterStudent);
         }
     }
 }

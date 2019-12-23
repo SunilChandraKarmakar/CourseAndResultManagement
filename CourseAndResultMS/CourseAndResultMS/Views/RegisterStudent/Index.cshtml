@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="row" id="tblRegisterStudent">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <table id="myTable" class="display table-striped table-bordered">
                 <thead>
                     <tr>
@@ -41,7 +41,7 @@
                                 Email : @item.Email <br />
                                 Contact : @item.ContactNo <br />
                             </td>
-                            <td>Department : item.Department.Name</td>
+                            <td>Department : @item.Department.Name</td>
                             <td>
                                 Join Date : @item.RegistrationDate <br />
                                 <address>
