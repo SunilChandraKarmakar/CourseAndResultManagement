@@ -630,6 +630,7 @@
     <Content Include="Views\CourseAssignToTeacher\Index.cshtml" />
     <Content Include="Views\CourseAssignToTeacher\Create.cshtml" />
     <Content Include="Views\RegisterStudent\Index.cshtml" />
+    <Content Include="Views\RegisterStudent\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

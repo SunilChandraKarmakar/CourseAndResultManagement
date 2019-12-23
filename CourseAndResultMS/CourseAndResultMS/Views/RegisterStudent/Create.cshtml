@@ -1,0 +1,94 @@
+﻿@using CourseAndResultMS.Models;
+@{
+    List<Department> departments = ViewBag.DepartmentList;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Create Register Student</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Create Register Student</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="create" method="post" action="@Url.Action("Create","RegisterStudent")">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="RegistrationNumber" class="col-md-2 control-label">Registration Number</label>
+                        <div class="col-md-10">
+                            <input type="text" id="RegistrationNumber" name="RegistrationNumber" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Name" class="col-md-2 control-label">Name</label>
+                        <div class="col-md-10">
+                            <input type="text" id="Name" name="Name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="DepartmentId" class="col-md-2 control-label">Department</label>
+                        <div class="col-md-10">
+                            <select id="DepartmentId" name="DepartmentId" class="form-control">
+                                <option value="">-- Select Department --</option>
+                                @foreach (Department item in departments)
+                                {
+                                    <option value="@item.DepartmentId">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="col-md-2 control-label">Email</label>
+                        <div class="col-md-10">
+                            <input type="email" id="Email" name="Email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ContactNo" class="col-md-2 control-label">Contact No</label>
+                        <div class="col-md-10">
+                            <input type="number" id="ContactNo" name="ContactNo" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="RegistrationDate" class="col-md-2 control-label">Registration Date</label>
+                        <div class="col-md-10">
+                            <input type="text" id="RegistrationDate" name="RegistrationDate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Address" class="col-md-2 control-label">Address</label>
+                        <div class="col-md-10">
+                            <textarea id="Address" class="form-control" placeholder="Type your address"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" id="submit" class="btn btn-primary" value="Submit" />
+                            <a href="../RegisterStudent/Index" class="btn btn-info">Back To List</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        $("#RegistrationDate").datepicker({
+            showAnim: "fold",
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "d MM, y"
+        });
+    </script>
+</body>
+</html>

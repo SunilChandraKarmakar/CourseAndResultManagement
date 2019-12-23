@@ -16,5 +16,13 @@ namespace CourseAndResultMS.Controllers
             ViewBag.RegisterStudentList = registerStudents;
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            List<Department> departments = db.Departments.ToList();
+            ViewBag.DepartmentList = departments;
+            return View();
+        }
     }
 }
