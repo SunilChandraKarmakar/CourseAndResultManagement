@@ -1,0 +1,96 @@
+﻿@using CourseAndResultMS.Models;
+@{
+    List<Department> departments = ViewBag.DepartmentList;
+    List<Course> courses = ViewBag.CourseList;
+    List<ClassRoom> classRooms = ViewBag.ClassRoomList;
+    List<Week> weeks = ViewBag.WeekList;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Create Allocate Class Room</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Create Allocate Class Room</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="create" method="post" action="@Url.Action("Create","AllocateClassRoom")">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="DepartmentId" class="col-md-2 control-label">Department</label>
+                        <div class="col-md-10">
+                            <select id="DepartmentId" name="DepartmentId" class="form-control">
+                                <option value="">-- Select Department --</option>
+                                @foreach (Department item in departments)
+                                {
+                                    <option value="@item.DepartmentId">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="CourseId" class="col-md-2 control-label">Course</label>
+                        <div class="col-md-10">
+                            <select id="CourseId" name="CourseId" class="form-control">
+                                <option value="">- Select Course --</option>
+                                @foreach (Course item in courses)
+                                {
+                                    <option value="@item.CourseId">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ClassRoomId" class="col-md-2 control-label">Class Room</label>
+                        <div class="col-md-10">
+                            <select id="ClassRoomId" name="ClassRoomId" class="form-control">
+                                <option value="">-- Select Class Room --</option>
+                                @foreach (ClassRoom item in classRooms)
+                                {
+                                    <option value="@item.ClassRoomId">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="WeekId" class="col-md-2 control-label">Week</label>
+                        <div class="col-md-10">
+                            <select id="WeekId" name="WeekId" class="form-control">
+                                <option value="">-- Select Week --</option>
+                                @foreach (Week item in weeks)
+                                {
+                                    <option value="@item.WeekId">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ClassStartTime" class="col-md-2 control-label">Start Time</label>
+                        <div class="col-md-10">
+                            <input type="text" id="ClassStartTime" name="ClassStartTime" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ClassEndTime" class="col-md-2 control-label">End Time</label>
+                        <div class="col-md-10">
+                            <input type="text" id="ClassEndTime" name="ClassEndTime" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" id="submit" value="Allocate" class="btn btn-primary" />
+                            <a href="../AllocateClassRoom/Index" class="btn btn-info">Back To List</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
