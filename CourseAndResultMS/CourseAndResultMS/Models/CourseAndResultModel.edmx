@@ -5,6 +5,25 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CourseAndResultManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AllocateClassRoom">
+          <Key>
+            <PropertyRef Name="AllocateClassRoomId" />
+          </Key>
+          <Property Name="AllocateClassRoomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="ClassRoomId" Type="int" Nullable="false" />
+          <Property Name="WeekId" Type="int" Nullable="false" />
+          <Property Name="ClassStartTime" Type="time" Precision="7" />
+          <Property Name="ClassEndTime" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="ClassRoom">
+          <Key>
+            <PropertyRef Name="ClassRoomId" />
+          </Key>
+          <Property Name="ClassRoomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="CourseId" />
@@ -76,6 +95,13 @@
           <Property Name="CraditToBeTaken" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Week">
+          <Key>
+            <PropertyRef Name="WeekId" />
+          </Key>
+          <Property Name="WeekId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CourseInformation">
@@ -94,6 +120,54 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           <Property Name="TeacherId" Type="int" />
           <Property Name="Teacher" Type="varchar" MaxLength="30" />
         </EntityType>
+        <Association Name="FK__AllocateC__Class__6E01572D">
+          <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
+          <End Role="AllocateClassRoom" Type="Self.AllocateClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassRoom">
+              <PropertyRef Name="ClassRoomId" />
+            </Principal>
+            <Dependent Role="AllocateClassRoom">
+              <PropertyRef Name="ClassRoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllocateC__Cours__6D0D32F4">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="AllocateClassRoom" Type="Self.AllocateClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="AllocateClassRoom">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllocateC__Depar__6C190EBB">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="AllocateClassRoom" Type="Self.AllocateClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="AllocateClassRoom">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllocateC__WeekI__6EF57B66">
+          <End Role="Week" Type="Self.Week" Multiplicity="1" />
+          <End Role="AllocateClassRoom" Type="Self.AllocateClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Week">
+              <PropertyRef Name="WeekId" />
+            </Principal>
+            <Dependent Role="AllocateClassRoom">
+              <PropertyRef Name="WeekId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Course__Departme__403A8C7D">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="Course" Type="Self.Course" Multiplicity="*" />
@@ -191,6 +265,8 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CourseAndResultManagementModelStoreContainer">
+          <EntitySet Name="AllocateClassRoom" EntityType="Self.AllocateClassRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassRoom" EntityType="Self.ClassRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseAssignToTeacher" EntityType="Self.CourseAssignToTeacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
@@ -198,6 +274,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           <EntitySet Name="RegisterStudent" EntityType="Self.RegisterStudent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Week" EntityType="Self.Week" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseInformation" EntityType="Self.CourseInformation" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CourseInformation].[CourseId] AS [CourseId], 
@@ -210,6 +287,22 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     [CourseInformation].[Teacher] AS [Teacher]
     FROM [dbo].[CourseInformation] AS [CourseInformation]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__AllocateC__Class__6E01572D" Association="Self.FK__AllocateC__Class__6E01572D">
+            <End Role="ClassRoom" EntitySet="ClassRoom" />
+            <End Role="AllocateClassRoom" EntitySet="AllocateClassRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllocateC__Cours__6D0D32F4" Association="Self.FK__AllocateC__Cours__6D0D32F4">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="AllocateClassRoom" EntitySet="AllocateClassRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllocateC__Depar__6C190EBB" Association="Self.FK__AllocateC__Depar__6C190EBB">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="AllocateClassRoom" EntitySet="AllocateClassRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllocateC__WeekI__6EF57B66" Association="Self.FK__AllocateC__WeekI__6EF57B66">
+            <End Role="Week" EntitySet="Week" />
+            <End Role="AllocateClassRoom" EntitySet="AllocateClassRoom" />
+          </AssociationSet>
           <AssociationSet Name="FK__Course__Departme__403A8C7D" Association="Self.FK__Course__Departme__403A8C7D">
             <End Role="Department" EntitySet="Department" />
             <End Role="Course" EntitySet="Course" />
@@ -258,6 +351,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           <NavigationProperty Name="Teachers" Relationship="CourseAndResultManagementModel.FK__Teacher__Departm__4F7CD00D" FromRole="Department" ToRole="Teacher" />
           <NavigationProperty Name="CourseAssignToTeachers" Relationship="CourseAndResultManagementModel.FK__CourseAss__Depar__534D60F1" FromRole="Department" ToRole="CourseAssignToTeacher" />
           <NavigationProperty Name="RegisterStudents" Relationship="CourseAndResultManagementModel.FK__RegisterS__Depar__6383C8BA" FromRole="Department" ToRole="RegisterStudent" />
+          <NavigationProperty Name="AllocateClassRooms" Relationship="CourseAndResultManagementModel.FK__AllocateC__Depar__6C190EBB" FromRole="Department" ToRole="AllocateClassRoom" />
         </EntityType>
         <EntityContainer Name="CourseAndResultManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Departments" EntityType="Self.Department" />
@@ -300,6 +394,25 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
             <End Role="Department" EntitySet="Departments" />
             <End Role="RegisterStudent" EntitySet="RegisterStudents" />
           </AssociationSet>
+          <EntitySet Name="AllocateClassRooms" EntityType="CourseAndResultManagementModel.AllocateClassRoom" />
+          <EntitySet Name="ClassRooms" EntityType="CourseAndResultManagementModel.ClassRoom" />
+          <EntitySet Name="Weeks" EntityType="CourseAndResultManagementModel.Week" />
+          <AssociationSet Name="FK__AllocateC__Class__6E01572D" Association="CourseAndResultManagementModel.FK__AllocateC__Class__6E01572D">
+            <End Role="ClassRoom" EntitySet="ClassRooms" />
+            <End Role="AllocateClassRoom" EntitySet="AllocateClassRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllocateC__Cours__6D0D32F4" Association="CourseAndResultManagementModel.FK__AllocateC__Cours__6D0D32F4">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="AllocateClassRoom" EntitySet="AllocateClassRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllocateC__Depar__6C190EBB" Association="CourseAndResultManagementModel.FK__AllocateC__Depar__6C190EBB">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="AllocateClassRoom" EntitySet="AllocateClassRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AllocateC__WeekI__6EF57B66" Association="CourseAndResultManagementModel.FK__AllocateC__WeekI__6EF57B66">
+            <End Role="Week" EntitySet="Weeks" />
+            <End Role="AllocateClassRoom" EntitySet="AllocateClassRooms" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Course">
           <Key>
@@ -315,6 +428,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__Course__Departme__403A8C7D" FromRole="Course" ToRole="Department" />
           <NavigationProperty Name="Semester" Relationship="CourseAndResultManagementModel.FK__Course__Semester__412EB0B6" FromRole="Course" ToRole="Semester" />
           <NavigationProperty Name="CourseAssignToTeachers" Relationship="CourseAndResultManagementModel.FK__CourseAss__Cours__5535A963" FromRole="Course" ToRole="CourseAssignToTeacher" />
+          <NavigationProperty Name="AllocateClassRooms" Relationship="CourseAndResultManagementModel.FK__AllocateC__Cours__6D0D32F4" FromRole="Course" ToRole="AllocateClassRoom" />
         </EntityType>
         <EntityType Name="Semester">
           <Key>
@@ -488,6 +602,86 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AllocateClassRoom">
+          <Key>
+            <PropertyRef Name="AllocateClassRoomId" />
+          </Key>
+          <Property Name="AllocateClassRoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="ClassRoomId" Type="Int32" Nullable="false" />
+          <Property Name="WeekId" Type="Int32" Nullable="false" />
+          <Property Name="ClassStartTime" Type="Time" Precision="7" />
+          <Property Name="ClassEndTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="ClassRoom" Relationship="CourseAndResultManagementModel.FK__AllocateC__Class__6E01572D" FromRole="AllocateClassRoom" ToRole="ClassRoom" />
+          <NavigationProperty Name="Course" Relationship="CourseAndResultManagementModel.FK__AllocateC__Cours__6D0D32F4" FromRole="AllocateClassRoom" ToRole="Course" />
+          <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__AllocateC__Depar__6C190EBB" FromRole="AllocateClassRoom" ToRole="Department" />
+          <NavigationProperty Name="Week" Relationship="CourseAndResultManagementModel.FK__AllocateC__WeekI__6EF57B66" FromRole="AllocateClassRoom" ToRole="Week" />
+        </EntityType>
+        <EntityType Name="ClassRoom">
+          <Key>
+            <PropertyRef Name="ClassRoomId" />
+          </Key>
+          <Property Name="ClassRoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AllocateClassRooms" Relationship="CourseAndResultManagementModel.FK__AllocateC__Class__6E01572D" FromRole="ClassRoom" ToRole="AllocateClassRoom" />
+        </EntityType>
+        <EntityType Name="Week">
+          <Key>
+            <PropertyRef Name="WeekId" />
+          </Key>
+          <Property Name="WeekId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AllocateClassRooms" Relationship="CourseAndResultManagementModel.FK__AllocateC__WeekI__6EF57B66" FromRole="Week" ToRole="AllocateClassRoom" />
+        </EntityType>
+        <Association Name="FK__AllocateC__Class__6E01572D">
+          <End Type="CourseAndResultManagementModel.ClassRoom" Role="ClassRoom" Multiplicity="1" />
+          <End Type="CourseAndResultManagementModel.AllocateClassRoom" Role="AllocateClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassRoom">
+              <PropertyRef Name="ClassRoomId" />
+            </Principal>
+            <Dependent Role="AllocateClassRoom">
+              <PropertyRef Name="ClassRoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllocateC__Cours__6D0D32F4">
+          <End Type="CourseAndResultManagementModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="CourseAndResultManagementModel.AllocateClassRoom" Role="AllocateClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="AllocateClassRoom">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllocateC__Depar__6C190EBB">
+          <End Type="CourseAndResultManagementModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="CourseAndResultManagementModel.AllocateClassRoom" Role="AllocateClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="AllocateClassRoom">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AllocateC__WeekI__6EF57B66">
+          <End Type="CourseAndResultManagementModel.Week" Role="Week" Multiplicity="1" />
+          <End Type="CourseAndResultManagementModel.AllocateClassRoom" Role="AllocateClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Week">
+              <PropertyRef Name="WeekId" />
+            </Principal>
+            <Dependent Role="AllocateClassRoom">
+              <PropertyRef Name="WeekId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -583,6 +777,35 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
                 <ScalarProperty Name="RegisterStudentId" ColumnName="RegisterStudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllocateClassRooms">
+            <EntityTypeMapping TypeName="CourseAndResultManagementModel.AllocateClassRoom">
+              <MappingFragment StoreEntitySet="AllocateClassRoom">
+                <ScalarProperty Name="ClassEndTime" ColumnName="ClassEndTime" />
+                <ScalarProperty Name="ClassStartTime" ColumnName="ClassStartTime" />
+                <ScalarProperty Name="WeekId" ColumnName="WeekId" />
+                <ScalarProperty Name="ClassRoomId" ColumnName="ClassRoomId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="AllocateClassRoomId" ColumnName="AllocateClassRoomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassRooms">
+            <EntityTypeMapping TypeName="CourseAndResultManagementModel.ClassRoom">
+              <MappingFragment StoreEntitySet="ClassRoom">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ClassRoomId" ColumnName="ClassRoomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weeks">
+            <EntityTypeMapping TypeName="CourseAndResultManagementModel.Week">
+              <MappingFragment StoreEntitySet="Week">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WeekId" ColumnName="WeekId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

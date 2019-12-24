@@ -12,27 +12,17 @@ namespace CourseAndResultMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Course
+    public partial class ClassRoom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Course()
+        public ClassRoom()
         {
-            this.CourseAssignToTeachers = new HashSet<CourseAssignToTeacher>();
             this.AllocateClassRooms = new HashSet<AllocateClassRoom>();
         }
     
-        public int CourseId { get; set; }
-        public string Code { get; set; }
+        public int ClassRoomId { get; set; }
         public string Name { get; set; }
-        public decimal Cradit { get; set; }
-        public string Description { get; set; }
-        public int DepartmentId { get; set; }
-        public int SemesterId { get; set; }
     
-        public virtual Department Department { get; set; }
-        public virtual Semester Semester { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourseAssignToTeacher> CourseAssignToTeachers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AllocateClassRoom> AllocateClassRooms { get; set; }
     }

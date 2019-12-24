@@ -93,5 +93,34 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AllocateClassRooms">
+      <EntityTypeMapping TypeName="CourseAndResultManagementModel.AllocateClassRoom">
+        <MappingFragment StoreEntitySet="AllocateClassRoom">
+          <ScalarProperty Name="ClassEndTime" ColumnName="ClassEndTime" />
+          <ScalarProperty Name="ClassStartTime" ColumnName="ClassStartTime" />
+          <ScalarProperty Name="WeekId" ColumnName="WeekId" />
+          <ScalarProperty Name="ClassRoomId" ColumnName="ClassRoomId" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="AllocateClassRoomId" ColumnName="AllocateClassRoomId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassRooms">
+      <EntityTypeMapping TypeName="CourseAndResultManagementModel.ClassRoom">
+        <MappingFragment StoreEntitySet="ClassRoom">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ClassRoomId" ColumnName="ClassRoomId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Weeks">
+      <EntityTypeMapping TypeName="CourseAndResultManagementModel.Week">
+        <MappingFragment StoreEntitySet="Week">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="WeekId" ColumnName="WeekId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

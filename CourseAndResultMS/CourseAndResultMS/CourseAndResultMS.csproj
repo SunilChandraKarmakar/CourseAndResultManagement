@@ -181,6 +181,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AllocateClassRoom.cs">
+      <DependentUpon>CourseAndResultModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClassRoom.cs">
+      <DependentUpon>CourseAndResultModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Course.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
@@ -220,6 +226,9 @@
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
+      <DependentUpon>CourseAndResultModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Week.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

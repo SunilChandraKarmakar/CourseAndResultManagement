@@ -33,5 +33,8 @@ namespace CourseAndResultMS.Models
         public virtual DbSet<CourseAssignToTeacher> CourseAssignToTeachers { get; set; }
         public virtual DbSet<CourseInformation> CourseInformations { get; set; }
         public virtual DbSet<RegisterStudent> RegisterStudents { get; set; }
+        public virtual DbSet<AllocateClassRoom> AllocateClassRooms { get; set; }
+        public virtual DbSet<ClassRoom> ClassRooms { get; set; }
+        public virtual DbSet<Week> Weeks { get; set; }
     }
 }

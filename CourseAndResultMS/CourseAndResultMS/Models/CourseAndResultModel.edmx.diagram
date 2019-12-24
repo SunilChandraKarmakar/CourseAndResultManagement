@@ -21,6 +21,13 @@
         <EntityTypeShape EntityType="CourseAndResultManagementModel.CourseInformation" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="CourseAndResultManagementModel.RegisterStudent" Width="1.5" PointX="3" PointY="8.625" />
         <AssociationConnector Association="CourseAndResultManagementModel.FK__RegisterS__Depar__6383C8BA" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.AllocateClassRoom" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.ClassRoom" Width="1.5" PointX="3" PointY="17.25" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.Week" Width="1.5" PointX="3" PointY="19.625" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__AllocateC__Class__6E01572D" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__AllocateC__Cours__6D0D32F4" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__AllocateC__Depar__6C190EBB" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__AllocateC__WeekI__6EF57B66" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
