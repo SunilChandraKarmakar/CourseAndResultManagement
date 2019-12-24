@@ -75,13 +75,13 @@
                     <div class="form-group">
                         <label for="ClassStartTime" class="col-md-2 control-label">Start Time</label>
                         <div class="col-md-10">
-                            <input type="text" id="ClassStartTime" name="ClassStartTime" class="form-control" />
+                            <input type="text" id="ClassStartTime" name="ClassStartTime" placeholder="Select start time" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="ClassEndTime" class="col-md-2 control-label">End Time</label>
                         <div class="col-md-10">
-                            <input type="text" id="ClassEndTime" name="ClassEndTime" class="form-control" />
+                            <input type="text" id="ClassEndTime" name="ClassEndTime" placeholder="Select end time" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -99,9 +99,28 @@
     <script src="~/Content/jquery-timepicker-1.3.5/jquery.timepicker.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            $("#create").validate({
+                rules: {
+                    DepartmentId: "required",
+                    CourseId: "required",
+                    ClassRoomId: "required",
+                    WeekId: "required",
+                    ClassStartTime: "required",
+                    ClassEndTime: "required"
+                },
+                messages: {
+                    DepartmentId: "Select Department Name.",
+                    CourseId: "Select Course Name.",
+                    ClassRoomId: "Select Class Room.",
+                    WeekId: "Select Week Name.",
+                    ClassStartTime: "Please select class start time.",
+                    ClassEndTime: "Please select class end time."
+                }
+            });
+
             $("#ClassStartTime").timepicker({
                 timeFormat: 'h:mm p',
-                defaultTime: '8',
                 startTime: '08:00am',
                 minTime: '08:00am',
                 maxTime: '08:00pm',
@@ -113,8 +132,6 @@
 
             $("#ClassEndTime").timepicker({
                 timeFormat: 'h:mm p',
-                defaultTime: '8',
-                startTime: '08:00am',
                 minTime: '08:00am',
                 maxTime: '08:00pm',
                 interval: 30,
