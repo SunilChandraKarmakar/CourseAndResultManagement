@@ -1,7 +1,66 @@
-﻿
+﻿@using CourseAndResultMS.Models;
 @{
-    ViewBag.Title = "Index";
+    List<AllocateClassRoom> allocateClassRooms = ViewBag.AllocateClassRoom;
+    List<Department> departments = ViewBag.DepartmentList;
+    List<Course> courses = ViewBag.CourseList;
+    List<ClassRoom> classRooms = ViewBag.ClassRoomList;
+    List<Week> weeks = ViewBag.WeekList;
 }
-
-<h2>Index</h2>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Allocate Class Room Index</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Allocate Class Room Details</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../AllocateClassRoom/Create" class="btn btn-success"><i class="fa fa-plus">&nbsp;</i> Create Allocate Class Room</a>
+        </div>
+    </div>
+    <div class="row" id="tblAllocateClassRoom">
+        <div class="col-md-8">
+            <table id="myTable" class="display table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Department and Course</th>
+                        <th>Room and Day</th>
+                        <th>Star and End Time</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (AllocateClassRoom item in allocateClassRooms)
+                    {
+                        <tr>
+                            <td>
+                                Department : @item.Department.Name <br />
+                                Course : @item.Course.Name <br />
+                            </td>
+                            <td>
+                                Room : @item.ClassRoom.Name <br />
+                                Day : @item.Week.Name <br />
+                            </td>
+                            <td>
+                                Start Time : @item.ClassStartTime <br />
+                                End Time : @item.ClassEndTime <br />
+                            </td>
+                            <td>
+                                <a href="../AllocateClassRoom/Edit/@item.AllocateClassRoomId" class="btn btn-info"><i class="fa fa-edit">&nbsp;</i> Edit</a>
+                                <a href="../AllocateClassRoom/Delete/@item.AllocateClassRoomId" class="btn btn-danger"><i class="fa fa-eye-dropper">&nbsp;</i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

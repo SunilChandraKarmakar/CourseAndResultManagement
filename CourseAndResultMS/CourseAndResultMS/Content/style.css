@@ -8,25 +8,30 @@
 }
 
 #tablemargin {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 #departmenttbl {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 100px;
 }
 
 #tblTeacher {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 30px;
 }
 
 #tblCourse {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 50px;
 }
 
 #tblRegisterStudent {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 20px;
+}
+
+#tblAllocateClassRoom {
+    margin-top: 30px;
+    margin-left: 50px;
 }
