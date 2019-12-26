@@ -20,7 +20,6 @@
 
 
 
-
         label.error {
             color: red;
             font-style: italic;
@@ -55,10 +54,6 @@
                         <div class="col-md-10">
                             <select id="CourseId" name="CourseId" class="form-control">
                                 <option value="">- Select Course --</option>
-                                @foreach (Course item in courses)
-                                {
-                                    <option value="@item.CourseId">@item.Name</option>
-                                }
                             </select>
                         </div>
                     </div>
@@ -89,13 +84,13 @@
                     <div class="form-group">
                         <label for="ClassStartTime" class="col-md-2 control-label">Start Time</label>
                         <div class="col-md-10">
-                            <input type="text" id="ClassStartTime" name="ClassStartTime" placeholder="Select start time" class="form-control timepicker" />
+                            <input type="time" id="ClassStartTime" name="ClassStartTime" class="form-control timepicker" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="ClassEndTime" class="col-md-2 control-label">End Time</label>
                         <div class="col-md-10">
-                            <input type="text" id="ClassEndTime" name="ClassEndTime" placeholder="Select end time" class="form-control timepicker" />
+                            <input type="time" id="ClassEndTime" name="ClassEndTime" class="form-control timepicker" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -133,9 +128,29 @@
                 }
             });
 
-            $("#ClassStartTime").wickedpicker();
+            $("#DepartmentId").change(function () {
 
-            $("#ClassEndTime").wickedpicker();
+                $("#CourseId").empty();
+                $("#CourseId").append('<option value="">-- Select Course --</option>');
+                var depId = $("#DepartmentId").val();
+                var getCourseByDepId = { departmentId: depId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '/AllocateClassRoom/GetCourseByDepartmentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getCourseByDepId),
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $("#CourseId").append('<option value=' + value.CourseId + '>' + value.Name + '</option>')
+                        });
+                    }
+                });
+            });
+
+            //$("#ClassStartTime").wickedpicker();
+
+            //$("#ClassEndTime").wickedpicker();
         });
     </script>
 </body>

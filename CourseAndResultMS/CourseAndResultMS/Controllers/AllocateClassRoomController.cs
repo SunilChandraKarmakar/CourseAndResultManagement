@@ -33,6 +33,15 @@ namespace CourseAndResultMS.Controllers
             return View();
         }
 
+        public JsonResult GetCourseByDepartmentId(int departmentId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<Course> courses = db.Courses.ToList();
+            List<Course> getCourseByDepId = courses.FindAll(c => c.DepartmentId == departmentId);
+            return Json(getCourseByDepId, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Create(AllocateClassRoom aAllocateClassRoom)
         {
