@@ -1,10 +1,6 @@
 ﻿@using CourseAndResultMS.Models;
 @{
     List<AllocateClassRoom> allocateClassRooms = ViewBag.AllocateClassRoom;
-    List<Department> departments = ViewBag.DepartmentList;
-    List<Course> courses = ViewBag.CourseList;
-    List<ClassRoom> classRooms = ViewBag.ClassRoomList;
-    List<Week> weeks = ViewBag.WeekList;
 }
 <!DOCTYPE html>
 <html>
@@ -26,7 +22,7 @@
         </div>
     </div>
     <div class="row" id="tblAllocateClassRoom">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <table id="myTable" class="display table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -49,8 +45,17 @@
                                 Day : @item.Week.Name <br />
                             </td>
                             <td>
-                                Start Time : @item.ClassStartTime <br />
-                                End Time : @item.ClassEndTime <br />
+                                @{
+                                    TimeSpan? clasStartTime = item.ClassStartTime;
+                                    DateTime convertClassStartTimeToDateTime = Convert.ToDateTime(clasStartTime.ToString());
+                                    String time12FormateClassStartTime = String.Format("{0:hh:mm:tt}", convertClassStartTimeToDateTime);
+
+                                    TimeSpan? classEndTime = item.ClassEndTime;
+                                    DateTime convertClassEndTimeToDateTime = Convert.ToDateTime(classEndTime.ToString());
+                                    String time12FormateClassEndTime = String.Format("{0:hh:mm:tt}", convertClassEndTimeToDateTime);
+                                }
+                                Start Time : @time12FormateClassStartTime <br />
+                                End Time : @time12FormateClassEndTime <br />
                             </td>
                             <td>
                                 <a href="../AllocateClassRoom/Edit/@item.AllocateClassRoomId" class="btn btn-info"><i class="fa fa-edit">&nbsp;</i> Edit</a>

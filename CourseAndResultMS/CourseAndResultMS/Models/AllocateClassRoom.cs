@@ -10,8 +10,7 @@
 namespace CourseAndResultMS.Models
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class AllocateClassRoom
     {
         public int AllocateClassRoomId { get; set; }
@@ -21,7 +20,7 @@ namespace CourseAndResultMS.Models
         public int WeekId { get; set; }
         public Nullable<System.TimeSpan> ClassStartTime { get; set; }
         public Nullable<System.TimeSpan> ClassEndTime { get; set; }
-    
+
         public virtual ClassRoom ClassRoom { get; set; }
         public virtual Course Course { get; set; }
         public virtual Department Department { get; set; }

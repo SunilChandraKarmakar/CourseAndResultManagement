@@ -32,5 +32,28 @@ namespace CourseAndResultMS.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Create(AllocateClassRoom aAllocateClassRoom)
+        {
+            if (ModelState.IsValid)
+            {
+                db.AllocateClassRooms.Add(aAllocateClassRoom);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            List<Department> departments = db.Departments.ToList();
+            List<Course> courses = db.Courses.ToList();
+            List<ClassRoom> classRooms = db.ClassRooms.ToList();
+            List<Week> weeks = db.Weeks.ToList();
+
+            ViewBag.DepartmentList = departments;
+            ViewBag.CourseList = courses;
+            ViewBag.ClassRoomList = classRooms;
+            ViewBag.WeekList = weeks;
+
+            return View(aAllocateClassRoom);
+        }
     }
 }
