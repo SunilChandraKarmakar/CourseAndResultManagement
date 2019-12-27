@@ -1,4 +1,5 @@
 ﻿using CourseAndResultMS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -42,8 +43,29 @@ namespace CourseAndResultMS.Controllers
             return Json(getCourseByDepId, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult CheckIsExistClassTime(int weekId, TimeSpan startClassTime, TimeSpan endClassTime)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<Week> weeks = db.Weeks.ToList();
+            Week aWeek = weeks.Find(w => w.WeekId == weekId);
+
+            List<AllocateClassRoom> allocateClassRooms = db.AllocateClassRooms.ToList();
+            List<AllocateClassRoom> getAllClassStartEndTime = allocateClassRooms.FindAll(c => c.WeekId == weekId);
+
+            foreach (AllocateClassRoom item in getAllClassStartEndTime)
+            {
+                if ((item.ClassStartTime > startClassTime && item.ClassStartTime >= endClassTime) || (item.ClassEndTime <= startClassTime && item.ClassEndTime < endClassTime))
+                    return Json(0, JsonRequestBehavior.AllowGet);
+                else
+                    return Json(1, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
-        public ActionResult Create(AllocateClassRoom aAllocateClassRoom)
+        public ActionResult Create(AllocateClassRoom aAllocateClassRoom, TimeSpan ClassStartTime)
         {
             if (ModelState.IsValid)
             {

@@ -20,6 +20,10 @@
 
 
 
+
+
+
+
         label.error {
             color: red;
             font-style: italic;
@@ -85,12 +89,14 @@
                         <label for="ClassStartTime" class="col-md-2 control-label">Start Time</label>
                         <div class="col-md-10">
                             <input type="time" id="ClassStartTime" name="ClassStartTime" class="form-control timepicker" />
+                            <span id="ClassStartTimeErrorMessage" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="ClassEndTime" class="col-md-2 control-label">End Time</label>
                         <div class="col-md-10">
                             <input type="time" id="ClassEndTime" name="ClassEndTime" class="form-control timepicker" />
+                            <span id="ClassEndTimeErrorMessage" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -151,6 +157,35 @@
             //$("#ClassStartTime").wickedpicker();
 
             //$("#ClassEndTime").wickedpicker();
+
+            $("#ClassEndTime").change(function () {
+
+                $("#ClassStartTimeErrorMessage").empty();
+                $("#ClassEndTimeErrorMessage").empty();
+
+                var weekId = $("#WeekId").val();
+                var startClassTime = $("#ClassStartTime").val();
+                var endClassTime = $("#ClassEndTime").val();
+
+                var checkIsExistClassTime = { weekId: weekId, startClassTime: startClassTime, endClassTime: endClassTime };
+
+                $.ajax({
+                    type: "POST",
+                    url: '/AllocateClassRoom/CheckIsExistClassTime',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(checkIsExistClassTime),
+                    success: function (data) {
+                        if (data == 1) {
+                            $("#ClassStartTimeErrorMessage").append('<span class="text-danger">Start time is exist</span>');
+                            $("#ClassEndTimeErrorMessage").append('<span class="text-danger">End time is exist</span>');
+                        }
+                    }
+                });
+
+                //alert(weekId);
+                //alert(startClassTime);
+                //alert(endClassTime);
+            });
         });
     </script>
 </body>
