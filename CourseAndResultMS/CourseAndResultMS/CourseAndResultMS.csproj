@@ -676,6 +676,7 @@
     <Content Include="Views\RegisterStudent\Create.cshtml" />
     <Content Include="Views\AllocateClassRoom\Index.cshtml" />
     <Content Include="Views\AllocateClassRoom\Create.cshtml" />
+    <Content Include="Views\AllocateClassRoom\RoomAndClassInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

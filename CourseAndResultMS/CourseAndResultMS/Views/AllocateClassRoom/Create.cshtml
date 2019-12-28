@@ -24,6 +24,7 @@
 
 
 
+
         label.error {
             color: red;
             font-style: italic;
@@ -178,6 +179,8 @@
                         if (data == 1) {
                             $("#ClassStartTimeErrorMessage").append('<span class="text-danger">Start time is exist</span>');
                             $("#ClassEndTimeErrorMessage").append('<span class="text-danger">End time is exist</span>');
+                            $("#ClassStartTime").val('');
+                            $("#ClassEndTime").val('');
                         }
                     }
                 });

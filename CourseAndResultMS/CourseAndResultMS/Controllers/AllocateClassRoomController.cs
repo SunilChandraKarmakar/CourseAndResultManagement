@@ -32,7 +32,7 @@ namespace CourseAndResultMS.Controllers
             ViewBag.WeekList = weeks;
 
             return View();
-        }
+        } 
 
         public JsonResult GetCourseByDepartmentId(int departmentId)
         {
@@ -65,7 +65,7 @@ namespace CourseAndResultMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(AllocateClassRoom aAllocateClassRoom, TimeSpan ClassStartTime)
+        public ActionResult Create(AllocateClassRoom aAllocateClassRoom)
         {
             if (ModelState.IsValid)
             {
@@ -85,6 +85,14 @@ namespace CourseAndResultMS.Controllers
             ViewBag.WeekList = weeks;
 
             return View(aAllocateClassRoom);
+        }
+
+        [HttpGet]
+        public ActionResult RoomAndClassInfo()
+        {
+            List<Department> departments = db.Departments.ToList();
+            ViewBag.DepartmentList = departments;
+            return View();
         }
     }
 }

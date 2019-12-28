@@ -98,7 +98,6 @@ F:\C# Project\CourseAndResultManagement\CourseAndResultMS\CourseAndResultMS\bin\
 F:\C# Project\CourseAndResultManagement\CourseAndResultMS\CourseAndResultMS\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 F:\C# Project\CourseAndResultManagement\CourseAndResultMS\CourseAndResultMS\bin\Microsoft.Owin.Security.OAuth.xml
 F:\C# Project\CourseAndResultManagement\CourseAndResultMS\CourseAndResultMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-F:\C# Project\CourseAndResultManagement\CourseAndResultMS\CourseAndResultMS\obj\Debug\CourseAndResultMS.csproj.CoreCompileInputs.cache
 F:\C# Project\CourseAndResultManagement\CourseAndResultMS\CourseAndResultMS\obj\Debug\CourseAndResultMS.csproj.CopyComplete
 F:\C# Project\CourseAndResultManagement\CourseAndResultMS\CourseAndResultMS\obj\Debug\CourseAndResultMS.dll
 F:\C# Project\CourseAndResultManagement\CourseAndResultMS\CourseAndResultMS\obj\Debug\CourseAndResultMS.pdb
