@@ -1,0 +1,62 @@
+﻿@using CourseAndResultMS.Models
+@{
+    List<EnrollCourse> enrollCourses = ViewBag.EnrollCourseList;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Enroll Course</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Enroll Course Details</h2>
+            <hr />
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../EnrollCourse/Create" class="btn btn-success"><i class="fa fa-plus">&nbsp;</i> Create Enroll Course</a>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 50px; margin-top: 30px">
+        <div class="col-md-8">
+            <table id="myTable" class="display table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Student Info</th>
+                        <th>Department And Course</th>
+                        <th>Enroll Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (EnrollCourse item in enrollCourses)
+                    {
+                        <tr>
+                            <td>
+                                Registration : @item.RegisterStudent.RegistrationNumber <br />
+                                Name : @item.RegisterStudent.Name <br />
+                                Email : @item.RegisterStudent.Email <br />
+                            </td>
+                            <td>
+                                Department : @item.RegisterStudent.Department.Name <br />
+                                Course : @item.Course.Name <br />
+                            </td>
+                            <td>Enroll Date : @item.EnrollDate <br /></td>
+                            <td>
+                                <a href="../EnrollCourse/Edit/@item.EnrollCourseId" class="btn btn-info"><i class="fa fa-edit">&nbsp;</i> Edit</a>
+                                <a href="../EnrollCourse/Delete/@item.EnrollCourseId" class="btn btn-danger"><i class="fa fa-eye-dropper">&nbsp;</i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

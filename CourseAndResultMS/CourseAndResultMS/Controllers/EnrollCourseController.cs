@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseAndResultMS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,14 @@ namespace CourseAndResultMS.Controllers
 {
     public class EnrollCourseController : Controller
     {
-        
+        private CourseAndResultManagementEntities db = new CourseAndResultManagementEntities();
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            List<EnrollCourse> enrollCourses = db.EnrollCourses.ToList();
+            ViewBag.EnrollCourseList = enrollCourses;
+            return View();
+        }
     }
 }

@@ -681,10 +681,10 @@
     <Content Include="Views\AllocateClassRoom\Index.cshtml" />
     <Content Include="Views\AllocateClassRoom\Create.cshtml" />
     <Content Include="Views\AllocateClassRoom\RoomAndClassInfo.cshtml" />
+    <Content Include="Views\EnrollCourse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EnrollCourse\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
