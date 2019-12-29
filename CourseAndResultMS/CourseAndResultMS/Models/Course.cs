@@ -19,6 +19,7 @@ namespace CourseAndResultMS.Models
         {
             this.CourseAssignToTeachers = new HashSet<CourseAssignToTeacher>();
             this.AllocateClassRooms = new HashSet<AllocateClassRoom>();
+            this.EnrollCourses = new HashSet<EnrollCourse>();
         }
     
         public int CourseId { get; set; }
@@ -35,5 +36,7 @@ namespace CourseAndResultMS.Models
         public virtual ICollection<CourseAssignToTeacher> CourseAssignToTeachers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AllocateClassRoom> AllocateClassRooms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EnrollCourse> EnrollCourses { get; set; }
     }
 }

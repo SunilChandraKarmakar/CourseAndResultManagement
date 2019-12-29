@@ -14,6 +14,12 @@ namespace CourseAndResultMS.Models
     
     public partial class RegisterStudent
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public RegisterStudent()
+        {
+            this.EnrollCourses = new HashSet<EnrollCourse>();
+        }
+    
         public int RegisterStudentId { get; set; }
         public string RegistrationNumber { get; set; }
         public string Name { get; set; }
@@ -24,5 +30,7 @@ namespace CourseAndResultMS.Models
         public string Address { get; set; }
     
         public virtual Department Department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EnrollCourse> EnrollCourses { get; set; }
     }
 }

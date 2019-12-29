@@ -122,5 +122,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EnrollCourses">
+      <EntityTypeMapping TypeName="CourseAndResultManagementModel.EnrollCourse">
+        <MappingFragment StoreEntitySet="EnrollCourse">
+          <ScalarProperty Name="EnrollDate" ColumnName="EnrollDate" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="RegisterStudentId" ColumnName="RegisterStudentId" />
+          <ScalarProperty Name="EnrollCourseId" ColumnName="EnrollCourseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

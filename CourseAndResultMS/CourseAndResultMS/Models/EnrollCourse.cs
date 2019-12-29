@@ -12,19 +12,14 @@ namespace CourseAndResultMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AllocateClassRoom
+    public partial class EnrollCourse
     {
-        public int AllocateClassRoomId { get; set; }
-        public int DepartmentId { get; set; }
+        public int EnrollCourseId { get; set; }
+        public int RegisterStudentId { get; set; }
         public int CourseId { get; set; }
-        public int ClassRoomId { get; set; }
-        public int WeekId { get; set; }
-        public Nullable<System.TimeSpan> ClassStartTime { get; set; }
-        public Nullable<System.TimeSpan> ClassEndTime { get; set; }
+        public System.DateTime EnrollDate { get; set; }
     
-        public virtual ClassRoom ClassRoom { get; set; }
         public virtual Course Course { get; set; }
-        public virtual Department Department { get; set; }
-        public virtual Week Week { get; set; }
+        public virtual RegisterStudent RegisterStudent { get; set; }
     }
 }

@@ -73,6 +73,15 @@
       <End Role="Week" EntitySet="Weeks" />
       <End Role="AllocateClassRoom" EntitySet="AllocateClassRooms" />
     </AssociationSet>
+    <EntitySet Name="EnrollCourses" EntityType="CourseAndResultManagementModel.EnrollCourse" />
+    <AssociationSet Name="FK__EnrollCou__Cours__03F0984C" Association="CourseAndResultManagementModel.FK__EnrollCou__Cours__03F0984C">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="EnrollCourse" EntitySet="EnrollCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EnrollCou__Regis__02FC7413" Association="CourseAndResultManagementModel.FK__EnrollCou__Regis__02FC7413">
+      <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+      <End Role="EnrollCourse" EntitySet="EnrollCourses" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Course">
     <Key>
@@ -89,6 +98,7 @@
     <NavigationProperty Name="Semester" Relationship="CourseAndResultManagementModel.FK__Course__Semester__412EB0B6" FromRole="Course" ToRole="Semester" />
     <NavigationProperty Name="CourseAssignToTeachers" Relationship="CourseAndResultManagementModel.FK__CourseAss__Cours__5535A963" FromRole="Course" ToRole="CourseAssignToTeacher" />
     <NavigationProperty Name="AllocateClassRooms" Relationship="CourseAndResultManagementModel.FK__AllocateC__Cours__6D0D32F4" FromRole="Course" ToRole="AllocateClassRoom" />
+    <NavigationProperty Name="EnrollCourses" Relationship="CourseAndResultManagementModel.FK__EnrollCou__Cours__03F0984C" FromRole="Course" ToRole="EnrollCourse" />
   </EntityType>
   <EntityType Name="Semester">
     <Key>
@@ -249,6 +259,7 @@
     <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
     <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__RegisterS__Depar__6383C8BA" FromRole="RegisterStudent" ToRole="Department" />
+    <NavigationProperty Name="EnrollCourses" Relationship="CourseAndResultManagementModel.FK__EnrollCou__Regis__02FC7413" FromRole="RegisterStudent" ToRole="EnrollCourse" />
   </EntityType>
   <Association Name="FK__RegisterS__Depar__6383C8BA">
     <End Type="CourseAndResultManagementModel.Department" Role="Department" Multiplicity="1" />
@@ -339,6 +350,41 @@
       </Principal>
       <Dependent Role="AllocateClassRoom">
         <PropertyRef Name="WeekId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EnrollCourse">
+    <Key>
+      <PropertyRef Name="EnrollCourseId" />
+    </Key>
+    <Property Name="EnrollCourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegisterStudentId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="EnrollDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Course" Relationship="CourseAndResultManagementModel.FK__EnrollCou__Cours__03F0984C" FromRole="EnrollCourse" ToRole="Course" />
+    <NavigationProperty Name="RegisterStudent" Relationship="CourseAndResultManagementModel.FK__EnrollCou__Regis__02FC7413" FromRole="EnrollCourse" ToRole="RegisterStudent" />
+  </EntityType>
+  <Association Name="FK__EnrollCou__Cours__03F0984C">
+    <End Type="CourseAndResultManagementModel.Course" Role="Course" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.EnrollCourse" Role="EnrollCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="EnrollCourse">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EnrollCou__Regis__02FC7413">
+    <End Type="CourseAndResultManagementModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.EnrollCourse" Role="EnrollCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegisterStudent">
+        <PropertyRef Name="RegisterStudentId" />
+      </Principal>
+      <Dependent Role="EnrollCourse">
+        <PropertyRef Name="RegisterStudentId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
