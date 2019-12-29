@@ -682,6 +682,7 @@
     <Content Include="Views\AllocateClassRoom\Create.cshtml" />
     <Content Include="Views\AllocateClassRoom\RoomAndClassInfo.cshtml" />
     <Content Include="Views\EnrollCourse\Index.cshtml" />
+    <Content Include="Views\EnrollCourse\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

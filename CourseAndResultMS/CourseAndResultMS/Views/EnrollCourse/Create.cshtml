@@ -1,0 +1,43 @@
+﻿@using CourseAndResultMS.Models;
+@{ 
+    List<RegisterStudent> registerStudents = ViewBag.RegisterStudentList;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Enroll Course</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Create Enroll Course</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="create" method="post" action="@Url.Action("Create", "EnrollCourse")">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="RegisterStudentId" class="control-label col-md-2">Student Reg. No</label>
+                        <div class="col-md-10">
+                            <select id="RegisterStudentId" name="RegisterStudentId" class="form-control">
+                                <option value="">-- Select Reg No --</option>
+                                @foreach (RegisterStudent item in registerStudents)
+                                {
+                                    <option value="@item.RegisterStudentId">@item.RegistrationNumber</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

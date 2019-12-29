@@ -18,5 +18,13 @@ namespace CourseAndResultMS.Controllers
             ViewBag.EnrollCourseList = enrollCourses;
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            List<RegisterStudent> registerStudents = db.RegisterStudents.ToList();
+            ViewBag.RegisterStudentList = registerStudents;
+            return View();
+        }
     }
 }
