@@ -103,3 +103,14 @@ CREATE TABLE AllocateClassRoom
 	FOREIGN KEY(ClassRoomId) REFERENCES ClassRoom(ClassRoomId),
 	FOREIGN KEY(WeekId) REFERENCES [Week](WeekId)
 )
+
+CREATE TABLE EnrollCourse
+(
+	EnrollCourseId INT IDENTITY(1,1) PRIMARY KEY,
+	RegisterStudentId INT NOT NULL,
+	CourseId INT NOT NULL,
+	EnrollDate DATE NOT NULL,
+
+	FOREIGN KEY(RegisterStudentId) REFERENCES RegisterStudent(RegisterStudentId), 
+	FOREIGN KEY(CourseId) REFERENCES Course(CourseId) 
+)
