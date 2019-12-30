@@ -107,6 +107,17 @@
     <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'CourseAndResultManagement.dbo.ClassSchidule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ClassSchidule">
+    <Key>
+      <PropertyRef Name="Code" />
+      <PropertyRef Name="CourseName" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Schidule" Type="varchar" MaxLength="8000" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="CourseInformation">
     <Key>
@@ -304,6 +315,13 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Week" EntityType="Self.Week" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassSchidule" EntityType="Self.ClassSchidule" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ClassSchidule].[Code] AS [Code], 
+    [ClassSchidule].[CourseName] AS [CourseName], 
+    [ClassSchidule].[Schidule] AS [Schidule]
+    FROM [dbo].[ClassSchidule] AS [ClassSchidule]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="CourseInformation" EntityType="Self.CourseInformation" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [CourseInformation].[CourseId] AS [CourseId], 

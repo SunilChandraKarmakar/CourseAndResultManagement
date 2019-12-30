@@ -31,6 +31,7 @@
         <EntityTypeShape EntityType="CourseAndResultManagementModel.EnrollCourse" Width="1.5" PointX="6.25" PointY="5.375" />
         <AssociationConnector Association="CourseAndResultManagementModel.FK__EnrollCou__Cours__03F0984C" />
         <AssociationConnector Association="CourseAndResultManagementModel.FK__EnrollCou__Regis__02FC7413" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.ClassSchidule" Width="1.5" PointX="8.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

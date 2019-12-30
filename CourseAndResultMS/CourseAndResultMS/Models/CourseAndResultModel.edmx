@@ -112,6 +112,19 @@
           <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CourseAndResultManagement.dbo.ClassSchidule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ClassSchidule">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="CourseName" />
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="Schidule" Type="varchar" MaxLength="8000" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CourseInformation">
           <Key>
@@ -309,6 +322,14 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Week" EntityType="Self.Week" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassSchidule" EntityType="Self.ClassSchidule" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ClassSchidule].[Code] AS [Code], 
+    [ClassSchidule].[CourseName] AS [CourseName], 
+    [ClassSchidule].[DepartmentId] AS [DepartmentId], 
+    [ClassSchidule].[Schidule] AS [Schidule]
+    FROM [dbo].[ClassSchidule] AS [ClassSchidule]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="CourseInformation" EntityType="Self.CourseInformation" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CourseInformation].[CourseId] AS [CourseId], 
@@ -464,6 +485,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
             <End Role="RegisterStudent" EntitySet="RegisterStudents" />
             <End Role="EnrollCourse" EntitySet="EnrollCourses" />
           </AssociationSet>
+          <EntitySet Name="ClassSchidules" EntityType="CourseAndResultManagementModel.ClassSchidule" />
         </EntityContainer>
         <EntityType Name="Course">
           <Key>
@@ -770,6 +792,17 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ClassSchidule">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="CourseName" />
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Schidule" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -904,6 +937,16 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="RegisterStudentId" ColumnName="RegisterStudentId" />
                 <ScalarProperty Name="EnrollCourseId" ColumnName="EnrollCourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassSchidules">
+            <EntityTypeMapping TypeName="CourseAndResultManagementModel.ClassSchidule">
+              <MappingFragment StoreEntitySet="ClassSchidule">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Schidule" ColumnName="Schidule" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -36,8 +36,7 @@ namespace CourseAndResultMS.Controllers
 
         public JsonResult GetCourseByDepartmentId(int departmentId)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-
+            db.Configuration.ProxyCreationEnabled = false; 
             List<Course> courses = db.Courses.ToList();
             List<Course> getCourseByDepId = courses.FindAll(c => c.DepartmentId == departmentId);
             return Json(getCourseByDepId, JsonRequestBehavior.AllowGet);
@@ -46,7 +45,6 @@ namespace CourseAndResultMS.Controllers
         public JsonResult CheckIsExistClassTime(int weekId, TimeSpan startClassTime, TimeSpan endClassTime)
         {
             db.Configuration.ProxyCreationEnabled = false;
-
             List<Week> weeks = db.Weeks.ToList();
             Week aWeek = weeks.Find(w => w.WeekId == weekId);
 
@@ -82,8 +80,7 @@ namespace CourseAndResultMS.Controllers
             ViewBag.DepartmentList = departments;
             ViewBag.CourseList = courses;
             ViewBag.ClassRoomList = classRooms;
-            ViewBag.WeekList = weeks;
-
+            ViewBag.WeekList = weeks; 
             return View(aAllocateClassRoom);
         }
 
@@ -93,6 +90,14 @@ namespace CourseAndResultMS.Controllers
             List<Department> departments = db.Departments.ToList();
             ViewBag.DepartmentList = departments;
             return View();
+        }
+
+        public JsonResult GetClassSchiduleByDepartmentId(int departmentId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<ClassSchidule> classSchidules = db.ClassSchidules.ToList();
+            //List<ClassSchidule> getSchiduleByDepId = classSchidules.FindAll(c=>c.d)
+            return Json(0); 
         }
     }
 }

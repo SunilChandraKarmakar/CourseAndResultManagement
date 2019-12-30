@@ -189,6 +189,9 @@
     <Compile Include="Models\ClassRoom.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassSchidule.cs">
+      <DependentUpon>CourseAndResultModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Course.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
