@@ -8,14 +8,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Enroll Course</title>
-    <link href="~/Content/Site.css" rel="stylesheet" />
-
-    <style> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />   
+    <style>
         label.error {
             color: red;
             font-style: italic;
         }
-    </style>  
+    </style>
 </head>
 
 <body>
@@ -70,7 +70,7 @@
                     <div class="form-group">
                         <label for="EnrollDate" class="col-md-2 control-label">Enroll Date</label>
                         <div class="col-md-10">
-                            <input type="text" id="EnrollDate" name="EnrollDate" class="form-control" />
+                            <input type="text" id="EnrollDate" name="EnrollDate" placeholder="Select Date" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -85,9 +85,17 @@
     </div>
 
     <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
 
     <script>
+        $("#EnrollDate").datepicker({
+                showAnim: "fold",
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "d MM, y"
+            });
+
         $(document).ready(function () {
             $("#create").validate({
                 rules: {
@@ -100,7 +108,7 @@
                     CourseId: "Select course.",
                     EnrollDate: "Select enroll date."
                 }
-            });  
+            });
 
             $("#RegisterStudentId").change(function () {
                 $("#Name").val('');
@@ -124,7 +132,7 @@
                         $("#Email").val(data.Email);
                     }
                 });
-                                
+
                 $.ajax({
                     type: "POST",
                     url: '/EnrollCourse/GetDepartmentByRegStudentId',
