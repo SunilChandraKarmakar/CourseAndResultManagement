@@ -63,6 +63,19 @@ namespace CourseAndResultMS.Controllers
             return Json(departmentCourse, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetCourseIsExist(int registerStudentId, int courseId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<EnrollCourse> enrollCourses = db.EnrollCourses.ToList();
+            List<EnrollCourse> studentCourseList = enrollCourses.FindAll(e => e.RegisterStudentId == registerStudentId);
+            EnrollCourse courseIsExist = studentCourseList.Find(s => s.CourseId == courseId);
+
+            if (courseIsExist == null)
+                return Json(0, JsonRequestBehavior.AllowGet);
+            else
+                return Json(1, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Create(EnrollCourse aEnrollCourse)
         {
