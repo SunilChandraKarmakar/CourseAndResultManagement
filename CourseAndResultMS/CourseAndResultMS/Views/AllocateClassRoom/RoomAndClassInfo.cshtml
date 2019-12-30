@@ -53,6 +53,26 @@
             </table>
         </div>
     </div>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#DepartmentId").change(function () {
+                var departmentId = $("#DepartmentId").val();
+                var getSchiduleByDepartmentId = { departmentId: departmentId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '/AllocateClassRoom/GetClassSchiduleByDepartmentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getSchiduleByDepartmentId),
+                    success: function (data) {
+
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

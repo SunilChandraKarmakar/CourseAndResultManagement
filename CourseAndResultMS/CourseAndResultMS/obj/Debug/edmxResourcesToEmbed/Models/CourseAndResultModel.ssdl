@@ -112,9 +112,11 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.ClassSchidule' does 
     <Key>
       <PropertyRef Name="Code" />
       <PropertyRef Name="CourseName" />
+      <PropertyRef Name="DepartmentId" />
     </Key>
     <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="CourseName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
     <Property Name="Schidule" Type="varchar" MaxLength="8000" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -319,6 +321,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
       <DefiningQuery>SELECT 
     [ClassSchidule].[Code] AS [Code], 
     [ClassSchidule].[CourseName] AS [CourseName], 
+    [ClassSchidule].[DepartmentId] AS [DepartmentId], 
     [ClassSchidule].[Schidule] AS [Schidule]
     FROM [dbo].[ClassSchidule] AS [ClassSchidule]</DefiningQuery>
     </EntitySet>

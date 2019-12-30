@@ -96,8 +96,8 @@ namespace CourseAndResultMS.Controllers
         {
             db.Configuration.ProxyCreationEnabled = false;
             List<ClassSchidule> classSchidules = db.ClassSchidules.ToList();
-            //List<ClassSchidule> getSchiduleByDepId = classSchidules.FindAll(c=>c.d)
-            return Json(0); 
+            List<ClassSchidule> getSchiduleByDepId = classSchidules.FindAll(c => c.DepartmentId == departmentId);
+            return Json(getSchiduleByDepId, JsonRequestBehavior.AllowGet); 
         }
     }
 }

@@ -135,6 +135,7 @@
     <EntitySetMapping Name="ClassSchidules">
       <EntityTypeMapping TypeName="CourseAndResultManagementModel.ClassSchidule">
         <MappingFragment StoreEntitySet="ClassSchidule">
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
           <ScalarProperty Name="Schidule" ColumnName="Schidule" />
           <ScalarProperty Name="CourseName" ColumnName="CourseName" />
           <ScalarProperty Name="Code" ColumnName="Code" />

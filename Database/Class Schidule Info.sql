@@ -6,5 +6,4 @@ FROM Course AS C
 LEFT JOIN AllocateClassRoom AS ACR ON C.CourseId = ACR.CourseId
 LEFT JOIN ClassRoom AS CR ON ACR.ClassRoomId = CR.ClassRoomId
 LEFT JOIN WEEK AS WK ON ACR.WeekId = WK.WeekId
-where c.DepartmentId = 1
 GROUP BY C.Code, C.Name, c.DepartmentId
