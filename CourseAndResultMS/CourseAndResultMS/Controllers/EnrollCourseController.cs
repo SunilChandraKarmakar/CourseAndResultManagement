@@ -62,5 +62,20 @@ namespace CourseAndResultMS.Controllers
             List<Course> departmentCourse = courses.FindAll(c => c.DepartmentId == studentDepartmentId);
             return Json(departmentCourse, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Create(EnrollCourse aEnrollCourse)
+        {
+            if(ModelState.IsValid)
+            {
+                db.EnrollCourses.Add(aEnrollCourse);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            List<RegisterStudent> registerStudents = db.RegisterStudents.ToList();
+            ViewBag.RegisterStudentList = registerStudents;
+            return View(aEnrollCourse);
+        }
     }
 }
