@@ -9,6 +9,12 @@
     <meta charset="UTF-8">
     <title>Student Result</title>
     <link href="~/Content/style.css" rel="stylesheet" />
+    <style> 
+        label.error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
@@ -74,7 +80,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-primary"/>
+                            <input type="submit" value="Save" class="btn btn-primary" />
                             <a href="../StudentResult/Index" class="btn btn-info">Back To List</a>
                         </div>
                     </div>
@@ -82,6 +88,25 @@
             </form>
         </div>
     </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#create").validate({
+                rules: {
+                    RegisterStudentId: "required",
+                    CourseId: "required",
+                    GradeLetterId: "required"
+                },
+                messages: {
+                    RegisterStudentId: "Select registration no.",
+                    CourseId: "Select course.",
+                    GradeLetterId: "Select grade."
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
