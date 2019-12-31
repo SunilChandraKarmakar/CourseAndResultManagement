@@ -66,6 +66,13 @@
     <Property Name="CourseId" Type="int" Nullable="false" />
     <Property Name="EnrollDate" Type="date" Nullable="false" />
   </EntityType>
+  <EntityType Name="GradeLetter">
+    <Key>
+      <PropertyRef Name="GradeLetterId" />
+    </Key>
+    <Property Name="GradeLetterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
   <EntityType Name="RegisterStudent">
     <Key>
       <PropertyRef Name="RegisterStudentId" />
@@ -85,6 +92,15 @@
     </Key>
     <Property Name="SemesterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentResult">
+    <Key>
+      <PropertyRef Name="StudentResultId" />
+    </Key>
+    <Property Name="StudentResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegisterStudentId" Type="int" Nullable="false" />
+    <Property Name="CourseId" Type="int" Nullable="false" />
+    <Property Name="GradeLetterId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -281,6 +297,42 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__StudentRe__Cours__0F624AF8">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="StudentResult" Type="Self.StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentRe__Grade__10566F31">
+    <End Role="GradeLetter" Type="Self.GradeLetter" Multiplicity="1" />
+    <End Role="StudentResult" Type="Self.StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GradeLetter">
+        <PropertyRef Name="GradeLetterId" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="GradeLetterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentRe__Regis__0E6E26BF">
+    <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="1" />
+    <End Role="StudentResult" Type="Self.StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegisterStudent">
+        <PropertyRef Name="RegisterStudentId" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="RegisterStudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Teacher__Departm__4F7CD00D">
     <End Role="Department" Type="Self.Department" Multiplicity="1" />
     <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
@@ -313,8 +365,10 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnrollCourse" EntityType="Self.EnrollCourse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GradeLetter" EntityType="Self.GradeLetter" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegisterStudent" EntityType="Self.RegisterStudent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentResult" EntityType="Self.StudentResult" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Week" EntityType="Self.Week" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassSchidule" EntityType="Self.ClassSchidule" store:Type="Views" store:Schema="dbo">
@@ -384,6 +438,18 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     <AssociationSet Name="FK__RegisterS__Depar__6383C8BA" Association="Self.FK__RegisterS__Depar__6383C8BA">
       <End Role="Department" EntitySet="Department" />
       <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__Cours__0F624AF8" Association="Self.FK__StudentRe__Cours__0F624AF8">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="StudentResult" EntitySet="StudentResult" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__Grade__10566F31" Association="Self.FK__StudentRe__Grade__10566F31">
+      <End Role="GradeLetter" EntitySet="GradeLetter" />
+      <End Role="StudentResult" EntitySet="StudentResult" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__Regis__0E6E26BF" Association="Self.FK__StudentRe__Regis__0E6E26BF">
+      <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+      <End Role="StudentResult" EntitySet="StudentResult" />
     </AssociationSet>
     <AssociationSet Name="FK__Teacher__Departm__4F7CD00D" Association="Self.FK__Teacher__Departm__4F7CD00D">
       <End Role="Department" EntitySet="Department" />

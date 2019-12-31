@@ -12,27 +12,17 @@ namespace CourseAndResultMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RegisterStudent
+    public partial class GradeLetter
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RegisterStudent()
+        public GradeLetter()
         {
-            this.EnrollCourses = new HashSet<EnrollCourse>();
             this.StudentResults = new HashSet<StudentResult>();
         }
     
-        public int RegisterStudentId { get; set; }
-        public string RegistrationNumber { get; set; }
+        public int GradeLetterId { get; set; }
         public string Name { get; set; }
-        public int DepartmentId { get; set; }
-        public string Email { get; set; }
-        public string ContactNo { get; set; }
-        public Nullable<System.DateTime> RegistrationDate { get; set; }
-        public string Address { get; set; }
     
-        public virtual Department Department { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EnrollCourse> EnrollCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentResult> StudentResults { get; set; }
     }

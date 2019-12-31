@@ -83,6 +83,20 @@
       <End Role="EnrollCourse" EntitySet="EnrollCourses" />
     </AssociationSet>
     <EntitySet Name="ClassSchidules" EntityType="CourseAndResultManagementModel.ClassSchidule" />
+    <EntitySet Name="GradeLetters" EntityType="CourseAndResultManagementModel.GradeLetter" />
+    <EntitySet Name="StudentResults" EntityType="CourseAndResultManagementModel.StudentResult" />
+    <AssociationSet Name="FK__StudentRe__Cours__0F624AF8" Association="CourseAndResultManagementModel.FK__StudentRe__Cours__0F624AF8">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="StudentResult" EntitySet="StudentResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__Grade__10566F31" Association="CourseAndResultManagementModel.FK__StudentRe__Grade__10566F31">
+      <End Role="GradeLetter" EntitySet="GradeLetters" />
+      <End Role="StudentResult" EntitySet="StudentResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__Regis__0E6E26BF" Association="CourseAndResultManagementModel.FK__StudentRe__Regis__0E6E26BF">
+      <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+      <End Role="StudentResult" EntitySet="StudentResults" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Course">
     <Key>
@@ -100,6 +114,7 @@
     <NavigationProperty Name="CourseAssignToTeachers" Relationship="CourseAndResultManagementModel.FK__CourseAss__Cours__5535A963" FromRole="Course" ToRole="CourseAssignToTeacher" />
     <NavigationProperty Name="AllocateClassRooms" Relationship="CourseAndResultManagementModel.FK__AllocateC__Cours__6D0D32F4" FromRole="Course" ToRole="AllocateClassRoom" />
     <NavigationProperty Name="EnrollCourses" Relationship="CourseAndResultManagementModel.FK__EnrollCou__Cours__03F0984C" FromRole="Course" ToRole="EnrollCourse" />
+    <NavigationProperty Name="StudentResults" Relationship="CourseAndResultManagementModel.FK__StudentRe__Cours__0F624AF8" FromRole="Course" ToRole="StudentResult" />
   </EntityType>
   <EntityType Name="Semester">
     <Key>
@@ -261,6 +276,7 @@
     <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Department" Relationship="CourseAndResultManagementModel.FK__RegisterS__Depar__6383C8BA" FromRole="RegisterStudent" ToRole="Department" />
     <NavigationProperty Name="EnrollCourses" Relationship="CourseAndResultManagementModel.FK__EnrollCou__Regis__02FC7413" FromRole="RegisterStudent" ToRole="EnrollCourse" />
+    <NavigationProperty Name="StudentResults" Relationship="CourseAndResultManagementModel.FK__StudentRe__Regis__0E6E26BF" FromRole="RegisterStudent" ToRole="StudentResult" />
   </EntityType>
   <Association Name="FK__RegisterS__Depar__6383C8BA">
     <End Type="CourseAndResultManagementModel.Department" Role="Department" Multiplicity="1" />
@@ -400,4 +416,60 @@
     <Property Name="Schidule" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
     <Property Name="DepartmentId" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="GradeLetter">
+    <Key>
+      <PropertyRef Name="GradeLetterId" />
+    </Key>
+    <Property Name="GradeLetterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="StudentResults" Relationship="CourseAndResultManagementModel.FK__StudentRe__Grade__10566F31" FromRole="GradeLetter" ToRole="StudentResult" />
+  </EntityType>
+  <EntityType Name="StudentResult">
+    <Key>
+      <PropertyRef Name="StudentResultId" />
+    </Key>
+    <Property Name="StudentResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegisterStudentId" Type="Int32" Nullable="false" />
+    <Property Name="CourseId" Type="Int32" Nullable="false" />
+    <Property Name="GradeLetterId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="CourseAndResultManagementModel.FK__StudentRe__Cours__0F624AF8" FromRole="StudentResult" ToRole="Course" />
+    <NavigationProperty Name="GradeLetter" Relationship="CourseAndResultManagementModel.FK__StudentRe__Grade__10566F31" FromRole="StudentResult" ToRole="GradeLetter" />
+    <NavigationProperty Name="RegisterStudent" Relationship="CourseAndResultManagementModel.FK__StudentRe__Regis__0E6E26BF" FromRole="StudentResult" ToRole="RegisterStudent" />
+  </EntityType>
+  <Association Name="FK__StudentRe__Cours__0F624AF8">
+    <End Type="CourseAndResultManagementModel.Course" Role="Course" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.StudentResult" Role="StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentRe__Grade__10566F31">
+    <End Type="CourseAndResultManagementModel.GradeLetter" Role="GradeLetter" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.StudentResult" Role="StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GradeLetter">
+        <PropertyRef Name="GradeLetterId" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="GradeLetterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentRe__Regis__0E6E26BF">
+    <End Type="CourseAndResultManagementModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+    <End Type="CourseAndResultManagementModel.StudentResult" Role="StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegisterStudent">
+        <PropertyRef Name="RegisterStudentId" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="RegisterStudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

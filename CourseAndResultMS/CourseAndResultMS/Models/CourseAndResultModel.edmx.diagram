@@ -32,6 +32,11 @@
         <AssociationConnector Association="CourseAndResultManagementModel.FK__EnrollCou__Cours__03F0984C" />
         <AssociationConnector Association="CourseAndResultManagementModel.FK__EnrollCou__Regis__02FC7413" />
         <EntityTypeShape EntityType="CourseAndResultManagementModel.ClassSchidule" Width="1.5" PointX="8.375" PointY="4.75" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.GradeLetter" Width="1.5" PointX="3" PointY="13.875" />
+        <EntityTypeShape EntityType="CourseAndResultManagementModel.StudentResult" Width="1.5" PointX="5.25" PointY="9.5" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__StudentRe__Cours__0F624AF8" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__StudentRe__Grade__10566F31" />
+        <AssociationConnector Association="CourseAndResultManagementModel.FK__StudentRe__Regis__0E6E26BF" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

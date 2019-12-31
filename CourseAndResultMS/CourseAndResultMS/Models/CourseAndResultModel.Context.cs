@@ -38,5 +38,7 @@ namespace CourseAndResultMS.Models
         public virtual DbSet<Week> Weeks { get; set; }
         public virtual DbSet<EnrollCourse> EnrollCourses { get; set; }
         public virtual DbSet<ClassSchidule> ClassSchidules { get; set; }
+        public virtual DbSet<GradeLetter> GradeLetters { get; set; }
+        public virtual DbSet<StudentResult> StudentResults { get; set; }
     }
 }

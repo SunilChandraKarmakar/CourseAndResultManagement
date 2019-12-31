@@ -142,5 +142,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="GradeLetters">
+      <EntityTypeMapping TypeName="CourseAndResultManagementModel.GradeLetter">
+        <MappingFragment StoreEntitySet="GradeLetter">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GradeLetterId" ColumnName="GradeLetterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentResults">
+      <EntityTypeMapping TypeName="CourseAndResultManagementModel.StudentResult">
+        <MappingFragment StoreEntitySet="StudentResult">
+          <ScalarProperty Name="GradeLetterId" ColumnName="GradeLetterId" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="RegisterStudentId" ColumnName="RegisterStudentId" />
+          <ScalarProperty Name="StudentResultId" ColumnName="StudentResultId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
