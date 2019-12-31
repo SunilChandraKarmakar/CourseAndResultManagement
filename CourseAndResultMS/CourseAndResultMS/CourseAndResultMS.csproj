@@ -693,10 +693,10 @@
     <Content Include="Views\AllocateClassRoom\RoomAndClassInfo.cshtml" />
     <Content Include="Views\EnrollCourse\Index.cshtml" />
     <Content Include="Views\EnrollCourse\Create.cshtml" />
+    <Content Include="Views\StudentResult\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\StudentResult\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
