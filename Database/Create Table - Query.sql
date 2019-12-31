@@ -114,3 +114,21 @@ CREATE TABLE EnrollCourse
 	FOREIGN KEY(RegisterStudentId) REFERENCES RegisterStudent(RegisterStudentId), 
 	FOREIGN KEY(CourseId) REFERENCES Course(CourseId) 
 )
+
+CREATE TABLE GradeLetter
+(
+	GradeLetterId INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] VARCHAR(5) UNIQUE NOT NULL
+)
+
+CREATE TABLE StudentResult
+(
+	StudentResultId INT IDENTITY(1,1) PRIMARY KEY,
+	RegisterStudentId INT NOT NULL,
+	CourseId INT NOT NULL,
+	GradeLetterId INT NOT NULL,
+
+	FOREIGN KEY(RegisterStudentId) REFERENCES RegisterStudent(RegisterStudentId),
+	FOREIGN KEY(CourseId) REFERENCES Course(CourseId),
+	FOREIGN KEY(GradeLetterId) REFERENCES GradeLetter(GradeLetterId)
+)

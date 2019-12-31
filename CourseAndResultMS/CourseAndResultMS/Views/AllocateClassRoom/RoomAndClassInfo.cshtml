@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8" style="margin-top:30px; margin-left:100px">
+        <div class="col-md-12" style="margin-top:30px">
             <table id="myTable" class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -43,7 +43,7 @@
                         <th>Schedule Info</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="classSchidule">
                     <tr>
                         <td></td>
                         <td></td>
@@ -58,6 +58,7 @@
     <script>
         $(document).ready(function () {
             $("#DepartmentId").change(function () {
+                $("#classSchidule").empty();
                 var departmentId = $("#DepartmentId").val();
                 var getSchiduleByDepartmentId = { departmentId: departmentId };
 
@@ -67,7 +68,9 @@
                     contentType: "application/json; charset=uft-8",
                     data: JSON.stringify(getSchiduleByDepartmentId),
                     success: function (data) {
-
+                        $.each(data, function (key, value) {
+                            $("#classSchidule").append('<tr><td>' + value.Code + '</td><td>' + value.CourseName + '</td><td>' + value.Schidule + '</td></tr>');    
+                        });
                     }
                 });
             });
