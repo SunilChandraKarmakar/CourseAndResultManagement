@@ -104,6 +104,51 @@
                     GradeLetterId: "Select grade."
                 }
             });
+            $("#RegisterStudentId").change(function () {
+                $("#Name").val('');
+                $("#Email").val('');
+                $("#DepartmentId").val('');
+                $("#CourseId").empty();
+                $("#CourseId").append('<option value="">-- Select Course --</option>');
+
+                var registerStudentId = $("#RegisterStudentId").val();
+                var getRegisterStudentInfo = { registerStudentId: registerStudentId };
+                var getDepartmentByRegStudentId = { registerStudentId: registerStudentId };
+                var getCourseList = { registerStudentId: registerStudentId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetRegisterStudentInfo',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getRegisterStudentInfo),
+                    success: function (data) {
+                        $("#Name").val(data.Name);
+                        $("#Email").val(data.Email);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetDepartmentByRegistrationId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getDepartmentByRegStudentId),
+                    success: function (data) {
+                        $("#DepartmentId").val(data);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetCourseListByRegisterStudentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getCourseList),
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $("#CourseId").append('<option value=' + value.CourseId + '>' + value.Name + '</option>');
+                        });    
+                    }
+                });
+            });
         });
     </script>
 
