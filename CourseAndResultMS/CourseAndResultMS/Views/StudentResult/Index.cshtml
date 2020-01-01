@@ -1,0 +1,61 @@
+﻿@using CourseAndResultMS.Models
+@{
+    List<StudentResult> studentResults = ViewBag.StudentResultList;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Result</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Student Result Details</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="../StudentResult/Create" class="btn btn-success"><i class="fa fa-plus">&nbsp;</i> Create Student Result</a>
+        </div>
+    </div>
+    <div class="row" style="margin-top:30px; margin-left: 50px;">
+        <div class="col-md-10">
+            <table id="myTable" class="display table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Student Information</th>
+                        <th>Result Information</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (StudentResult item in studentResults)
+                    {
+                        <tr>
+                            <td>
+                                Registration No: @item.RegisterStudent.RegistrationNumber <br />
+                                Name: @item.RegisterStudent.Name <br />
+                                Email: @item.RegisterStudent.Email <br />
+                            </td>
+                            <td>
+                                Department: @item.RegisterStudent.Department.Name <br />
+                                Course: @item.Course.Name <br />
+                                Greade: @item.GradeLetter.Name <br />
+                            </td>
+                            <td>
+                                <a href="../StudentResult/Edit/@item.StudentResultId" class="btn btn-info"><i class="fa fa-edit">&nbsp;</i> Edit</a>
+                                <a href="../StudentResult/Delete/@item.StudentResultId" class="btn btn-danger"><i class="fa fa-eye-dropper">&nbsp;</i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

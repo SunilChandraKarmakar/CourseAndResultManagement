@@ -694,6 +694,7 @@
     <Content Include="Views\EnrollCourse\Index.cshtml" />
     <Content Include="Views\EnrollCourse\Create.cshtml" />
     <Content Include="Views\StudentResult\Create.cshtml" />
+    <Content Include="Views\StudentResult\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

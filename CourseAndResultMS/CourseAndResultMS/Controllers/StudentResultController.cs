@@ -12,6 +12,14 @@ namespace CourseAndResultMS.Controllers
         private CourseAndResultManagementEntities db = new CourseAndResultManagementEntities();
 
         [HttpGet]
+        public ActionResult Index()
+        {
+            List<StudentResult> studentResults = db.StudentResults.ToList();
+            ViewBag.StudentResultList = studentResults;
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Create()
         {
             List<RegisterStudent> registerStudents = db.RegisterStudents.ToList();
