@@ -1,5 +1,6 @@
-﻿@using CourseAndResultMS.Models         
-@{
+﻿@using CourseAndResultMS.Models
+@model CourseAndResultMS.Models.StudentResult
+@{ 
     List<RegisterStudent> registerStudents = ViewBag.RegisterStudentList;
     List<GradeLetter> gradeLetters = ViewBag.GradeLetterList;
 }
@@ -21,19 +22,19 @@
 <body>
     <div class="row">
         <div class="col-md-12">
-            <h2>Create Student Result</h2>
+            <h2>Edit Student Result</h2>
             <hr />
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form id="create" method="post" action="@Url.Action("Create", "StudentResult")">
+            <form id="edit" method="post" action="@Url.Action("Edit", "StudentResult")">
                 <div class="form-horizontal">
                     <div class="form-group">
                         <label for="RegisterStudentId" class="col-md-2 control-label">Registration No</label>
                         <div class="col-md-10">
                             <select id="RegisterStudentId" name="RegisterStudentId" class="form-control">
-                                <option value="">-- Select Reg No --</option>
+                                <option value="@Model.RegisterStudentId">@Model.RegisterStudent.RegistrationNumber</option>
                                 @foreach (RegisterStudent item in registerStudents)
                                 {
                                     <option value="@item.RegisterStudentId">@item.RegistrationNumber</option>
@@ -44,26 +45,26 @@
                     <div class="form-group">
                         <label for="Name" class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input type="text" id="Name" class="form-control" readonly />
+                            <input type="text" id="Name" class="form-control" readonly/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Email" class="col-md-2 control-label">Email</label>
                         <div class="col-md-10">
-                            <input type="email" id="Email" class="form-control" readonly />
+                            <input type="email" id="Email" class="form-control" readonly/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="DepartmentId" class="col-md-2 control-label">Department</label>
                         <div class="col-md-10">
-                            <input type="text" id="DepartmentId" class="form-control" readonly />
+                            <input type="text" id="DepartmentId" class="form-control" readonly/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="CourseId" class="col-md-2 control-label">Course</label>
                         <div class="col-md-10">
                             <select id="CourseId" name="CourseId" class="form-control">
-                                <option value="">-- Select Course --</option>
+                                <option value="@Model.CourseId">@Model.Course.Name</option>
                             </select>
                         </div>
                     </div>
@@ -71,7 +72,7 @@
                         <label for="GradeLetterId" class="col-md-2 control-label">Grade Letter</label>
                         <div class="col-md-10">
                             <select id="GradeLetterId" name="GradeLetterId" class="form-control">
-                                <option value="">-- Select Grade --</option>
+                                <option value="@Model.GradeLetterId">@Model.GradeLetter.Name</option>
                                 @foreach (GradeLetter item in gradeLetters)
                                 {
                                     <option value="@item.GradeLetterId">@item.Name</option>
@@ -81,18 +82,58 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-primary" />
-                            <a href="../StudentResult/Index" class="btn btn-info">Back To List</a>
+                            <input type="submit" value="Update" class="btn btn-primary"/>
+                            <a href="../../StudentResult/Index" class="btn btn-info">Back To List</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script>
         $(document).ready(function () {
+
+            var registerStudentId = $("#RegisterStudentId").val();
+            var getRegisterStudentInfo = { registerStudentId: registerStudentId };
+            var getDepartmentByRegStudentId = { registerStudentId: registerStudentId };
+            var getCourseList = { registerStudentId: registerStudentId };
+
+            $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetRegisterStudentInfo',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getRegisterStudentInfo),
+                    success: function (data) {
+                        $("#Name").val(data.Name);
+                        $("#Email").val(data.Email);
+                    }
+            });
+
+             $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetDepartmentByRegistrationId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getDepartmentByRegStudentId),
+                    success: function (data) {
+                        $("#DepartmentId").val(data);
+                    }
+             });
+
+            $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetCourseListByRegisterStudentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getCourseList),
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $("#CourseId").append('<option value=' + value.CourseId + '>' + value.Name + '</option>');
+                        });
+                    }
+            });
+
             $("#create").validate({
                 rules: {
                     RegisterStudentId: "required",
@@ -105,6 +146,7 @@
                     GradeLetterId: "Select grade."
                 }
             });
+
             $("#RegisterStudentId").change(function () {
                 $("#Name").val('');
                 $("#Email").val('');
@@ -152,5 +194,6 @@
             });
         });
     </script>
-</body> 
+
+</body>
 </html>

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using CourseAndResultMS.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
-using CourseAndResultMS.Models;
 
 namespace CourseAndResultMS.Controllers
 {
@@ -14,9 +13,7 @@ namespace CourseAndResultMS.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<StudentResult> studentResults = db.StudentResults.ToList();
-            ViewBag.StudentResultList = studentResults;
-            return View();
+            return View(db.StudentResults.ToList());
         }
 
         [HttpGet]
@@ -66,12 +63,12 @@ namespace CourseAndResultMS.Controllers
         [HttpPost]
         public ActionResult Create(StudentResult aStudentResult)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 db.StudentResults.Add(aStudentResult);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            }   
 
             List<RegisterStudent> registerStudents = db.RegisterStudents.ToList();
             ViewBag.RegisterStudentList = registerStudents;
@@ -80,6 +77,22 @@ namespace CourseAndResultMS.Controllers
             ViewBag.GradeLetterList = gradeLetters;
             return View(aStudentResult);
 
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? Id)
+        {     
+            if (Id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            StudentResult aStudentResult = db.StudentResults.Find(Id);
+
+            if (aStudentResult == null)
+                return HttpNotFound();
+
+            ViewBag.RegisterStudentList = db.RegisterStudents.ToList();
+            ViewBag.GradeLetterList = db.GradeLetters.ToList();
+            return View(aStudentResult);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿@using CourseAndResultMS.Models
-@{
-    List<StudentResult> studentResults = ViewBag.StudentResultList;
-}
+@model IEnumerable<CourseAndResultMS.Models.StudentResult>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,6 @@
     <title>Student Result</title>
     <link href="~/Content/style.css" rel="stylesheet" />
 </head>
-
 <body>
     <div class="row">
         <div class="col-md-12">
@@ -33,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (StudentResult item in studentResults)
+                    @foreach (StudentResult item in Model)
                     {
                         <tr>
                             <td>
@@ -47,8 +45,8 @@
                                 Greade: @item.GradeLetter.Name <br />
                             </td>
                             <td>
-                                <a href="../StudentResult/Edit/@item.StudentResultId" class="btn btn-info"><i class="fa fa-edit">&nbsp;</i> Edit</a>
-                                <a href="../StudentResult/Delete/@item.StudentResultId" class="btn btn-danger"><i class="fa fa-eye-dropper">&nbsp;</i> Delete</a>
+                                <a href="../StudentResult/Edit/@item.StudentResultId" class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
+                                <a href="../StudentResult/Delete/@item.StudentResultId" class="btn btn-danger"><i class="fa fa-eye-dropper"></i>Delete</a>
                             </td>
                         </tr>
                     }
@@ -57,5 +55,4 @@
         </div>
     </div>
 </body>
-
 </html>
