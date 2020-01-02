@@ -11,12 +11,6 @@
     <meta charset="UTF-8">
     <title>Student Result</title>
     <link href="~/Content/style.css" rel="stylesheet" />
-    <style>
-        label.error {
-            color: red;
-            font-style: italic;
-        }
-    </style>
 </head>
 
 <body>
@@ -31,6 +25,7 @@
             <form id="edit" method="post" action="@Url.Action("Edit", "StudentResult")">
                 <div class="form-horizontal">
                     <div class="form-group">
+                        @Html.HiddenFor(model => model.StudentResultId)
                         <label for="RegisterStudentId" class="col-md-2 control-label">Registration No</label>
                         <div class="col-md-10">
                             <select id="RegisterStudentId" name="RegisterStudentId" class="form-control">
@@ -132,20 +127,7 @@
                             $("#CourseId").append('<option value=' + value.CourseId + '>' + value.Name + '</option>');
                         });
                     }
-            });
-
-            $("#create").validate({
-                rules: {
-                    RegisterStudentId: "required",
-                    CourseId: "required",
-                    GradeLetterId: "required"
-                },
-                messages: {
-                    RegisterStudentId: "Select registration no.",
-                    CourseId: "Select course.",
-                    GradeLetterId: "Select grade."
-                }
-            });
+            });       
 
             $("#RegisterStudentId").change(function () {
                 $("#Name").val('');

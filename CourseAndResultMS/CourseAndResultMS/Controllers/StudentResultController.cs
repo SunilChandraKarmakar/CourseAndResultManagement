@@ -1,5 +1,6 @@
 ﻿using CourseAndResultMS.Models;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -89,6 +90,21 @@ namespace CourseAndResultMS.Controllers
 
             if (aStudentResult == null)
                 return HttpNotFound();
+
+            ViewBag.RegisterStudentList = db.RegisterStudents.ToList();
+            ViewBag.GradeLetterList = db.GradeLetters.ToList();
+            return View(aStudentResult);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(StudentResult aStudentResult)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Entry(aStudentResult).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
             ViewBag.RegisterStudentList = db.RegisterStudents.ToList();
             ViewBag.GradeLetterList = db.GradeLetters.ToList();
