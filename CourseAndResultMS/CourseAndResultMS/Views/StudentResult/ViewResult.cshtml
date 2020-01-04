@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="row" style="margin-top:20px">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <table id="myTable" class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -64,7 +64,7 @@
                         <th>Greade</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="ShowResult">
                     <tr><td></td><td></td><td></td></tr>
                 </tbody>
             </table>
@@ -78,6 +78,7 @@
                 $("#Name").val('');
                 $("#Email").val('');
                 $("#DepartmentId").val('');
+                $("#ShowResult").empty();
 
                 var registerStudentId = $("#RegisterStudentId").val();
                 var getStudentInfoByRegisterStudentId = { registerStudentId: registerStudentId };
@@ -111,7 +112,9 @@
                     contentType: "application/json; charset=uft-8",
                     data: JSON.stringify(getStudentResult),
                     success: function (data) {
-
+                        $.each(data, function (key, value) {
+                            $("#ShowResult").append('<tr><td>' + value.Code + '</td><td>' + value.CourseName + '</td><td>' + value.Grade + '</td></tr>');   
+                        });
                     }
                 });
             });

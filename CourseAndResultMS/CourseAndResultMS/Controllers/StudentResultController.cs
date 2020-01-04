@@ -133,10 +133,11 @@ namespace CourseAndResultMS.Controllers
             return Json(getDepartmentName.Name, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult GetStudentResultByRegisterStudentId(int registerStudentId)
-        //{
-        //    List<StudentResultInfo> getStudentResultInfo = db.StudentResultInfoes.ToList();
-        //    List<StudentResultInfo> getMatchStudentResultInfo = getMatchStudentResultInfo.FindAll(s => s.)
-        //}
+        public JsonResult GetStudentResultByRegisterStudentId(int registerStudentId)
+        {
+            List<StudentResultInfo> getStudentResultInfo = db.StudentResultInfoes.ToList();
+            List<StudentResultInfo> getMatchStudentResult = getStudentResultInfo.FindAll(s => s.RegisterStudentId == registerStudentId);
+            return Json(getMatchStudentResult, JsonRequestBehavior.AllowGet);
+        }
     }
 }
