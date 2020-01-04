@@ -136,7 +136,7 @@ namespace CourseAndResultMS.Controllers
         //public JsonResult GetStudentResultByRegisterStudentId(int registerStudentId)
         //{
         //    List<StudentResultInfo> getStudentResultInfo = db.StudentResultInfoes.ToList();
-        //    List<StudentResultInfo> getMatchStudentResultInfo = getMatchStudentResultInfo.FindAll(s=>s.)
+        //    List<StudentResultInfo> getMatchStudentResultInfo = getMatchStudentResultInfo.FindAll(s => s.)
         //}
     }
 }
