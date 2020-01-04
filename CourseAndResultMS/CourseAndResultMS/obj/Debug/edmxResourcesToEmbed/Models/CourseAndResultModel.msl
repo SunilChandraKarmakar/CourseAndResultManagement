@@ -163,6 +163,7 @@
     <EntitySetMapping Name="StudentResultInfoes">
       <EntityTypeMapping TypeName="CourseAndResultManagementModel.StudentResultInfo">
         <MappingFragment StoreEntitySet="StudentResultInfo">
+          <ScalarProperty Name="StudentResultId" ColumnName="StudentResultId" />
           <ScalarProperty Name="Grade" ColumnName="Grade" />
           <ScalarProperty Name="CourseName" ColumnName="CourseName" />
           <ScalarProperty Name="Code" ColumnName="Code" />

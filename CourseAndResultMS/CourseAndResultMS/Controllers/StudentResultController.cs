@@ -132,5 +132,11 @@ namespace CourseAndResultMS.Controllers
             Department getDepartmentName = getAllDepartment.Find(d => d.DepartmentId == getMatchRegisterStudent.DepartmentId);
             return Json(getDepartmentName.Name, JsonRequestBehavior.AllowGet);
         }
+
+        //public JsonResult GetStudentResultByRegisterStudentId(int registerStudentId)
+        //{
+        //    List<StudentResultInfo> getStudentResultInfo = db.StudentResultInfoes.ToList();
+        //    List<StudentResultInfo> getMatchStudentResultInfo = getMatchStudentResultInfo.FindAll(s=>s.)
+        //}
     }
 }

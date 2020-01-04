@@ -165,10 +165,12 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultInfo' d
             <PropertyRef Name="Code" />
             <PropertyRef Name="CourseName" />
             <PropertyRef Name="Grade" />
+            <PropertyRef Name="StudentResultId" />
           </Key>
           <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="CourseName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Grade" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="StudentResultId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__AllocateC__Class__6E01572D">
           <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
@@ -412,7 +414,8 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultInfo' d
             <DefiningQuery>SELECT 
     [StudentResultInfo].[Code] AS [Code], 
     [StudentResultInfo].[CourseName] AS [CourseName], 
-    [StudentResultInfo].[Grade] AS [Grade]
+    [StudentResultInfo].[Grade] AS [Grade], 
+    [StudentResultInfo].[StudentResultId] AS [StudentResultId]
     FROM [dbo].[StudentResultInfo] AS [StudentResultInfo]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__AllocateC__Class__6E01572D" Association="Self.FK__AllocateC__Class__6E01572D">
@@ -966,10 +969,12 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultInfo' d
             <PropertyRef Name="Code" />
             <PropertyRef Name="CourseName" />
             <PropertyRef Name="Grade" />
+            <PropertyRef Name="StudentResultId" />
           </Key>
           <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="CourseName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Grade" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="StudentResultId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1139,6 +1144,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultInfo' d
           <EntitySetMapping Name="StudentResultInfoes">
             <EntityTypeMapping TypeName="CourseAndResultManagementModel.StudentResultInfo">
               <MappingFragment StoreEntitySet="StudentResultInfo">
+                <ScalarProperty Name="StudentResultId" ColumnName="StudentResultId" />
                 <ScalarProperty Name="Grade" ColumnName="Grade" />
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
                 <ScalarProperty Name="Code" ColumnName="Code" />

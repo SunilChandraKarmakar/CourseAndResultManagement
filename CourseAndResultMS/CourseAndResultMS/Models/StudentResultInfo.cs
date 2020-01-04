@@ -17,5 +17,6 @@ namespace CourseAndResultMS.Models
         public string Code { get; set; }
         public string CourseName { get; set; }
         public string Grade { get; set; }
+        public int StudentResultId { get; set; }
     }
 }

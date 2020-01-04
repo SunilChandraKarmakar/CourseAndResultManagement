@@ -82,6 +82,7 @@
                 var registerStudentId = $("#RegisterStudentId").val();
                 var getStudentInfoByRegisterStudentId = { registerStudentId: registerStudentId };
                 var getDepartmentByRegisterStudentId = { registerStudentId: registerStudentId };
+                var getStudentResult = { registerStudentId: registerStudentId };
 
                 $.ajax({
                     type: "POST",
@@ -101,6 +102,16 @@
                     data: JSON.stringify(getDepartmentByRegisterStudentId),
                     success: function (data) {
                         $("#DepartmentId").val(data);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetStudentResultByRegisterStudentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getStudentResult),
+                    success: function (data) {
+
                     }
                 });
             });
