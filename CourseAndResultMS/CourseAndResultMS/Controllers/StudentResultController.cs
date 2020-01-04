@@ -106,5 +106,12 @@ namespace CourseAndResultMS.Controllers
             ViewBag.GradeLetterList = db.GradeLetters.ToList();
             return View(aStudentResult);
         }
+
+        [HttpGet]
+        public ActionResult ViewResult()
+        {
+            ViewBag.RegisterStudentList = db.RegisterStudents.ToList();
+            return View();
+        }
     }
 }
