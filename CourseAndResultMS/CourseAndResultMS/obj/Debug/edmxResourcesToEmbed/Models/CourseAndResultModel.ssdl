@@ -153,6 +153,18 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     <Property Name="TeacherId" Type="int" />
     <Property Name="Teacher" Type="varchar" MaxLength="30" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StudentResultInfo">
+    <Key>
+      <PropertyRef Name="Code" />
+      <PropertyRef Name="CourseName" />
+      <PropertyRef Name="Grade" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Grade" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
   <Association Name="FK__AllocateC__Class__6E01572D">
     <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
     <End Role="AllocateClassRoom" Type="Self.AllocateClassRoom" Multiplicity="*" />
@@ -390,6 +402,13 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     [CourseInformation].[TeacherId] AS [TeacherId], 
     [CourseInformation].[Teacher] AS [Teacher]
     FROM [dbo].[CourseInformation] AS [CourseInformation]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="StudentResultInfo" EntityType="Self.StudentResultInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [StudentResultInfo].[Code] AS [Code], 
+    [StudentResultInfo].[CourseName] AS [CourseName], 
+    [StudentResultInfo].[Grade] AS [Grade]
+    FROM [dbo].[StudentResultInfo] AS [StudentResultInfo]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK__AllocateC__Class__6E01572D" Association="Self.FK__AllocateC__Class__6E01572D">
       <End Role="ClassRoom" EntitySet="ClassRoom" />

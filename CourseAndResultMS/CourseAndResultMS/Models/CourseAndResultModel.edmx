@@ -158,6 +158,18 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
           <Property Name="TeacherId" Type="int" />
           <Property Name="Teacher" Type="varchar" MaxLength="30" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudentResultInfo">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="CourseName" />
+            <PropertyRef Name="Grade" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Grade" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
         <Association Name="FK__AllocateC__Class__6E01572D">
           <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
           <End Role="AllocateClassRoom" Type="Self.AllocateClassRoom" Multiplicity="*" />
@@ -396,6 +408,13 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     [CourseInformation].[Teacher] AS [Teacher]
     FROM [dbo].[CourseInformation] AS [CourseInformation]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="StudentResultInfo" EntityType="Self.StudentResultInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentResultInfo].[Code] AS [Code], 
+    [StudentResultInfo].[CourseName] AS [CourseName], 
+    [StudentResultInfo].[Grade] AS [Grade]
+    FROM [dbo].[StudentResultInfo] AS [StudentResultInfo]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__AllocateC__Class__6E01572D" Association="Self.FK__AllocateC__Class__6E01572D">
             <End Role="ClassRoom" EntitySet="ClassRoom" />
             <End Role="AllocateClassRoom" EntitySet="AllocateClassRoom" />
@@ -566,6 +585,7 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
             <End Role="RegisterStudent" EntitySet="RegisterStudents" />
             <End Role="StudentResult" EntitySet="StudentResults" />
           </AssociationSet>
+          <EntitySet Name="StudentResultInfoes" EntityType="CourseAndResultManagementModel.StudentResultInfo" />
         </EntityContainer>
         <EntityType Name="Course">
           <Key>
@@ -941,6 +961,16 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="StudentResultInfo">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="CourseName" />
+            <PropertyRef Name="Grade" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1103,6 +1133,15 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="RegisterStudentId" ColumnName="RegisterStudentId" />
                 <ScalarProperty Name="StudentResultId" ColumnName="StudentResultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentResultInfoes">
+            <EntityTypeMapping TypeName="CourseAndResultManagementModel.StudentResultInfo">
+              <MappingFragment StoreEntitySet="StudentResultInfo">
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
