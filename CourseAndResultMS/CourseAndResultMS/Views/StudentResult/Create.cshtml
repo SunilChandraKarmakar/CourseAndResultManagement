@@ -115,7 +115,7 @@
                 var registerStudentId = $("#RegisterStudentId").val();
                 var getRegisterStudentInfo = { registerStudentId: registerStudentId };
                 var getDepartmentByRegStudentId = { registerStudentId: registerStudentId };
-                var getCourseList = { registerStudentId: registerStudentId };
+                var getEnrollCourseByRegisterStudentId = { registerStudentId: registerStudentId };
 
                 $.ajax({
                     type: "POST",
@@ -140,12 +140,12 @@
 
                 $.ajax({
                     type: "POST",
-                    url: '/StudentResult/GetCourseListByRegisterStudentId',
+                    url: '/StudentResult/GetEnrollCourseByRegisterStudentId',
                     contentType: "application/json; charset=uft-8",
-                    data: JSON.stringify(getCourseList),
+                    data: JSON.stringify(getEnrollCourseByRegisterStudentId),
                     success: function (data) {
                         $.each(data, function (key, value) {
-                            $("#CourseId").append('<option value=' + value.CourseId + '>' + value.Name + '</option>');
+                            $("#CourseId").append('<option value=' + value.CourseId + '>' + value.CourseId + '</option>');
                         });
                     }
                 });

@@ -47,18 +47,14 @@ namespace CourseAndResultMS.Controllers
             Department getDepartment = departments.Find(d => d.DepartmentId == departmentId);
             string departmentName = getDepartment.Name;
             return Json(departmentName, JsonRequestBehavior.AllowGet);
-        }
+        }         
 
-        public JsonResult GetCourseListByRegisterStudentId(int registerStudentId)
+        public JsonResult GetEnrollCourseByRegisterStudentId(int registerStudentId)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            List<RegisterStudent> registerStudents = db.RegisterStudents.ToList();
-            RegisterStudent getARegisterStudent = registerStudents.Find(r => r.RegisterStudentId == registerStudentId);
-            int studentDepartmentId = getARegisterStudent.DepartmentId;
-
-            List<Course> courses = db.Courses.ToList();
-            List<Course> getStudentCourseByDepartmentId = courses.FindAll(c => c.DepartmentId == studentDepartmentId);
-            return Json(getStudentCourseByDepartmentId, JsonRequestBehavior.AllowGet);
+            List<EnrollCourse> getAllEnrollCourse = db.EnrollCourses.ToList();
+            List<EnrollCourse> getMatchEnrollStudent = getAllEnrollCourse.FindAll(e => e.RegisterStudentId == registerStudentId);
+            return Json(getMatchEnrollStudent, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
