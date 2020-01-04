@@ -113,5 +113,24 @@ namespace CourseAndResultMS.Controllers
             ViewBag.RegisterStudentList = db.RegisterStudents.ToList();
             return View();
         }
+
+        public JsonResult GetStudentInfoByRegisterStudentId(int registerStudentId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<RegisterStudent> getRegisterStudent = db.RegisterStudents.ToList();
+            RegisterStudent getMatchRegisterStudent = getRegisterStudent.Find(r => r.RegisterStudentId == registerStudentId);
+            return Json(getMatchRegisterStudent, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDepartmentByRegisterStudentId(int registerStudentId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<RegisterStudent> getRegisterStudent = db.RegisterStudents.ToList();
+            RegisterStudent getMatchRegisterStudent = getRegisterStudent.Find(r => r.RegisterStudentId == registerStudentId);
+                        
+            List<Department> getAllDepartment = db.Departments.ToList();
+            Department getDepartmentName = getAllDepartment.Find(d => d.DepartmentId == getMatchRegisterStudent.DepartmentId);
+            return Json(getDepartmentName.Name, JsonRequestBehavior.AllowGet);
+        }
     }
 }

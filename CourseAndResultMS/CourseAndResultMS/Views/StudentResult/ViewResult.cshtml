@@ -69,7 +69,43 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>  
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#RegisterStudentId").change(function () {
+                $("#Name").val('');
+                $("#Email").val('');
+                $("#DepartmentId").val('');
+
+                var registerStudentId = $("#RegisterStudentId").val();
+                var getStudentInfoByRegisterStudentId = { registerStudentId: registerStudentId };
+                var getDepartmentByRegisterStudentId = { registerStudentId: registerStudentId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetStudentInfoByRegisterStudentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getStudentInfoByRegisterStudentId),
+                    success: function (data) {
+                        $("#Name").val(data.Name);
+                        $("#Email").val(data.Email);
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentResult/GetDepartmentByRegisterStudentId',
+                    contentType: "application/json; charset=uft-8",
+                    data: JSON.stringify(getDepartmentByRegisterStudentId),
+                    success: function (data) {
+                        $("#DepartmentId").val(data);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
