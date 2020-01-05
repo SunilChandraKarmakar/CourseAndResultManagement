@@ -154,8 +154,8 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.CourseInformation' d
     <Property Name="Teacher" Type="varchar" MaxLength="30" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="StudentResultInfo">
+warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StudentResultView">
     <Key>
       <PropertyRef Name="Code" />
       <PropertyRef Name="CourseName" />
@@ -405,13 +405,13 @@ warning 6002: The table/view 'CourseAndResultManagement.dbo.StudentResultInfo' d
     [CourseInformation].[Teacher] AS [Teacher]
     FROM [dbo].[CourseInformation] AS [CourseInformation]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="StudentResultInfo" EntityType="Self.StudentResultInfo" store:Type="Views" store:Schema="dbo">
+    <EntitySet Name="StudentResultView" EntityType="Self.StudentResultView" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [StudentResultInfo].[Code] AS [Code], 
-    [StudentResultInfo].[CourseName] AS [CourseName], 
-    [StudentResultInfo].[Grade] AS [Grade], 
-    [StudentResultInfo].[RegisterStudentId] AS [RegisterStudentId]
-    FROM [dbo].[StudentResultInfo] AS [StudentResultInfo]</DefiningQuery>
+    [StudentResultView].[Code] AS [Code], 
+    [StudentResultView].[CourseName] AS [CourseName], 
+    [StudentResultView].[Grade] AS [Grade], 
+    [StudentResultView].[RegisterStudentId] AS [RegisterStudentId]
+    FROM [dbo].[StudentResultView] AS [StudentResultView]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK__AllocateC__Class__6E01572D" Association="Self.FK__AllocateC__Class__6E01572D">
       <End Role="ClassRoom" EntitySet="ClassRoom" />

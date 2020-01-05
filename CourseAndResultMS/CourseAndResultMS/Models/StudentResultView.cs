@@ -12,7 +12,7 @@ namespace CourseAndResultMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentResultInfo
+    public partial class StudentResultView
     {
         public string Code { get; set; }
         public string CourseName { get; set; }

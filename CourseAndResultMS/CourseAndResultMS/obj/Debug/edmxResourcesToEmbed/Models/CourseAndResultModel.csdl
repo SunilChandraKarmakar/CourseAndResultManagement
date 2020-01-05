@@ -97,7 +97,7 @@
       <End Role="RegisterStudent" EntitySet="RegisterStudents" />
       <End Role="StudentResult" EntitySet="StudentResults" />
     </AssociationSet>
-    <EntitySet Name="StudentResultInfoes" EntityType="CourseAndResultManagementModel.StudentResultInfo" />
+    <EntitySet Name="StudentResultViews" EntityType="CourseAndResultManagementModel.StudentResultView" />
   </EntityContainer>
   <EntityType Name="Course">
     <Key>
@@ -473,7 +473,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="StudentResultInfo">
+  <EntityType Name="StudentResultView">
     <Key>
       <PropertyRef Name="Code" />
       <PropertyRef Name="CourseName" />

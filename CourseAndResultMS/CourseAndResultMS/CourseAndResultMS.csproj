@@ -240,7 +240,7 @@
     <Compile Include="Models\StudentResult.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\StudentResultInfo.cs">
+    <Compile Include="Models\StudentResultView.cs">
       <DependentUpon>CourseAndResultModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">

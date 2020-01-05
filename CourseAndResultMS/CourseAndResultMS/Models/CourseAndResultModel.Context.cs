@@ -40,6 +40,6 @@ namespace CourseAndResultMS.Models
         public virtual DbSet<ClassSchidule> ClassSchidules { get; set; }
         public virtual DbSet<GradeLetter> GradeLetters { get; set; }
         public virtual DbSet<StudentResult> StudentResults { get; set; }
-        public virtual DbSet<StudentResultInfo> StudentResultInfoes { get; set; }
+        public virtual DbSet<StudentResultView> StudentResultViews { get; set; }
     }
 }

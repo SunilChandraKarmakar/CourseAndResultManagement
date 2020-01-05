@@ -160,9 +160,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="StudentResultInfoes">
-      <EntityTypeMapping TypeName="CourseAndResultManagementModel.StudentResultInfo">
-        <MappingFragment StoreEntitySet="StudentResultInfo">
+    <EntitySetMapping Name="StudentResultViews">
+      <EntityTypeMapping TypeName="CourseAndResultManagementModel.StudentResultView">
+        <MappingFragment StoreEntitySet="StudentResultView">
           <ScalarProperty Name="RegisterStudentId" ColumnName="RegisterStudentId" />
           <ScalarProperty Name="Grade" ColumnName="Grade" />
           <ScalarProperty Name="CourseName" ColumnName="CourseName" />

@@ -132,12 +132,13 @@ namespace CourseAndResultMS.Controllers
             Department getDepartmentName = getAllDepartment.Find(d => d.DepartmentId == getMatchRegisterStudent.DepartmentId);
             return Json(getDepartmentName.Name, JsonRequestBehavior.AllowGet);
         }
-
+        
         public JsonResult GetStudentResultByRegisterStudentId(int registerStudentId)
         {
-            List<StudentResultInfo> getStudentResultInfo = db.StudentResultInfoes.ToList();
-            List<StudentResultInfo> getMatchStudentResult = getStudentResultInfo.FindAll(s => s.RegisterStudentId == registerStudentId);
-            return Json(getMatchStudentResult, JsonRequestBehavior.AllowGet);
+            db.Configuration.ProxyCreationEnabled = false;
+            List<StudentResultView> studentResultViews = db.StudentResultViews.ToList();
+            List<StudentResultView> matchStudentResult = studentResultViews.FindAll(s => s.RegisterStudentId == registerStudentId);
+            return Json(matchStudentResult, JsonRequestBehavior.AllowGet);
         }
     }
 }
