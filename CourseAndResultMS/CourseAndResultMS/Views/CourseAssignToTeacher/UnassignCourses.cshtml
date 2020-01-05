@@ -1,0 +1,59 @@
+﻿@using CourseAndResultMS.Models
+@{ 
+    List<CourseAssignToTeacher> courseAssignToTeachers = ViewBag.CourseAssignToTeacherList;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Unassign Course</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Unassign Course Details</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row" id="tblUnassignCourse">
+        <div class="col-md-10">
+            <table id="myTable" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Teacher Info</th>
+                        <th>Cradit Info</th>
+                        <th>Course Info</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (CourseAssignToTeacher item in courseAssignToTeachers)
+                    {
+                        <tr>
+                            <td>
+                                Department: @item.Department.Name <br />
+                                Teacher: @item.Teacher.Name <br />
+                            </td>
+                            <td>
+                                Taken Cradit: @item.Teacher.CraditToBeTaken <br />
+                                Remaining Cradit: @item.RemainingCradit <br />
+                            </td>
+                            <td>
+                                Code: @item.Course.Code <br />
+                                Name: @item.Course.Name <br />
+                                Cradit: @item.Course.Cradit <br />
+                            </td>
+                            <td>
+                                <a href="../../CourseAssignToTeacher/UnassignCourse/@item.CourseAssignToTeacherId" class="btn btn-danger"><i class="fa fa-eye-dropper"></i> Unassign</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

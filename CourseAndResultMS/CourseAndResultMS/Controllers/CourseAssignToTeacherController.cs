@@ -29,8 +29,7 @@ namespace CourseAndResultMS.Controllers
 
         public JsonResult GetTeacherByDepartmentId(int departmentId)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-
+            db.Configuration.ProxyCreationEnabled = false;  
             List<Teacher> teachers = db.Teachers.ToList();
             List<Teacher> getTeacherListByDepartmentId = teachers.FindAll(t => t.DepartmentId == departmentId);
             return Json(getTeacherListByDepartmentId, JsonRequestBehavior.AllowGet);
@@ -38,8 +37,7 @@ namespace CourseAndResultMS.Controllers
 
         public JsonResult GetTeacherCradit(int teacherId)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-
+            db.Configuration.ProxyCreationEnabled = false;  
             List<Teacher> teachers = db.Teachers.ToList();
             Teacher aTeacher = teachers.Find(t => t.TeacherId == teacherId);
             return Json(aTeacher, JsonRequestBehavior.AllowGet);
@@ -47,8 +45,7 @@ namespace CourseAndResultMS.Controllers
 
         public JsonResult GetRemainingCraditForTeacher(int teacherId)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-
+            db.Configuration.ProxyCreationEnabled = false;  
             List<Teacher> teachers = db.Teachers.ToList();
             Teacher aTeacher = teachers.Find(t => t.TeacherId == teacherId);
 
@@ -63,8 +60,7 @@ namespace CourseAndResultMS.Controllers
 
         public JsonResult GetCourseByDepartmentId(int departmentId)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-
+            db.Configuration.ProxyCreationEnabled = false; 
             List<Course> courses = db.Courses.ToList();
             List<Course> getCourseByDepartmentId = courses.FindAll(c => c.DepartmentId == departmentId);
             return Json(getCourseByDepartmentId, JsonRequestBehavior.AllowGet);
@@ -72,8 +68,7 @@ namespace CourseAndResultMS.Controllers
 
         public JsonResult GetCourseNameAndCraditByCourseId(int courseId)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-
+            db.Configuration.ProxyCreationEnabled = false; 
             List<Course> courses = db.Courses.ToList();
             Course aCourse = courses.Find(c => c.CourseId == courseId);
             return Json(aCourse, JsonRequestBehavior.AllowGet);
@@ -83,13 +78,12 @@ namespace CourseAndResultMS.Controllers
         {
             db.Configuration.ProxyCreationEnabled = false;
             decimal teacherRemainingCradit = 0;
-
             List<CourseAssignToTeacher> courseAssignToTeachers = db.CourseAssignToTeachers.ToList();
             CourseAssignToTeacher aCourseAssignToTeacher = courseAssignToTeachers.FindLast(t => t.TeacherId == teacherId);
-
+            
             List<Course> courses = db.Courses.ToList();
             Course aCourse = courses.Find(c => c.CourseId == courseId);
-
+            
             List<Teacher> teachers = db.Teachers.ToList();
             Teacher aTeacher = teachers.Find(t => t.TeacherId == teacherId);
 
@@ -97,8 +91,7 @@ namespace CourseAndResultMS.Controllers
             {
                 decimal craditToBeTaken = aTeacher.CraditToBeTaken;
                 decimal courseCradit = aCourse.Cradit;
-                teacherRemainingCradit = craditToBeTaken - courseCradit;
-
+                teacherRemainingCradit = craditToBeTaken - courseCradit; 
             }
             else
             {
@@ -113,7 +106,6 @@ namespace CourseAndResultMS.Controllers
         public JsonResult GetCodeNameCraditByCourseId(int courseId)
         {
             db.Configuration.ProxyCreationEnabled = false;
-
             List<CourseAssignToTeacher> courseAssignToTeachers = db.CourseAssignToTeachers.ToList();
             CourseAssignToTeacher aCourseAssignToTeacher = courseAssignToTeachers.Find(c => c.CourseId == courseId);
 
@@ -143,11 +135,16 @@ namespace CourseAndResultMS.Controllers
         public JsonResult GetCourseInfoByDepartmentId(int departmentId)
         {
             db.Configuration.ProxyCreationEnabled = false;
-
             List<CourseInformation> courseInformation = db.CourseInformations.ToList();
             List<CourseInformation> aCourseInfo = courseInformation.FindAll(c => c.DepartmentId == departmentId);
-
             return Json(aCourseInfo, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult UnassignCourses()
+        {
+            ViewBag.CourseAssignToTeacherList = db.CourseAssignToTeachers.ToList();
+            return View();
         }
     }
 }
