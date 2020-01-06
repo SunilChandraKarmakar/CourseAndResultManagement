@@ -1,0 +1,60 @@
+﻿@model CourseAndResultMS.Models.AllocateClassRoom
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Unassign</title>
+        <link href="~/Content/style.css" rel="stylesheet" />
+    </head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Unassign Class Room</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <dl class="dl-horizontal">
+                    <dt>Department</dt>
+                    <dd>@Model.Department.Name</dd>
+                    <dt>Course</dt>
+                    <dd>@Model.Course.Name</dd>
+                    <dt>Room</dt>
+                    <dd>@Model.ClassRoom.Name</dd>
+                    <dt>Day</dt>
+                    <dd>@Model.Week.Name</dd>
+
+                    @{
+                        TimeSpan? clasStartTime = Model.ClassStartTime;
+                        DateTime convertClassStartTimeToDateTime = Convert.ToDateTime(clasStartTime.ToString());
+                        String time12FormateClassStartTime = String.Format("{0:hh:mm:tt}", convertClassStartTimeToDateTime);
+
+                        TimeSpan? classEndTime = Model.ClassEndTime;
+                        DateTime convertClassEndTimeToDateTime = Convert.ToDateTime(classEndTime.ToString());
+                        String time12FormateClassEndTime = String.Format("{0:hh:mm:tt}", convertClassEndTimeToDateTime);
+                    }
+
+                    <dt>Start Time</dt>
+                    <dd>@time12FormateClassStartTime</dd>
+                    <dt>End Time</dt>
+                    <dd>@time12FormateClassEndTime</dd>
+                </dl>
+                <form method="post" action="@Url.Action("UnassignClassRoom", "AllocateClassRoom")">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Unassign" class="btn btn-danger" />
+                                <a href="../../AllocateClassRoom/Index" class="btn btn-info">Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

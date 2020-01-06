@@ -99,5 +99,19 @@ namespace CourseAndResultMS.Controllers
             List<ClassSchidule> getSchiduleByDepId = classSchidules.FindAll(c => c.DepartmentId == departmentId);
             return Json(getSchiduleByDepId, JsonRequestBehavior.AllowGet); 
         }
+
+        [HttpGet]
+        public ActionResult UnassignClassRoom(int? Id)
+        {
+            if (Id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            AllocateClassRoom aAllocateClassRoom = db.AllocateClassRooms.Find(Id);
+
+            if (aAllocateClassRoom == null)
+                return HttpNotFound();
+
+            return View(aAllocateClassRoom);
+        }
     }
 }
