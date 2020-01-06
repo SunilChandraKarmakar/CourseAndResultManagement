@@ -1,6 +1,7 @@
 ﻿using CourseAndResultMS.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 namespace CourseAndResultMS.Controllers
@@ -145,6 +146,20 @@ namespace CourseAndResultMS.Controllers
         {
             ViewBag.CourseAssignToTeacherList = db.CourseAssignToTeachers.ToList();
             return View();
+        } 
+        
+        [HttpGet]
+        public ActionResult Delete(int? Id)
+        {
+            if (Id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            CourseAssignToTeacher aCourseAssignToTeacher = db.CourseAssignToTeachers.Find(Id);
+
+            if (aCourseAssignToTeacher == null)
+                return HttpNotFound();
+
+            return View(aCourseAssignToTeacher);
         }
     }
 }

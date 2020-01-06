@@ -701,6 +701,7 @@
     <Content Include="Views\StudentResult\Edit.cshtml" />
     <Content Include="Views\StudentResult\ViewResult.cshtml" />
     <Content Include="Views\CourseAssignToTeacher\UnassignCourses.cshtml" />
+    <Content Include="Views\CourseAssignToTeacher\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

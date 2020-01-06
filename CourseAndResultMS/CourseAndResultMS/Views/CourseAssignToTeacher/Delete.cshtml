@@ -1,0 +1,50 @@
+﻿@model CourseAndResultMS.Models.CourseAssignToTeacher
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Delete Course</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <dl class="dl-horizontal">
+                    <dt>Department</dt>
+                    <dd>@Model.Department.Name</dd>
+                    <dt>Teacher</dt>
+                    <dd>@Model.Teacher.Name</dd>
+                    <dt>Taken Cradid</dt>
+                    <dd>@Model.Teacher.CraditToBeTaken</dd>
+                    <dt>Remaining Cradit</dt>
+                    <dd>@Model.RemainingCradit</dd>
+                    <dt>Code</dt>
+                    <dd>@Model.Course.Code</dd>
+                    <dt>Name</dt>
+                    <dd>@Model.Course.Name</dd>
+                    <dt>Cradit</dt>
+                    <dd>@Model.Course.Cradit</dd>
+                </dl>
+                <form method="post" action="@Url.Action("Delete", "CourseAssignToTeacher")">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Delete" class="btn btn-danger"/>
+                                <a href="../../CourseAssignToTeacher/UnassignCourses" class="btn btn-info">Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
