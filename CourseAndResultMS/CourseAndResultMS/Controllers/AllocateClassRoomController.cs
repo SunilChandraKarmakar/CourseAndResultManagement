@@ -113,5 +113,14 @@ namespace CourseAndResultMS.Controllers
 
             return View(aAllocateClassRoom);
         }
+
+        [HttpPost]
+        public ActionResult UnassignClassRoom(int Id)
+        {
+            AllocateClassRoom aAllocateClassRoom = db.AllocateClassRooms.Find(Id);
+            db.AllocateClassRooms.Remove(aAllocateClassRoom);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
