@@ -161,5 +161,14 @@ namespace CourseAndResultMS.Controllers
 
             return View(aCourseAssignToTeacher);
         }
+
+        [HttpPost]
+        public ActionResult Delete(int Id)
+        {
+            CourseAssignToTeacher aCourseAssignToTeacher = db.CourseAssignToTeachers.Find(Id);
+            db.CourseAssignToTeachers.Remove(aCourseAssignToTeacher);
+            db.SaveChanges(); 
+            return RedirectToAction("UnassignCourses");
+        }
     }
 }
